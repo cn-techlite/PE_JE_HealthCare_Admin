@@ -106,7 +106,7 @@ class NewUserStateService {
   initServiceUser() async {
     var homeService = HomeServices();
     _streamServiceUser = homeService.getAllStreamServiceUserData();
-    final result = _stream;
+    final result = _streamServiceUser;
     return result;
   }
 
