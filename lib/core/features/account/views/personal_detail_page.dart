@@ -34,7 +34,7 @@ class _LoginPageState extends ConsumerState<AccountDetailsPage> {
   final _focusLastName = FocusNode();
   final _focusPhoneNo = FocusNode();
 
-  late AccountProvider accountProviders;
+  late AccountNotifier accountProviders;
   late RegisterResponseModel globals;
 
   bool isSwitchedHoliday = false;
@@ -45,10 +45,10 @@ class _LoginPageState extends ConsumerState<AccountDetailsPage> {
     _firstName = TextEditingController();
     _lastName = TextEditingController();
 
-    accountProviders = ref.read(accountProvider);
-    accountProviders.getPostData(context);
+    accountProviders = ref.read(accountProvider.notifier);
+    accountProviders.getAccount();
     setState(() {
-      globals = accountProviders.userData;
+      globals = accountProviders.userData!;
     });
     super.initState();
   }
@@ -85,6 +85,7 @@ class _LoginPageState extends ConsumerState<AccountDetailsPage> {
                         text: "Name",
                         textAlign: TextAlign.start,
                         fontSize: 23,
+                        isBody: true,
                         color: AppColors.black,
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.bold),
@@ -92,6 +93,7 @@ class _LoginPageState extends ConsumerState<AccountDetailsPage> {
                         text: "${globals.firstName} ${globals.surName}",
                         textAlign: TextAlign.start,
                         fontSize: 23,
+                        isBody: true,
                         color: AppColors.black,
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w600),
@@ -182,9 +184,8 @@ class _LoginPageState extends ConsumerState<AccountDetailsPage> {
                               onPressed: () async {
                                 _focusPhoneNo.unfocus();
                                 if (_formkey.currentState!.validate()) {
-                                  accountProviders.updateNames(
+                                  accountProviders.updateUser(
                                     context: context,
-                                    userId: globals.id.toString(),
                                     firstName: _firstName.text.trim(),
                                     lastName: _lastName.text.trim(),
                                   );
@@ -195,6 +196,7 @@ class _LoginPageState extends ConsumerState<AccountDetailsPage> {
                                   text: "Update",
                                   textAlign: TextAlign.center,
                                   fontSize: 23,
+                                  isBody: true,
                                   color: AppColors.white,
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.w600)),
@@ -210,6 +212,7 @@ class _LoginPageState extends ConsumerState<AccountDetailsPage> {
                   text: "Email",
                   textAlign: TextAlign.start,
                   fontSize: 23,
+                  isBody: true,
                   color: AppColors.black,
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.bold),
@@ -217,6 +220,7 @@ class _LoginPageState extends ConsumerState<AccountDetailsPage> {
                   text: "${globals.email}",
                   textAlign: TextAlign.start,
                   fontSize: 23,
+                  isBody: true,
                   color: AppColors.black,
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w600),
@@ -242,12 +246,14 @@ class _LoginPageState extends ConsumerState<AccountDetailsPage> {
                     const AppText(
                         text: "Phone Number",
                         textAlign: TextAlign.start,
+                        isBody: true,
                         fontSize: 23,
                         color: AppColors.black,
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.bold),
                     AppText(
                         text: "${globals.phoneNo}",
+                        isBody: true,
                         textAlign: TextAlign.start,
                         fontSize: 23,
                         color: AppColors.black,
@@ -309,9 +315,8 @@ class _LoginPageState extends ConsumerState<AccountDetailsPage> {
                               onPressed: () async {
                                 _focusPhoneNo.unfocus();
                                 if (_formkey.currentState!.validate()) {
-                                  accountProviders.updatePhone(
+                                  accountProviders.updateUser(
                                       context: context,
-                                      userId: globals.id.toString(),
                                       phoneNo: _phoneNo.text.trim());
                                   Navigator.pop(context);
                                 }
@@ -320,6 +325,7 @@ class _LoginPageState extends ConsumerState<AccountDetailsPage> {
                                   text: "Update",
                                   textAlign: TextAlign.center,
                                   fontSize: 23,
+                                  isBody: true,
                                   color: AppColors.white,
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.w600)),
@@ -361,6 +367,7 @@ class _LoginPageState extends ConsumerState<AccountDetailsPage> {
                 text: "Profile Updates",
                 textAlign: TextAlign.center,
                 fontSize: 19,
+                isBody: true,
                 color: AppColors.white,
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.w600),

@@ -1,16 +1,12 @@
-import 'package:pe_je_healthcare_admin/core/components/constants/push_notification.dart';
 import 'package:pe_je_healthcare_admin/core/components/utils/colors.dart';
-import 'package:pe_je_healthcare_admin/core/components/helpers/firebase_options.dart';
-import 'package:upgrader/upgrader.dart';
+
 import 'core/components/helpers/globals.dart';
 import 'core/components/routes/routers.dart';
 import 'core/components/utils/package_export.dart';
 import 'core/components/routes/routers.dart' as router;
 
-final _pushMessagingNotification = getIt<PushNotificationService>();
-
-Future myBackgroundMessageHandler(RemoteMessage message) async {
-  debugPrint("onBackgroundMessage: ${message.notification?.title}");
+Future myBackgroundMessageHandler(String message) async {
+  debugPrint("onBackgroundMessage: $message");
 }
 
 void main() async {
@@ -18,13 +14,8 @@ void main() async {
   // await Upgrader.clearSavedSettings(); // REMOVE this for release builds
   SystemChrome.setPreferredOrientations;
 
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   getIt.registerLazySingleton<AppGlobals>(() => AppGlobals());
   await setupLocator();
-  await FirebaseMessaging.instance.getInitialMessage();
-  await _pushMessagingNotification.initialize();
-  //Handle Push Notification when app is in background and when app is terminated
-  FirebaseMessaging.onBackgroundMessage(myBackgroundMessageHandler);
 
   await globals.init();
   if (globals.userId.toString().isNotEmpty) {

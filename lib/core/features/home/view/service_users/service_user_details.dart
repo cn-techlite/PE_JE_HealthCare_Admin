@@ -23,12 +23,12 @@ class ServiceUsersDetailsPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
-  late HomeProvider homeProviders;
+  late HomeNotifier homeProviders;
 
   @override
   void initState() {
-    homeProviders = ref.read(homeProvider);
-    homeProviders.getAllUsersData(context);
+    homeProviders = ref.read(homeProvider.notifier);
+    homeProviders.getAllUsersData();
     homeProviders.allUserData;
     super.initState();
   }
@@ -132,6 +132,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
           child: const AppText(
               text: "View Notes",
               textAlign: TextAlign.center,
+              isBody: true,
               fontSize: 14,
               color: AppColors.primary,
               decoration: TextDecoration.underline,
@@ -144,6 +145,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
               text: "${userChat.firstName} ${userChat.lastName}",
               textAlign: TextAlign.start,
               fontSize: 19,
+              isBody: true,
               color: AppColors.black,
               fontStyle: FontStyle.normal,
               fontWeight: FontWeight.bold),
@@ -216,6 +218,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 child: AppText(
                     text: "Delete",
+                    isBody: true,
                     textAlign: TextAlign.start,
                     fontSize: 19,
                     color: AppColors.white,
@@ -245,6 +248,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                       children: [
                         const AppText(
                             text: "Communication",
+                            isBody: true,
                             textAlign: TextAlign.start,
                             fontSize: 13,
                             color: AppColors.black,
@@ -276,6 +280,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                       addVerticalSpacing(context, 180),
                       AppText(
                           text: "${userChat.communication}",
+                          isBody: true,
                           textAlign: TextAlign.start,
                           fontSize: 16,
                           color: AppColors.black,
@@ -308,6 +313,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                       children: [
                         const AppText(
                             text: "Mobilization",
+                            isBody: true,
                             textAlign: TextAlign.start,
                             fontSize: 13,
                             color: AppColors.black,
@@ -339,6 +345,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                       addVerticalSpacing(context, 180),
                       AppText(
                           text: "${userChat.mobilization}",
+                          isBody: true,
                           textAlign: TextAlign.start,
                           fontSize: 16,
                           color: AppColors.black,
@@ -371,6 +378,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                       children: [
                         const AppText(
                             text: "Washing and Dressing",
+                            isBody: true,
                             textAlign: TextAlign.start,
                             fontSize: 13,
                             color: AppColors.black,
@@ -402,6 +410,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                       addVerticalSpacing(context, 180),
                       AppText(
                           text: "${userChat.washingAndDressing}",
+                          isBody: true,
                           textAlign: TextAlign.start,
                           fontSize: 16,
                           color: AppColors.black,
@@ -435,6 +444,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                         const AppText(
                             text: "Medication",
                             textAlign: TextAlign.start,
+                            isBody: true,
                             fontSize: 13,
                             color: AppColors.black,
                             fontStyle: FontStyle.normal,
@@ -465,6 +475,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                       addVerticalSpacing(context, 180),
                       AppText(
                           text: "${userChat.medication}",
+                          isBody: true,
                           textAlign: TextAlign.start,
                           fontSize: 16,
                           color: AppColors.black,
@@ -497,6 +508,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                       children: [
                         const AppText(
                             text: "Eye Sight",
+                            isBody: true,
                             textAlign: TextAlign.start,
                             fontSize: 13,
                             color: AppColors.black,
@@ -528,6 +540,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                       addVerticalSpacing(context, 180),
                       AppText(
                           text: "${userChat.eyesight}",
+                          isBody: true,
                           textAlign: TextAlign.start,
                           fontSize: 16,
                           color: AppColors.black,
@@ -560,6 +573,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                       children: [
                         const AppText(
                             text: "Social Activities",
+                            isBody: true,
                             textAlign: TextAlign.start,
                             fontSize: 13,
                             color: AppColors.black,
@@ -591,6 +605,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                       addVerticalSpacing(context, 180),
                       AppText(
                           text: "${userChat.socialactivities}",
+                          isBody: true,
                           textAlign: TextAlign.start,
                           fontSize: 16,
                           color: AppColors.black,
@@ -624,6 +639,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                         const AppText(
                             text: "Falls Risks",
                             textAlign: TextAlign.start,
+                            isBody: false,
                             fontSize: 13,
                             color: AppColors.black,
                             fontStyle: FontStyle.normal,
@@ -655,6 +671,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                       AppText(
                           text: "${userChat.fallRisk}",
                           textAlign: TextAlign.start,
+                          isBody: false,
                           fontSize: 16,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
@@ -687,6 +704,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                         const AppText(
                             text: "Food and Fluid",
                             textAlign: TextAlign.start,
+                            isBody: false,
                             fontSize: 13,
                             color: AppColors.black,
                             fontStyle: FontStyle.normal,
@@ -718,6 +736,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                       AppText(
                           text: "${userChat.foodAndFluid}",
                           textAlign: TextAlign.start,
+                          isBody: false,
                           fontSize: 16,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
@@ -754,6 +773,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
         title: const AppText(
             text: "Service User Details",
             textAlign: TextAlign.center,
+            isBody: true,
             fontSize: 21,
             color: AppColors.white,
             fontStyle: FontStyle.normal,
@@ -785,6 +805,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                   child: AppText(
                       text: "Assign User",
                       textAlign: TextAlign.start,
+                      isBody: false,
                       fontSize: 19,
                       color: AppColors.primary,
                       fontStyle: FontStyle.normal,

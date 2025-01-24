@@ -50,6 +50,7 @@ class _LoginPageState extends ConsumerState<ViewUserWorkHistory> {
             text: "Work History",
             textAlign: TextAlign.center,
             fontSize: 15,
+            isBody: false,
             color: AppColors.black,
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w600),

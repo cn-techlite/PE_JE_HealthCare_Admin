@@ -1,7 +1,5 @@
 // ignore_for_file: unnecessary_null_comparison, null_check_always_fails, deprecated_member_use
 import 'dart:developer';
-import 'package:another_flushbar/flushbar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package_export.dart';
 
 // ignore: constant_identifier_names
@@ -75,7 +73,7 @@ class Constants {
     return MediaQuery.of(context).size.width;
   }
 
-  static double buttonHeight = 50;
+  static double buttonHeight = 55;
 
   static const scrollerTransitionTime = 5;
 
@@ -85,17 +83,22 @@ class Constants {
 }
 
 // setToLocalStorage() method will set data to the local storage
-Future setToLocalStorage({required String name, required String data}) async {
+Future setToLocalStorage({required String name, dynamic data}) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setString(name, data);
 }
 
-Future setIntToLocalStorage({required String name, required int data}) async {
+Future setIntToLocalStorage({required String name, dynamic data}) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setInt(name, data);
 }
 
-Future setBoolToLocalStorage({required String name, required bool data}) async {
+Future setDoubleToLocalStorage({required String name, dynamic data}) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setDouble(name, data);
+}
+
+Future setBoolToLocalStorage({required String name, dynamic data}) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setBool(name, data);
 }
@@ -117,6 +120,11 @@ Future getIntFromLocalStorage({required String name}) async {
   return prefs.getInt(name);
 }
 
+Future getDoubleFromLocalStorage({required String name}) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getDouble(name);
+}
+
 Future getBoolFromLocalStorage({required String name}) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   return prefs.getBool(name);
@@ -125,48 +133,6 @@ Future getBoolFromLocalStorage({required String name}) async {
 removeFromLocalStorage({required String name}) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.remove(name);
-}
-
-showErrorMsg({
-  cxt,
-  msg,
-}) {
-  Flushbar(
-    title: 'Alert',
-    message: msg,
-    duration: const Duration(seconds: 5),
-    flushbarPosition: FlushbarPosition.TOP,
-    backgroundColor: Colors.red,
-    titleColor: Colors.white,
-    messageColor: Colors.white,
-    //showProgressIndicator: true,
-    flushbarStyle: FlushbarStyle.FLOATING,
-    icon: const Icon(
-      Icons.info_outline,
-      color: Colors.white,
-    ),
-  ).show(cxt);
-}
-
-showSuccessMsg({
-  cxt,
-  msg,
-}) {
-  Flushbar(
-    title: 'Alert',
-    message: msg,
-    //   showProgressIndicator: true,
-    duration: const Duration(seconds: 5),
-    flushbarPosition: FlushbarPosition.TOP,
-    backgroundColor: Colors.green,
-    titleColor: Colors.white,
-    messageColor: Colors.white,
-    flushbarStyle: FlushbarStyle.FLOATING,
-    icon: const Icon(
-      Icons.done_rounded,
-      color: Colors.white,
-    ),
-  ).show(cxt);
 }
 
 void finish(BuildContext context, [Object? result]) {

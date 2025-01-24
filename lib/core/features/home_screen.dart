@@ -29,19 +29,14 @@ class _NavBarfeaturestate extends ConsumerState<HomeScreenPage> {
   @override
   void initState() {
     super.initState();
-    final provider = ref.read(accountProvider);
-    provider.getPostData(context);
-    final users = ref.read(homeProvider);
-    users.getAllUsersData(context);
-    users.getAllServiceUserData(context);
-    timer = Timer.periodic(const Duration(seconds: 10), (Timer t) {
-      provider.getPostData(context);
-      users.getAllUsersData(context);
-      users.getAllServiceUserData(context);
-    });
+    final provider = ref.read(accountProvider.notifier);
+    provider.getAccount();
+    final users = ref.read(homeProvider.notifier);
+    users.getAllUsersData();
+    users.getAllServiceUserData();
   }
 
-  Future<bool> _onPopInvoked(bool isPop) async {
+  Future<bool> _onPopInvoked(bool isPop, pop) async {
     return (await showDialog(
           context: context,
           builder: (context) => BackdropFilter(
@@ -87,14 +82,14 @@ class _NavBarfeaturestate extends ConsumerState<HomeScreenPage> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, WidgetRef ref, Widget? child) {
-      final provider = ref.read(accountProvider);
-      provider.getPostData(context);
+      final provider = ref.read(accountProvider.notifier);
+      provider.getAccount();
       provider.userData;
-      final users = ref.read(homeProvider);
-      users.getAllUsersData(context);
-      users.getAllServiceUserData(context);
+      final users = ref.read(homeProvider.notifier);
+      users.getAllUsersData();
+      users.getAllServiceUserData();
       return PopScope(
-        onPopInvoked: _onPopInvoked,
+        onPopInvokedWithResult: _onPopInvoked,
         canPop: false,
         child: Scaffold(
           body: Container(
@@ -112,6 +107,7 @@ class _NavBarfeaturestate extends ConsumerState<HomeScreenPage> {
                     child: AppText(
                         text: "Welcome to PE & JE Health Care Services",
                         textAlign: TextAlign.center,
+                        isBody: true,
                         fontSize: 12,
                         color: AppColors.black,
                         fontStyle: FontStyle.normal,
@@ -152,6 +148,7 @@ class _NavBarfeaturestate extends ConsumerState<HomeScreenPage> {
                                 child: AppText(
                                     text: "  Hi ${globals.userName}",
                                     textAlign: TextAlign.start,
+                                    isBody: true,
                                     fontSize: 14,
                                     color: AppColors.primary,
                                     fontStyle: FontStyle.normal,
@@ -192,6 +189,7 @@ class _NavBarfeaturestate extends ConsumerState<HomeScreenPage> {
                                   const AppText(
                                       text: "Visit Service Users",
                                       textAlign: TextAlign.start,
+                                      isBody: true,
                                       fontSize: 19,
                                       color: AppColors.primary,
                                       fontStyle: FontStyle.normal,
@@ -226,6 +224,7 @@ class _NavBarfeaturestate extends ConsumerState<HomeScreenPage> {
                                   const AppText(
                                       text: "All Users List",
                                       textAlign: TextAlign.start,
+                                      isBody: true,
                                       fontSize: 19,
                                       color: AppColors.primary,
                                       fontStyle: FontStyle.normal,

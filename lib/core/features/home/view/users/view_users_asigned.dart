@@ -21,14 +21,14 @@ class ViewUserAssignedServiceUser extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<ViewUserAssignedServiceUser> {
-  late HomeProvider homeProviders;
+  late HomeNotifier homeProviders;
   List<ServiceUserResponseModel> data = [];
   @override
   void initState() {
-    homeProviders = ref.read(homeProvider);
-    homeProviders.getAllServiceUserData(context);
-    homeProviders.allServiceUserData;
-    data = homeProviders.allServiceUserData.where((element) {
+    homeProviders = ref.read(homeProvider.notifier);
+    homeProviders.getAllServiceUserData();
+    homeProviders.allServiceUsers;
+    data = homeProviders.allServiceUsers.where((element) {
       return element.sunday!.morningVisitId == widget.id ||
           element.sunday!.nightVisitId == widget.id ||
           element.monday!.morningVisitId == widget.id ||
@@ -86,6 +86,7 @@ class _LoginPageState extends ConsumerState<ViewUserAssignedServiceUser> {
               AppText(
                   text: "${userChat.firstName} ${userChat.lastName}",
                   textAlign: TextAlign.start,
+                  isBody: true,
                   fontSize: 12,
                   color: AppColors.black,
                   fontStyle: FontStyle.normal,
@@ -118,6 +119,7 @@ class _LoginPageState extends ConsumerState<ViewUserAssignedServiceUser> {
         title: const AppText(
             text: "Task User List",
             textAlign: TextAlign.center,
+            isBody: true,
             fontSize: 19,
             color: AppColors.white,
             fontStyle: FontStyle.normal,
@@ -151,6 +153,7 @@ class _LoginPageState extends ConsumerState<ViewUserAssignedServiceUser> {
                           text: "Nothing to show here",
                           textAlign: TextAlign.start,
                           fontSize: 21,
+                          isBody: true,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.bold),
@@ -159,6 +162,7 @@ class _LoginPageState extends ConsumerState<ViewUserAssignedServiceUser> {
                               "You have not been assigned to any service user yet.",
                           textAlign: TextAlign.center,
                           fontSize: 26,
+                          isBody: true,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.normal),

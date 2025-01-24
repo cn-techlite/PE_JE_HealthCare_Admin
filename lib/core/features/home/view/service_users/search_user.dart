@@ -12,14 +12,15 @@ import 'package:pe_je_healthcare_admin/core/features/home/services/home_service.
 class SelectUserPage extends ConsumerStatefulWidget {
   final List<UserResponseModel> users;
   final String userId;
-  final String endpoint;
+  final String dayString;
+  final bool isNight;
 
-  const SelectUserPage({
-    super.key,
-    required this.users,
-    required this.userId,
-    required this.endpoint,
-  });
+  const SelectUserPage(
+      {super.key,
+      required this.users,
+      required this.userId,
+      required this.dayString,
+      required this.isNight});
 
   @override
   _UserPageState createState() => _UserPageState();
@@ -127,6 +128,7 @@ class _UserPageState extends ConsumerState<SelectUserPage> {
                   ),
                   const AppText(
                       text: "Nothing to show here",
+                      isBody: true,
                       textAlign: TextAlign.start,
                       fontSize: 21,
                       color: AppColors.black,
@@ -136,6 +138,7 @@ class _UserPageState extends ConsumerState<SelectUserPage> {
                       text:
                           "You have not been assigned to any service user yet.",
                       textAlign: TextAlign.center,
+                      isBody: true,
                       fontSize: 26,
                       color: AppColors.black,
                       fontStyle: FontStyle.normal,
@@ -151,70 +154,143 @@ class _UserPageState extends ConsumerState<SelectUserPage> {
                 var userChat = selectedUsers[index];
                 return GestureDetector(
                   onTap: () async {
-                    await showDialog<bool>(
-                        context: context,
-                        builder: (context) {
-                          return CupertinoAlertDialog(
-                            title: const AppText(
-                                text: "Assign User",
-                                textAlign: TextAlign.center,
-                                fontSize: 18,
-                                color: AppColors.black,
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.bold),
-                            content: const AppText(
-                                text:
-                                    "Are you sure you want to assign to this account? This action is irreversible.",
-                                textAlign: TextAlign.center,
-                                fontSize: 15,
-                                color: AppColors.black,
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.normal),
-                            actions: [
-                              CupertinoDialogAction(
-                                  child: const Text("Proceed"),
-                                  onPressed: () async {
-                                    String deviceToken = "";
-                                    for (var token
-                                        in userChat.deviceTokenModels!) {
-                                      deviceToken =
-                                          token.deviceTokenId.toString();
-                                    }
-                                    final isValid = await HomeServices()
-                                        .addTaskUser(
-                                            serviceUserId: widget.userId,
-                                            userVisitId: userChat.id.toString(),
-                                            userVisitName:
-                                                "${userChat.firstName} ${userChat.lastName}",
-                                            endpoint: widget.endpoint);
-                                    if (isValid) {
-                                      await HomeServices().sendNotificationUser(
-                                          userDeviceToken: deviceToken,
-                                          title: "New Task",
-                                          body:
-                                              "You have been assigned to a new task",
-                                          notificationType: "task",
-                                          userId: userChat.id.toString());
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(const SnackBar(
-                                              content: Text(
-                                                  "User Added Successfully")));
-                                      Navigator.pop(context);
-                                    } else {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(const SnackBar(
-                                              content:
-                                                  Text("Failed to add user")));
-                                    }
-                                  }),
-                              CupertinoDialogAction(
-                                  child: const Text("Cancel"),
-                                  onPressed: () {
-                                    Navigator.of(context).pop(false);
-                                  }),
-                            ],
-                          );
-                        });
+                    widget.isNight == true
+                        ? await showDialog<bool>(
+                            context: context,
+                            builder: (context) {
+                              return CupertinoAlertDialog(
+                                title: const AppText(
+                                    text: "Assign User",
+                                    isBody: true,
+                                    textAlign: TextAlign.center,
+                                    fontSize: 18,
+                                    color: AppColors.black,
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.bold),
+                                content: const AppText(
+                                    text:
+                                        "Are you sure you want to assign to this account? This action is irreversible.",
+                                    textAlign: TextAlign.center,
+                                    isBody: true,
+                                    fontSize: 15,
+                                    color: AppColors.black,
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.normal),
+                                actions: [
+                                  CupertinoDialogAction(
+                                      child: const Text("Proceed"),
+                                      onPressed: () async {
+                                        String deviceToken = "";
+                                        for (var token
+                                            in userChat.deviceTokenModels!) {
+                                          deviceToken =
+                                              token.deviceTokenId.toString();
+                                        }
+
+                                        final isValid = await HomeServices()
+                                            .updateServiceUser(
+                                                serviceUserId: widget.userId,
+                                                nightUserId:
+                                                    userChat.id.toString(),
+                                                nightUserName:
+                                                    "${userChat.firstName} ${userChat.lastName}",
+                                                dayString: widget.dayString);
+                                        if (isValid) {
+                                          await HomeServices().sendNotificationUser(
+                                              userDeviceToken: deviceToken,
+                                              title: "New Task",
+                                              body:
+                                                  "You have been assigned to a new task",
+                                              notificationType: "task",
+                                              userId: userChat.id.toString());
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  content: Text(
+                                                      "User Added Successfully")));
+                                          Navigator.pop(context);
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  content: Text(
+                                                      "Failed to add user")));
+                                        }
+                                      }),
+                                  CupertinoDialogAction(
+                                      child: const Text("Cancel"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop(false);
+                                      }),
+                                ],
+                              );
+                            })
+                        : await showDialog<bool>(
+                            context: context,
+                            builder: (context) {
+                              return CupertinoAlertDialog(
+                                title: const AppText(
+                                    text: "Assign User",
+                                    isBody: true,
+                                    textAlign: TextAlign.center,
+                                    fontSize: 18,
+                                    color: AppColors.black,
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.bold),
+                                content: const AppText(
+                                    text:
+                                        "Are you sure you want to assign to this account? This action is irreversible.",
+                                    textAlign: TextAlign.center,
+                                    isBody: true,
+                                    fontSize: 15,
+                                    color: AppColors.black,
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.normal),
+                                actions: [
+                                  CupertinoDialogAction(
+                                      child: const Text("Proceed"),
+                                      onPressed: () async {
+                                        String deviceToken = "";
+                                        for (var token
+                                            in userChat.deviceTokenModels!) {
+                                          deviceToken =
+                                              token.deviceTokenId.toString();
+                                        }
+
+                                        final isValid = await HomeServices()
+                                            .updateServiceUser(
+                                                serviceUserId: widget.userId,
+                                                morningUserId:
+                                                    userChat.id.toString(),
+                                                morningUserName:
+                                                    "${userChat.firstName} ${userChat.lastName}",
+                                                dayString: widget.dayString);
+                                        if (isValid) {
+                                          await HomeServices().sendNotificationUser(
+                                              userDeviceToken: deviceToken,
+                                              title: "New Task",
+                                              body:
+                                                  "You have been assigned to a new task",
+                                              notificationType: "task",
+                                              userId: userChat.id.toString());
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  content: Text(
+                                                      "User Added Successfully")));
+                                          Navigator.pop(context);
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  content: Text(
+                                                      "Failed to add user")));
+                                        }
+                                      }),
+                                  CupertinoDialogAction(
+                                      child: const Text("Cancel"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop(false);
+                                      }),
+                                ],
+                              );
+                            });
                   },
                   child: Card(
                     elevation: 4,
@@ -246,6 +322,7 @@ class _UserPageState extends ConsumerState<SelectUserPage> {
                               text:
                                   "${userChat.firstName} ${userChat.lastName}",
                               textAlign: TextAlign.start,
+                              isBody: true,
                               fontSize: 12,
                               color: AppColors.black,
                               fontStyle: FontStyle.normal,

@@ -37,6 +37,7 @@ class _LoginPageState extends State<HelpAndSupportPage> {
             text: "Help and Support",
             textAlign: TextAlign.center,
             fontSize: 20,
+            isBody: false,
             color: AppColors.white,
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w600),
@@ -68,6 +69,7 @@ class _LoginPageState extends State<HelpAndSupportPage> {
               child: AppText(
                   text: "FAQ",
                   textAlign: TextAlign.start,
+                  isBody: false,
                   fontSize: 18,
                   color: AppColors.black,
                   fontStyle: FontStyle.normal,
@@ -96,6 +98,7 @@ class _LoginPageState extends State<HelpAndSupportPage> {
                               text: "How does E-Clinic Work?",
                               textAlign: TextAlign.start,
                               fontSize: 22,
+                              isBody: false,
                               color: AppColors.black,
                               fontStyle: FontStyle.normal,
                               fontWeight: FontWeight.w700),
@@ -171,6 +174,7 @@ class _LoginPageState extends State<HelpAndSupportPage> {
                           child: AppText(
                               text: "How do i select the right doctor?",
                               textAlign: TextAlign.start,
+                              isBody: false,
                               fontSize: 22,
                               color: AppColors.black,
                               fontStyle: FontStyle.normal,
@@ -248,6 +252,7 @@ class _LoginPageState extends State<HelpAndSupportPage> {
                               text:
                                   "Why am i getting billed for the entire session even after i ended it early?",
                               textAlign: TextAlign.start,
+                              isBody: true,
                               fontSize: 22,
                               color: AppColors.black,
                               fontStyle: FontStyle.normal,
@@ -325,6 +330,7 @@ class _LoginPageState extends State<HelpAndSupportPage> {
                               text:
                                   "Is it safe to store my card details on the app?",
                               textAlign: TextAlign.start,
+                              isBody: true,
                               fontSize: 22,
                               color: AppColors.black,
                               fontStyle: FontStyle.normal,
@@ -402,6 +408,7 @@ class _LoginPageState extends State<HelpAndSupportPage> {
                               text:
                                   "How do i trust the Doctors on the platform?",
                               textAlign: TextAlign.start,
+                              isBody: true,
                               fontSize: 22,
                               color: AppColors.black,
                               fontStyle: FontStyle.normal,

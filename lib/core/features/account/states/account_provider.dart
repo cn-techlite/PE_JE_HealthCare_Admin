@@ -1,328 +1,94 @@
-import 'package:pe_je_healthcare_admin/core/features/account/model/available_model.dart';
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:pe_je_healthcare_admin/core/features/account/services/account_services.dart';
 
 import '../../../components/utils/constants.dart';
 import '../../../components/utils/package_export.dart';
 import '../model/user_response_model.dart';
 
-class AccountProvider with ChangeNotifier {
-  RegisterResponseModel userData = RegisterResponseModel();
+abstract class AccountState {}
 
-  bool haveData = false;
-  bool loading = false;
-  final AccountService _services = AccountService();
+class AccountInitial extends AccountState {}
 
-  getPostData(context) async {
-    haveData = true;
-    // notifyListeners();
-    userData = await _services.getUserData();
-    haveData = false;
-    notifyListeners();
+class AccountLoading extends AccountState {}
+
+class AccountSuccess extends AccountState {
+  RegisterResponseModel userData;
+
+  AccountSuccess({required this.userData});
+}
+
+class AccountFailure extends AccountState {
+  final String error;
+
+  AccountFailure(this.error);
+
+  @override
+  String toString() {
+    return 'AuthFailure: $error';
+  }
+}
+
+class AccountNotifier extends StateNotifier<AccountState> {
+  final AccountService services;
+  RegisterResponseModel? userData;
+
+  AccountNotifier({required this.services}) : super(AccountInitial());
+
+  getAccount() async {
+    try {
+      if (!mounted) {
+        state = AccountLoading();
+        return;
+      }
+      RegisterResponseModel response2 = await services.getUserData();
+      userData = response2;
+      state = AccountSuccess(userData: response2);
+    } on Exception catch (e) {
+      state = AccountFailure(e.toString());
+    }
   }
 
-  updateProfileImage({
-    required context,
-    required String userId,
-    required String imageFile,
-  }) async {
-    loading = true;
-    notifyListeners();
-    await _services.updateProfilePics(
-      userId: userId,
-      imageFile: imageFile,
-    );
-    getPostData(context);
-    loading = false;
-    notifyListeners();
-  }
-
-  updateNames({
-    required context,
-    required String userId,
-    required String firstName,
-    required String lastName,
-  }) async {
-    loading = true;
-    notifyListeners();
-    await _services.updateNames(
-      userId: userId,
-      firstName: firstName,
-      lastName: lastName,
-    );
-    getPostData(context);
-    loading = false;
-    notifyListeners();
-  }
-
-  void updatePhone(
-      {required context,
-      required String userId,
-      required String phoneNo}) async {
-    loading = true;
-    notifyListeners();
-    await _services.updatePhoneNo(
-      userId: userId,
-      phoneNo: phoneNo,
-    );
-    getPostData(context);
-    loading = false;
-    notifyListeners();
-  }
-
-  void updateProofOfAddress(
-      {required context,
-      required String userId,
-      required String imageFile}) async {
-    loading = true;
-    notifyListeners();
-    await _services.updateProofOfAddress(
-      userId: userId,
-      imageFile: imageFile,
-    );
-    getPostData(context);
-    loading = false;
-    notifyListeners();
-  }
-
-  void updateAddress({
-    required context,
-    required String userId,
-    required String address,
-    required String addressPostCodes,
-  }) async {
-    loading = true;
-    notifyListeners();
-    await _services.updateAddress(
-        userId: userId, address: address, addressPostCodes: addressPostCodes);
-    getPostData(context);
-    loading = false;
-    notifyListeners();
-  }
-
-  void updateNationality(
-      {required context,
-      required String userId,
-      required String nationality}) async {
-    loading = true;
-    notifyListeners();
-    await _services.updateNationality(userId: userId, nationality: nationality);
-    getPostData(context);
-    loading = false;
-    notifyListeners();
-  }
-
-  void updateBankDetails({
-    required context,
-    required String userId,
-    required String bankName,
-    required String accountNumber,
-    required String bankSortCode,
-  }) async {
-    loading = true;
-    notifyListeners();
-    await _services.updateBankDetails(
-        userId: userId,
-        bankName: bankName,
-        accountNumber: accountNumber,
-        bankSortCode: bankSortCode);
-    getPostData(context);
-    loading = false;
-    notifyListeners();
-  }
-
-  void updateNextOfKin({
-    required context,
-    required String userId,
-    required String nextOfKin,
-    required String nextOfKinPhoneNo,
-  }) async {
-    loading = true;
-    notifyListeners();
-    await _services.updateNextOfKin(
-      userId: userId,
-      nextOfKin: nextOfKin,
-      nextOfKinPhoneNo: nextOfKinPhoneNo,
-    );
-    getPostData(context);
-    loading = false;
-    notifyListeners();
-  }
-
-  void updateWorkExperience(
-      {required context,
-      required String userId,
-      required String workExperience}) async {
-    loading = true;
-    notifyListeners();
-    await _services.updateWorkExperience(
-      userId: userId,
-      workExperience: workExperience,
-    );
-    getPostData(context);
-    loading = false;
-    notifyListeners();
-  }
-
-  void updateInsuranceNo(
-      {required context,
-      required String userId,
-      required String insuranceNo}) async {
-    loading = true;
-    notifyListeners();
-    await _services.updateInsuranceNo(
-      userId: userId,
-      insuranceNo: insuranceNo,
-    );
-    getPostData(context);
-    loading = false;
-    notifyListeners();
-  }
-
-  void updateReferenceEmail({
-    required context,
-    required String userId,
-    required String referenceEmail1,
-    required String referenceEmail2,
-  }) async {
-    loading = true;
-    notifyListeners();
-    await _services.updateReferenceEmail(
-      userId: userId,
-      referenceEmail1: referenceEmail1,
-      referenceEmail2: referenceEmail2,
-    );
-    getPostData(context);
-    loading = false;
-    notifyListeners();
-  }
-
-  void updateDBS({
-    required context,
-    required String userId,
-    required String dbsCode,
-    required String dbsFile,
-  }) async {
-    loading = true;
-    notifyListeners();
-    await _services.updateDBS(
-      userId: userId,
-      dbsCode: dbsCode,
-      dbsFile: dbsFile,
-    );
-    getPostData(context);
-    loading = false;
-    notifyListeners();
-  }
-
-  void updateTrainingCertificate(
-      {required context,
-      required String userId,
-      required String imageFile}) async {
-    loading = true;
-    notifyListeners();
-    await _services.updateTrainingCertificate(
-      userId: userId,
-      imageFile: imageFile,
-    );
-    getPostData(context);
-    loading = false;
-    notifyListeners();
-  }
-
-  void updateAgreement({
-    required context,
-    required String userId,
-  }) async {
-    loading = true;
-    notifyListeners();
-    await _services.updateAgreement(
-      userId: userId,
-    );
-    getPostData(context);
-    loading = false;
-    notifyListeners();
-  }
-
-  void updateCvUpload(
-      {required context,
-      required String userId,
-      required String imageFile}) async {
-    loading = true;
-    notifyListeners();
-    await _services.updateCvUpload(
-      userId: userId,
-      imageFile: imageFile,
-    );
-    getPostData(context);
-    loading = false;
-    notifyListeners();
-  }
-
-  void updateHolidays({
-    required context,
-    required String userId,
-    required String startDate,
-    required String endDate,
-  }) async {
-    loading = true;
-    notifyListeners();
-    await _services.updateHolidays(
-      userId: userId,
-      startDate: startDate,
-      endDate: endDate,
-    );
-    getPostData(context);
-    loading = false;
-    notifyListeners();
-  }
-
-  void updateHolidayStatus({
-    required context,
-  }) async {
-    loading = true;
-    notifyListeners();
-    await _services.updateHolidayValue();
-    getPostData(context);
-    loading = false;
-    notifyListeners();
-  }
-
-  void updateAvailability({
-    required context,
-    required String userId,
-    required UpdateAvailableModel available,
-  }) async {
-    loading = true;
-    notifyListeners();
-    await _services.updateAvailability(
-      userId: userId,
-      available: available,
-    );
-    getPostData(context);
-    loading = false;
-    notifyListeners();
-  }
-
-  void updateWorkHistory({
-    required context,
-    required String userId,
-    required String companyName,
-    required String positionHeld,
-    required String workStartDate,
-    required String workEndDate,
-  }) async {
-    loading = true;
-    notifyListeners();
-    await _services.updateWorkHistory(
-      userId: userId,
-      companyName: companyName,
-      positionHeld: positionHeld,
-      workStartDate: workStartDate,
-      workEndDate: workEndDate,
-    );
-    getPostData(context);
-    loading = false;
-    notifyListeners();
+  updateUser(
+      {String? firstName,
+      String? lastName,
+      String? phoneNo,
+      String? imagePath,
+      String? sex,
+      String? userState,
+      String? locality,
+      String? address,
+      String? branch,
+      required BuildContext context}) async {
+    try {
+      if (!mounted) {
+        state = AccountLoading();
+        return;
+      }
+      var response = await services.updateUsers(
+        firstName: firstName,
+        lastName: lastName,
+        phoneNo: phoneNo,
+        imagePath: imagePath,
+        address: address,
+        sex: sex,
+        state: userState,
+        locality: locality,
+        branch: branch,
+      );
+      if (response) {
+        if (!mounted) return;
+        state = AccountSuccess(userData: userData!);
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("User Updated Successfully")));
+      } else {
+        state = AccountFailure("User Not Found");
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("User Not Found")));
+      }
+    } on Exception catch (e) {
+      state = AccountFailure(e.toString());
+    }
   }
 
   Future<void> handleSignOut() async {
@@ -334,7 +100,10 @@ class AccountProvider with ChangeNotifier {
   }
 }
 
-final accountProvider = ChangeNotifierProvider<AccountProvider>(
-  (ref) => AccountProvider(),
-);
-final streamRepo = Provider<AccountService>((ref) => AccountService());
+final streamRepositoryProvider =
+    Provider<AccountService>((ref) => AccountService());
+final accountProvider =
+    StateNotifierProvider<AccountNotifier, AccountState>((ref) {
+  final AccountService service = AccountService();
+  return AccountNotifier(services: service);
+});

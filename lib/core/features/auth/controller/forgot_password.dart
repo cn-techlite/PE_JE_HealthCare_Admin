@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:pe_je_healthcare_admin/core/components/widgets/custom_snackbar.dart';
 import '../../../components/utils/helper_functions.dart';
 import '../services/auth_service.dart';
 import '../view/forgot_password.dart';
@@ -46,8 +47,11 @@ class ForgotPasswordController extends State<ForgotPasswordScreen> {
         setState(() {
           isLoading = false;
         });
-        showInfoAlertWithAction(
-            context, "Email Error", "Email Does Not Exist", () {});
+        showCustomSnackbar(context,
+            title: "User Exist",
+            content: "Email Does Not Exist",
+            type: SnackbarType.error,
+            isTopPosition: false);
       }
     }
 

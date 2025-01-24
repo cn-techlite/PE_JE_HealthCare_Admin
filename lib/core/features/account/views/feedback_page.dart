@@ -44,8 +44,8 @@ class _FeedbackPageState extends ConsumerState<FeedbackPage> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     final key = GlobalKey<ScaffoldMessengerState>();
-    final accountProviderd = ref.read(accountProvider);
-    accountProviderd.getPostData(context);
+    final accountProviderd = ref.read(accountProvider.notifier);
+    accountProviderd.getAccount();
     var user = accountProviderd.userData;
 
     return Container(
@@ -67,6 +67,7 @@ class _FeedbackPageState extends ConsumerState<FeedbackPage> {
             title: const AppText(
                 text: "Give us Feedback",
                 textAlign: TextAlign.start,
+                isBody: true,
                 fontSize: 23,
                 color: AppColors.white,
                 fontStyle: FontStyle.normal,
@@ -99,6 +100,7 @@ class _FeedbackPageState extends ConsumerState<FeedbackPage> {
                         child: const AppText(
                             text: "Share your feedback with us",
                             textAlign: TextAlign.start,
+                            isBody: true,
                             fontSize: 23,
                             color: AppColors.black,
                             fontStyle: FontStyle.normal,
@@ -142,7 +144,7 @@ class _FeedbackPageState extends ConsumerState<FeedbackPage> {
                                     bool isValid = await AccountService()
                                         .addFeedBack(
                                             feedback: _feedback.text.trim(),
-                                            phoneNo: user.phoneNo.toString());
+                                            phoneNo: user!.phoneNo.toString());
                                     setState(() {
                                       _isProcessing = false;
                                     });
@@ -179,6 +181,7 @@ class _FeedbackPageState extends ConsumerState<FeedbackPage> {
                                           text: "Feedback",
                                           textAlign: TextAlign.start,
                                           fontSize: 23,
+                                          isBody: true,
                                           color: AppColors.white,
                                           fontStyle: FontStyle.normal,
                                           fontWeight: FontWeight.w600),

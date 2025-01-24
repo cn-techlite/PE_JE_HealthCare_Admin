@@ -25,12 +25,12 @@ class UserDetailsPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<UserDetailsPage> {
-  late HomeProvider homeProviders;
+  late HomeNotifier homeProviders;
 
   @override
   void initState() {
-    homeProviders = ref.read(homeProvider);
-    homeProviders.getAllUsersData(context);
+    homeProviders = ref.read(homeProvider.notifier);
+    homeProviders.getAllUsersData();
     homeProviders.allUserData;
     super.initState();
   }
@@ -77,6 +77,7 @@ class _LoginPageState extends ConsumerState<UserDetailsPage> {
           child: const AppText(
               text: "View Task Users",
               textAlign: TextAlign.center,
+              isBody: true,
               fontSize: 14,
               color: AppColors.primary,
               decoration: TextDecoration.underline,
@@ -89,6 +90,7 @@ class _LoginPageState extends ConsumerState<UserDetailsPage> {
               text: "${userChat.firstName} ${userChat.lastName}",
               textAlign: TextAlign.start,
               fontSize: 19,
+              isBody: true,
               color: AppColors.black,
               fontStyle: FontStyle.normal,
               fontWeight: FontWeight.bold),
@@ -98,6 +100,7 @@ class _LoginPageState extends ConsumerState<UserDetailsPage> {
               text: "${userChat.email}",
               textAlign: TextAlign.start,
               fontSize: 19,
+              isBody: true,
               color: AppColors.black,
               fontStyle: FontStyle.normal,
               fontWeight: FontWeight.bold),
@@ -106,6 +109,7 @@ class _LoginPageState extends ConsumerState<UserDetailsPage> {
           child: AppText(
               text: "${userChat.phoneNo}",
               textAlign: TextAlign.start,
+              isBody: true,
               fontSize: 19,
               color: AppColors.black,
               fontStyle: FontStyle.normal,
@@ -442,6 +446,7 @@ class _LoginPageState extends ConsumerState<UserDetailsPage> {
                         return CupertinoAlertDialog(
                           title: const AppText(
                               text: "Delete User",
+                              isBody: true,
                               textAlign: TextAlign.center,
                               fontSize: 18,
                               color: AppColors.black,
@@ -451,6 +456,7 @@ class _LoginPageState extends ConsumerState<UserDetailsPage> {
                               text:
                                   "Are you sure you want to delete this user? This action cannot be undone.",
                               textAlign: TextAlign.center,
+                              isBody: true,
                               fontSize: 15,
                               color: AppColors.black,
                               fontStyle: FontStyle.normal,
@@ -484,6 +490,7 @@ class _LoginPageState extends ConsumerState<UserDetailsPage> {
                         top: 10.0, bottom: 10.0, left: 20.0, right: 20.0),
                     child: AppText(
                         text: "Delete User",
+                        isBody: true,
                         textAlign: TextAlign.start,
                         fontSize: 19,
                         color: AppColors.white,
@@ -516,6 +523,7 @@ class _LoginPageState extends ConsumerState<UserDetailsPage> {
                         top: 10.0, bottom: 10.0, left: 20.0, right: 20.0),
                     child: AppText(
                         text: "Work History",
+                        isBody: true,
                         textAlign: TextAlign.start,
                         fontSize: 19,
                         color: AppColors.white,
@@ -542,6 +550,7 @@ class _LoginPageState extends ConsumerState<UserDetailsPage> {
                         top: 10.0, bottom: 10.0, left: 20.0, right: 20.0),
                     child: AppText(
                         text: "Verify User",
+                        isBody: true,
                         textAlign: TextAlign.start,
                         fontSize: 19,
                         color: AppColors.white,
@@ -581,6 +590,7 @@ class _LoginPageState extends ConsumerState<UserDetailsPage> {
         title: const AppText(
             text: "User Details",
             textAlign: TextAlign.center,
+            isBody: true,
             fontSize: 21,
             color: AppColors.white,
             fontStyle: FontStyle.normal,
@@ -612,6 +622,7 @@ class _LoginPageState extends ConsumerState<UserDetailsPage> {
                   child: AppText(
                       text: "View Availability",
                       textAlign: TextAlign.start,
+                      isBody: true,
                       fontSize: 21,
                       color: AppColors.primary,
                       fontStyle: FontStyle.normal,

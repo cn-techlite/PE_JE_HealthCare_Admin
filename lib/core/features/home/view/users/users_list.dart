@@ -20,10 +20,10 @@ class UserListPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<UserListPage> {
-  late HomeProvider homeProviders;
+  late HomeNotifier homeProviders;
   @override
   void initState() {
-    homeProviders = ref.read(homeProvider);
+    homeProviders = ref.read(homeProvider.notifier);
     super.initState();
   }
 
@@ -67,6 +67,7 @@ class _LoginPageState extends ConsumerState<UserListPage> {
                   text: "${userChat.firstName} ${userChat.lastName}",
                   textAlign: TextAlign.start,
                   fontSize: 12,
+                  isBody: true,
                   color: AppColors.black,
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.bold),
@@ -100,6 +101,7 @@ class _LoginPageState extends ConsumerState<UserListPage> {
             text: "User List",
             textAlign: TextAlign.center,
             fontSize: 19,
+            isBody: true,
             color: AppColors.white,
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w600),
@@ -134,6 +136,7 @@ class _LoginPageState extends ConsumerState<UserListPage> {
                                 text: "Nothing to show here",
                                 textAlign: TextAlign.start,
                                 fontSize: 21,
+                                isBody: true,
                                 color: AppColors.black,
                                 fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.bold),
@@ -142,6 +145,7 @@ class _LoginPageState extends ConsumerState<UserListPage> {
                                     "You have not been assigned to any service user yet.",
                                 textAlign: TextAlign.center,
                                 fontSize: 26,
+                                isBody: true,
                                 color: AppColors.black,
                                 fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.normal),

@@ -98,23 +98,6 @@ Widget camButton(String text, double width, VoidCallback onPressed,
   );
 }
 
-// Widget appButtons(String text, double width, VoidCallback onPressed,
-//     [Color textColor = Colors.black, double fontSize = 12]) {
-//   return SizedBox(
-//     width: width,
-//     height: Constants.buttonHeight,
-//     child: CupertinoButton(
-//         borderRadius: BorderRadius.circular(Constants.buttonHeight / 2),
-//         child: Text(text,
-//             style: TextStyle(
-//                 color: textColor,
-//                 fontSize: fontSize,
-//                 fontWeight: FontWeight.w600)),
-//         onPressed: onPressed,
-//         color: AppColors.primary),
-//   );
-// }
-
 Widget appButtonBusiness(String text, double width, VoidCallback onPressed,
     [Color textColor = Colors.black, double fontSize = 12]) {
   return GestureDetector(

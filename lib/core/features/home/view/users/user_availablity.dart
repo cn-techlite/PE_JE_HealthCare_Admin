@@ -105,6 +105,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                 text: "User Availability schedule",
                 textAlign: TextAlign.center,
                 fontSize: 15,
+                isBody: false,
                 color: AppColors.black,
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.w600),
@@ -128,6 +129,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                               text: "Check Availability Schedule",
                               textAlign: TextAlign.start,
                               fontSize: 13,
+                              isBody: true,
                               color: AppColors.black,
                               fontStyle: FontStyle.normal,
                               fontWeight: FontWeight.w600),
@@ -160,6 +162,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                   children: [
                                     const AppText(
                                         text: "Sunday",
+                                        isBody: true,
                                         textAlign: TextAlign.start,
                                         fontSize: 13,
                                         color: AppColors.black,
@@ -205,6 +208,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                       ),
                                       const AppText(
                                           text: "Morning",
+                                          isBody: true,
                                           textAlign: TextAlign.start,
                                           fontSize: 16,
                                           color: AppColors.black,
@@ -230,6 +234,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                       ),
                                       const AppText(
                                           text: "Night",
+                                          isBody: true,
                                           textAlign: TextAlign.start,
                                           fontSize: 16,
                                           color: AppColors.black,
@@ -264,6 +269,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                   children: [
                                     const AppText(
                                         text: "Monday",
+                                        isBody: true,
                                         textAlign: TextAlign.start,
                                         fontSize: 13,
                                         color: AppColors.black,
@@ -309,6 +315,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                       ),
                                       const AppText(
                                           text: "Morning",
+                                          isBody: true,
                                           textAlign: TextAlign.start,
                                           fontSize: 16,
                                           color: AppColors.black,
@@ -333,6 +340,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                         width: 10,
                                       ),
                                       const AppText(
+                                          isBody: true,
                                           text: "Night",
                                           textAlign: TextAlign.start,
                                           fontSize: 16,
@@ -368,6 +376,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                   children: [
                                     const AppText(
                                         text: "Tuesday",
+                                        isBody: true,
                                         textAlign: TextAlign.start,
                                         fontSize: 13,
                                         color: AppColors.black,
@@ -413,6 +422,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                       ),
                                       const AppText(
                                           text: "Morning",
+                                          isBody: true,
                                           textAlign: TextAlign.start,
                                           fontSize: 16,
                                           color: AppColors.black,
@@ -440,6 +450,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                           text: "Night",
                                           textAlign: TextAlign.start,
                                           fontSize: 16,
+                                          isBody: true,
                                           color: AppColors.black,
                                           fontStyle: FontStyle.normal,
                                           fontWeight: FontWeight.bold),
@@ -472,6 +483,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                   children: [
                                     const AppText(
                                         text: "Wednesday",
+                                        isBody: true,
                                         textAlign: TextAlign.start,
                                         fontSize: 13,
                                         color: AppColors.black,
@@ -517,6 +529,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                       ),
                                       const AppText(
                                           text: "Morning",
+                                          isBody: true,
                                           textAlign: TextAlign.start,
                                           fontSize: 16,
                                           color: AppColors.black,
@@ -542,6 +555,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                       ),
                                       const AppText(
                                           text: "Night",
+                                          isBody: true,
                                           textAlign: TextAlign.start,
                                           fontSize: 16,
                                           color: AppColors.black,
@@ -576,6 +590,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                   children: [
                                     const AppText(
                                         text: "Thursday",
+                                        isBody: true,
                                         textAlign: TextAlign.start,
                                         fontSize: 13,
                                         color: AppColors.black,
@@ -621,6 +636,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                       ),
                                       const AppText(
                                           text: "Morning",
+                                          isBody: true,
                                           textAlign: TextAlign.start,
                                           fontSize: 16,
                                           color: AppColors.black,
@@ -646,6 +662,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                       ),
                                       const AppText(
                                           text: "Night",
+                                          isBody: true,
                                           textAlign: TextAlign.start,
                                           fontSize: 16,
                                           color: AppColors.black,
@@ -680,6 +697,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                   children: [
                                     const AppText(
                                         text: "Friday",
+                                        isBody: true,
                                         textAlign: TextAlign.start,
                                         fontSize: 13,
                                         color: AppColors.black,
@@ -725,6 +743,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                       ),
                                       const AppText(
                                           text: "Morning",
+                                          isBody: true,
                                           textAlign: TextAlign.start,
                                           fontSize: 16,
                                           color: AppColors.black,
@@ -750,6 +769,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                       ),
                                       const AppText(
                                           text: "Night",
+                                          isBody: true,
                                           textAlign: TextAlign.start,
                                           fontSize: 16,
                                           color: AppColors.black,
@@ -784,6 +804,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                   children: [
                                     const AppText(
                                         text: "Saturday",
+                                        isBody: true,
                                         textAlign: TextAlign.start,
                                         fontSize: 13,
                                         color: AppColors.black,
@@ -829,6 +850,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                       ),
                                       const AppText(
                                           text: "Morning",
+                                          isBody: true,
                                           textAlign: TextAlign.start,
                                           fontSize: 16,
                                           color: AppColors.black,
@@ -854,6 +876,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                       ),
                                       const AppText(
                                           text: "Night",
+                                          isBody: true,
                                           textAlign: TextAlign.start,
                                           fontSize: 16,
                                           color: AppColors.black,

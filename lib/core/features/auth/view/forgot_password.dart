@@ -46,6 +46,7 @@ class ForgotPasswordView
                       const AppText(
                           text: "Forgot \nPassword",
                           textAlign: TextAlign.start,
+                          isBody: true,
                           fontSize: 8,
                           color: AppColors.primaryDark,
                           fontStyle: FontStyle.normal,
@@ -54,6 +55,7 @@ class ForgotPasswordView
                       const AppText(
                           text: "Email Address",
                           textAlign: TextAlign.start,
+                          isBody: true,
                           fontSize: 15,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,

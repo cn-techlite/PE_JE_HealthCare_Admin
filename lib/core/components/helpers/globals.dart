@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:pe_je_healthcare_admin/core/components/constants/push_notification.dart';
-import 'package:get_it/get_it.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:pe_je_healthcare_admin/core/components/helpers/notification_service.dart';
 import '../../features/auth/model/login_response_model.dart';
 import '../utils/constants.dart';
 import '../utils/package_export.dart';
@@ -105,5 +103,5 @@ AppGlobals globals = getIt.get<AppGlobals>();
 Future<void> setupLocator() async {
 // Register dependencies
 
-  getIt.registerLazySingleton(() => PushNotificationService());
+  getIt.registerLazySingleton(() => NotificationService());
 }

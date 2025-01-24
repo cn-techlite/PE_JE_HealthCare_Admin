@@ -2,13 +2,13 @@
 
 import 'dart:io';
 
-import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:pe_je_healthcare_admin/core/components/utils/helper_functions.dart';
 import 'package:pe_je_healthcare_admin/core/components/utils/package_export.dart';
 import 'package:pe_je_healthcare_admin/core/features/home/services/home_service.dart';
 import 'package:pe_je_healthcare_admin/core/features/home/view/service_users/add_service_users.dart';
 import 'package:pe_je_healthcare_admin/core/features/home_screen.dart';
+
+import '../../../components/widgets/custom_snackbar.dart';
 
 class AddServiceUserScreen extends ConsumerStatefulWidget {
   const AddServiceUserScreen({
@@ -154,8 +154,11 @@ class AddServiceUserScreenController
         setState(() {
           isLoading = false;
         });
-        showInfoAlertWithAction(
-            context, "Error", "An Error Occurred, Please Try Again", () {});
+        showCustomSnackbar(context,
+            title: "Service User",
+            content: "Error in Adding Service Users",
+            type: SnackbarType.error,
+            isTopPosition: false);
       }
     }
     setState(() {

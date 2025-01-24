@@ -68,6 +68,7 @@ class GetStartedScreen extends StatelessWidget {
                   AppText(
                     text: "Manage health care services".toString(),
                     textAlign: TextAlign.center,
+                    isBody: true,
                     fontSize: 25,
                     color: AppColors.black,
                     fontStyle: FontStyle.normal,

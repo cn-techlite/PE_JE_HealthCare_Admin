@@ -1,5 +1,4 @@
 // ignore_for_file: deprecated_member_use
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -127,78 +126,6 @@ String convertToTitleCase(String? text) {
   return capitalizedWords.join(' ');
 }
 
-Widget produceButton(
-    String text, Color color, double width, VoidCallback onPressed,
-    [double height = 50,
-    Color textColor = Colors.white,
-    double fontSize = 14]) {
-  return SizedBox(
-    width: width,
-    height: height,
-    child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: color,
-        ),
-        child: Text(text,
-            style: TextStyle(
-                color: textColor,
-                fontSize: fontSize,
-                fontWeight: FontWeight.normal))),
-  );
-}
-
-Widget produceSmallButton(
-    String text, Color color, double width, VoidCallback onPressed,
-    [double height = 50,
-    Color textColor = Colors.white,
-    double fontSize = 12]) {
-  return InkWell(
-    onTap: onPressed,
-    child: Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(24.0),
-      ),
-      child: Center(
-        child: Text(text,
-            style: TextStyle(
-                color: textColor,
-                fontSize: fontSize,
-                fontWeight: FontWeight.normal)),
-      ),
-    ),
-  );
-}
-
-Widget produceImage(String imgPath, double imgWidth, double imgHeight,
-    [BoxFit fit = BoxFit.contain]) {
-  return Image.asset(
-    imgPath,
-    fit: fit,
-    width: imgWidth,
-    height: imgHeight,
-  );
-}
-
-Widget showCircularLoadingIndicator = Align(
-    alignment: Alignment.center,
-    child: Container(
-        color: Colors.black.withOpacity(0.5),
-        width: 100,
-        height: 100,
-        child: showAppLoader));
-
-//non - functions
-Widget showAppLoader = const Center(
-  child: CircularProgressIndicator(
-    color: Colors.yellowAccent,
-    backgroundColor: Colors.white,
-  ),
-);
-
 String getNairaSymbol() {
   return "\u{20A6}";
 }
@@ -209,6 +136,10 @@ void dismissKeyboard() {
 
 void popSheet(BuildContext context) {
   Navigator.of(context).pop();
+}
+
+void navigateBack(BuildContext context) {
+  Navigator.pop(context);
 }
 
 void navigateToRoute(BuildContext context, dynamic routeClass) {
@@ -227,93 +158,6 @@ void navigateAndRemoveUntilRoute(BuildContext context, dynamic routeClass) {
 
 navPush(BuildContext context, String route) {
   Navigator.push(context, generateRoute(RouteSettings(name: route)));
-}
-
-//Alerts
-
-showInfoAlertWithAction(BuildContext context, String title, String description,
-    Function onPressed) {
-  showCupertinoDialog(
-    context: context,
-    barrierDismissible: true,
-    builder: (context) => CupertinoAlertDialog(
-      title: Text(title),
-      content: Text(description),
-      actions: <Widget>[
-        CupertinoDialogAction(
-            child: const Text("Ok"),
-            onPressed: () {
-              Navigator.of(context).pop(true);
-              onPressed();
-            }),
-      ],
-    ),
-  );
-}
-
-showCancelOrProceedAlert(
-    {required BuildContext context,
-    required String title,
-    required String description,
-    String cancel = "Cancel",
-    String proceed = "Proceed",
-    required VoidCallback onPressed}) {
-  showCupertinoDialog(
-    context: context,
-    builder: (context) => CupertinoAlertDialog(
-      title: Text(title),
-      content: Text(description),
-      actions: <Widget>[
-        CupertinoDialogAction(
-          child: Text(
-            cancel,
-            style: const TextStyle(color: AppColors.primary),
-          ),
-          onPressed: () => Navigator.of(context, rootNavigator: true).pop(true),
-        ),
-        CupertinoDialogAction(
-          onPressed: onPressed,
-          child: Text(proceed),
-        ),
-      ],
-    ),
-  );
-}
-
-showThreeOptionsAlert({
-  required BuildContext context,
-  required String title,
-  required String description,
-  String cancel = "Cancel",
-  required String titleOne,
-  required String titleTwo,
-  required VoidCallback onPressedOne,
-  required VoidCallback onPressedTwo,
-}) {
-  showCupertinoDialog(
-    context: context,
-    builder: (context) => CupertinoAlertDialog(
-      title: Text(title),
-      content: Text(description),
-      actions: <Widget>[
-        CupertinoDialogAction(
-          onPressed: onPressedOne,
-          child: Text(titleOne),
-        ),
-        CupertinoDialogAction(
-          onPressed: onPressedTwo,
-          child: Text(titleTwo),
-        ),
-        CupertinoDialogAction(
-          child: Text(
-            cancel,
-            style: const TextStyle(color: AppColors.primary),
-          ),
-          onPressed: () => Navigator.of(context).pop(true),
-        ),
-      ],
-    ),
-  );
 }
 
 displayBottomSheet(context, Widget bottomSheet) {
@@ -353,4 +197,21 @@ class KeyboardUtils {
       currentFocus.unfocus();
     }
   }
+}
+
+class DashedLineVerticalPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    double dashHeight = 10, dashSpace = 3, startY = 0;
+    final paint = Paint()
+      ..color = AppColors.green
+      ..strokeWidth = size.width * 2;
+    while (startY < size.height) {
+      canvas.drawLine(Offset(0, startY), Offset(0, startY + dashHeight), paint);
+      startY += dashHeight + dashSpace;
+    }
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }

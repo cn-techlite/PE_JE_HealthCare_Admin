@@ -40,6 +40,7 @@ class LoginScreensView
                       text: "Welcome to PE & JE HealthCare Master App",
                       textAlign: TextAlign.start,
                       fontSize: 18,
+                      isBody: false,
                       color: AppColors.primary,
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w700),
@@ -105,6 +106,7 @@ class LoginScreensView
                         child: const AppText(
                             text: "Forgot Password?",
                             textAlign: TextAlign.end,
+                            isBody: true,
                             fontSize: 18,
                             color: AppColors.primary,
                             fontStyle: FontStyle.normal,
@@ -136,6 +138,7 @@ class LoginScreensView
                                       textAlign: TextAlign.center,
                                       fontSize: 32,
                                       color: AppColors.black,
+                                      isBody: true,
                                       fontStyle: FontStyle.normal,
                                       fontWeight: FontWeight.w600),
                                   GestureDetector(
@@ -148,6 +151,7 @@ class LoginScreensView
                                         decoration: TextDecoration.underline,
                                         textAlign: TextAlign.center,
                                         fontSize: 30,
+                                        isBody: true,
                                         color: AppColors.primary,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.w600),
@@ -159,6 +163,7 @@ class LoginScreensView
                                       text: "&",
                                       textAlign: TextAlign.center,
                                       fontSize: 32,
+                                      isBody: true,
                                       color: AppColors.black,
                                       fontStyle: FontStyle.normal,
                                       fontWeight: FontWeight.w600),
@@ -175,6 +180,7 @@ class LoginScreensView
                                         decoration: TextDecoration.underline,
                                         textAlign: TextAlign.center,
                                         fontSize: 30,
+                                        isBody: true,
                                         color: AppColors.primary,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.w600),
@@ -202,6 +208,7 @@ class LoginScreensView
                               children: [
                                 const AppText(
                                     text: "I Agree to the ",
+                                    isBody: true,
                                     textAlign: TextAlign.center,
                                     fontSize: 32,
                                     color: AppColors.black,
@@ -214,6 +221,7 @@ class LoginScreensView
                                   },
                                   child: const AppText(
                                       text: "Terms & Conditions",
+                                      isBody: true,
                                       decoration: TextDecoration.underline,
                                       textAlign: TextAlign.center,
                                       fontSize: 30,
@@ -228,6 +236,7 @@ class LoginScreensView
                                     text: "&",
                                     textAlign: TextAlign.center,
                                     fontSize: 32,
+                                    isBody: true,
                                     color: AppColors.black,
                                     fontStyle: FontStyle.normal,
                                     fontWeight: FontWeight.w600),
@@ -244,6 +253,7 @@ class LoginScreensView
                                       decoration: TextDecoration.underline,
                                       textAlign: TextAlign.center,
                                       fontSize: 30,
+                                      isBody: true,
                                       color: AppColors.primary,
                                       fontStyle: FontStyle.normal,
                                       fontWeight: FontWeight.w600),
@@ -257,95 +267,6 @@ class LoginScreensView
                     controller.loginUser();
                   }, AppColors.primary, controller.isLoading),
                   addVerticalSpacing(context, 20),
-                  // const Row(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: [
-                  //     Expanded(
-                  //       child: Divider(
-                  //         color: Color.fromRGBO(218, 218, 218, 1),
-                  //         thickness: 1,
-                  //       ),
-                  //     ),
-                  //     SizedBox(
-                  //       width: 10,
-                  //     ),
-                  //     AppText(
-                  //         text: "Or",
-                  //         textAlign: TextAlign.center,
-                  //         fontSize: 30,
-                  //         color: AppColors.black,
-                  //         fontStyle: FontStyle.normal,
-                  //         fontWeight: FontWeight.w600),
-                  //     SizedBox(
-                  //       width: 10,
-                  //     ),
-                  //     Expanded(
-                  //       child: Divider(
-                  //         color: Color.fromRGBO(218, 218, 218, 1),
-                  //         thickness: 1,
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
-                  // addVerticalSpacing(context, 20),
-                  // Platform.isAndroid
-                  //     ? appButton2(
-                  //         onPressed: () async {
-                  //           controller.google();
-                  //         },
-                  //         btnColor: AppColors.white,
-                  //         border: Border.all(
-                  //             color: const Color.fromRGBO(218, 218, 218, 1),
-                  //             width: 1),
-                  //         child: Row(
-                  //           mainAxisAlignment: MainAxisAlignment.center,
-                  //           crossAxisAlignment: CrossAxisAlignment.center,
-                  //           children: [
-                  //             Image.asset("assets/images/google.png",
-                  //                 height: 20, width: 20),
-                  //             const SizedBox(
-                  //               width: 8,
-                  //             ),
-                  //             const AppText(
-                  //                 text: "Google",
-                  //                 textAlign: TextAlign.center,
-                  //                 fontSize: 24,
-                  //                 color: AppColors.black,
-                  //                 fontStyle: FontStyle.normal,
-                  //                 fontWeight: FontWeight.w600),
-                  //           ],
-                  //         ),
-                  //       )
-                  //     : appButton2(
-                  //         onPressed: () async {
-                  //           controller.apple();
-                  //         },
-                  //         btnColor: AppColors.white,
-                  //         border: Border.all(
-                  //             color: const Color.fromRGBO(218, 218, 218, 1),
-                  //             width: 1),
-                  //         child: Row(
-                  //           mainAxisAlignment: MainAxisAlignment.center,
-                  //           crossAxisAlignment: CrossAxisAlignment.center,
-                  //           children: [
-                  //             Image.asset(
-                  //               "assets/images/apple.png",
-                  //               height: 20,
-                  //               width: 20,
-                  //             ),
-                  //             const SizedBox(
-                  //               width: 8,
-                  //             ),
-                  //             const AppText(
-                  //                 text: "Apple",
-                  //                 textAlign: TextAlign.center,
-                  //                 fontSize: 24,
-                  //                 color: AppColors.black,
-                  //                 fontStyle: FontStyle.normal,
-                  //                 fontWeight: FontWeight.w600),
-                  //           ],
-                  //         ),
-                  //       ),
                 ],
               ),
             ),

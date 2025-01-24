@@ -60,6 +60,7 @@ class _LoginPageState extends State<PrivacyPolicyPage> {
                 padding: EdgeInsets.only(left: 20, right: 20),
                 child: AppText(
                     text: "Privacy Policy",
+                    isBody: false,
                     textAlign: TextAlign.start,
                     fontSize: 23,
                     color: AppColors.black,
@@ -73,6 +74,7 @@ class _LoginPageState extends State<PrivacyPolicyPage> {
                     text:
                         "You may use our Services only if you can legally form a binding contract with us, and only in accordance with these terms and all applicable laws. You can't use our Services if it would be prohibited by Nigerian sanctions. Any use or access by anyone under the age of 18 is not allowed.",
                     textAlign: TextAlign.start,
+                    isBody: true,
                     fontSize: 22,
                     color: AppColors.black,
                     fontStyle: FontStyle.normal,
@@ -85,6 +87,7 @@ class _LoginPageState extends State<PrivacyPolicyPage> {
                     text:
                         "Using PE & JE HealthCare may include downloading software to your phone, tablet, or other device.",
                     textAlign: TextAlign.start,
+                    isBody: true,
                     fontSize: 22,
                     color: AppColors.black,
                     fontStyle: FontStyle.normal,
@@ -98,6 +101,7 @@ class _LoginPageState extends State<PrivacyPolicyPage> {
                         "You agree that we may automatically update that software, and these terms will apply to any updates. We are a technology company. We do not own, operate, or maintain any parking facility, and we do not provide parking enforcement.services.",
                     textAlign: TextAlign.start,
                     fontSize: 22,
+                    isBody: true,
                     color: AppColors.black,
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.normal),

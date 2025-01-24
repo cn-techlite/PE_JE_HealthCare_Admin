@@ -21,10 +21,10 @@ class ServiceUserPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<ServiceUserPage> {
-  late HomeProvider homeProviders;
+  late HomeNotifier homeProviders;
   @override
   void initState() {
-    homeProviders = ref.read(homeProvider);
+    homeProviders = ref.read(homeProvider.notifier);
     super.initState();
   }
 
@@ -67,6 +67,7 @@ class _LoginPageState extends ConsumerState<ServiceUserPage> {
               AppText(
                   text: "${userChat.firstName} ${userChat.lastName}",
                   textAlign: TextAlign.start,
+                  isBody: false,
                   fontSize: 12,
                   color: AppColors.black,
                   fontStyle: FontStyle.normal,
@@ -106,6 +107,7 @@ class _LoginPageState extends ConsumerState<ServiceUserPage> {
         ),
         title: const AppText(
             text: "Service User List",
+            isBody: false,
             textAlign: TextAlign.center,
             fontSize: 19,
             color: AppColors.white,
@@ -141,6 +143,7 @@ class _LoginPageState extends ConsumerState<ServiceUserPage> {
                             const AppText(
                                 text: "Nothing to show here",
                                 textAlign: TextAlign.start,
+                                isBody: false,
                                 fontSize: 21,
                                 color: AppColors.black,
                                 fontStyle: FontStyle.normal,
@@ -149,6 +152,7 @@ class _LoginPageState extends ConsumerState<ServiceUserPage> {
                                 text:
                                     "You have not been assigned to any service user yet.",
                                 textAlign: TextAlign.center,
+                                isBody: true,
                                 fontSize: 26,
                                 color: AppColors.black,
                                 fontStyle: FontStyle.normal,

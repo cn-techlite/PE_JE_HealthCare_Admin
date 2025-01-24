@@ -44,6 +44,7 @@ class ForgotPasswordCodeScreenView extends StatelessView<
                   const AppText(
                       text: "Create New \nPassword",
                       textAlign: TextAlign.start,
+                      isBody: true,
                       fontSize: 8,
                       color: AppColors.primaryDark,
                       fontStyle: FontStyle.normal,
@@ -53,6 +54,7 @@ class ForgotPasswordCodeScreenView extends StatelessView<
                       text:
                           "Please enter the your new password if you forget it, then click on forget password",
                       textAlign: TextAlign.start,
+                      isBody: true,
                       fontSize: 14,
                       color: AppColors.primaryDark,
                       fontStyle: FontStyle.normal,
@@ -65,6 +67,7 @@ class ForgotPasswordCodeScreenView extends StatelessView<
                           text: "New Password",
                           textAlign: TextAlign.start,
                           fontSize: 15,
+                          isBody: true,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.w400),
@@ -114,6 +117,7 @@ class ForgotPasswordCodeScreenView extends StatelessView<
                           text: "Confirm Password",
                           textAlign: TextAlign.start,
                           fontSize: 15,
+                          isBody: true,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.w400),

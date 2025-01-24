@@ -43,7 +43,7 @@ class _LoginPageState extends ConsumerState<DeleteAccountPage> {
 
   @override
   Widget build(BuildContext context) {
-    final accountProviderd = ref.read(accountProvider);
+    final accountProviderd = ref.read(accountProvider.notifier);
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -74,6 +74,7 @@ class _LoginPageState extends ConsumerState<DeleteAccountPage> {
                     const Center(
                       child: AppText(
                           text: "Delete Account",
+                          isBody: false,
                           textAlign: TextAlign.start,
                           fontSize: 15,
                           color: AppColors.red,
@@ -105,6 +106,7 @@ class _LoginPageState extends ConsumerState<DeleteAccountPage> {
                           text: widget.name.toString(),
                           textAlign: TextAlign.start,
                           fontSize: 19,
+                          isBody: true,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.bold),
@@ -114,6 +116,7 @@ class _LoginPageState extends ConsumerState<DeleteAccountPage> {
                           text: "${globals.userEmail}",
                           textAlign: TextAlign.start,
                           fontSize: 22,
+                          isBody: true,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.normal),
@@ -123,6 +126,7 @@ class _LoginPageState extends ConsumerState<DeleteAccountPage> {
                         text:
                             "Please provide a reason for deleting your account. We will be sad to see you go.",
                         textAlign: TextAlign.start,
+                        isBody: true,
                         fontSize: 20,
                         color: AppColors.black,
                         fontStyle: FontStyle.normal,
@@ -163,6 +167,7 @@ class _LoginPageState extends ConsumerState<DeleteAccountPage> {
                               return CupertinoAlertDialog(
                                 title: const AppText(
                                     text: "Delete Account",
+                                    isBody: true,
                                     textAlign: TextAlign.center,
                                     fontSize: 18,
                                     color: AppColors.black,
@@ -172,6 +177,7 @@ class _LoginPageState extends ConsumerState<DeleteAccountPage> {
                                     text:
                                         "Are you sure you want to delete your account? This action is irreversible.",
                                     textAlign: TextAlign.center,
+                                    isBody: true,
                                     fontSize: 15,
                                     color: AppColors.black,
                                     fontStyle: FontStyle.normal,

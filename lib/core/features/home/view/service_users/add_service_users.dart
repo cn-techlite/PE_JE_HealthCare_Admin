@@ -18,6 +18,7 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
         title: const AppText(
             text: "Add Service User",
             textAlign: TextAlign.center,
+            isBody: false,
             fontSize: 15,
             color: AppColors.black,
             fontStyle: FontStyle.normal,
@@ -60,6 +61,7 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                       children: <Widget>[
                         const AppText(
                             text: "Add User Image",
+                            isBody: false,
                             textAlign: TextAlign.start,
                             fontSize: 22,
                             color: AppColors.black,
@@ -107,6 +109,7 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                                                 AppText(
                                                     text: "Upload Image",
                                                     textAlign: TextAlign.start,
+                                                    isBody: true,
                                                     fontSize: 15,
                                                     color: AppColors.black,
                                                     fontStyle: FontStyle.normal,
@@ -163,6 +166,7 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                       const AppText(
                           text: "First Name",
                           textAlign: TextAlign.center,
+                          isBody: true,
                           fontSize: 18,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
@@ -194,6 +198,7 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                       const AppText(
                           text: "Last Name",
                           textAlign: TextAlign.center,
+                          isBody: true,
                           fontSize: 18,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
@@ -259,6 +264,7 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                       const AppText(
                           text: "Address",
                           textAlign: TextAlign.center,
+                          isBody: true,
                           fontSize: 18,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
@@ -289,6 +295,7 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                     children: [
                       const AppText(
                           text: "Date of Birth",
+                          isBody: true,
                           textAlign: TextAlign.center,
                           fontSize: 18,
                           color: AppColors.black,
@@ -365,6 +372,7 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                     children: [
                       const AppText(
                           text: "Communication",
+                          isBody: true,
                           textAlign: TextAlign.center,
                           fontSize: 18,
                           color: AppColors.black,
@@ -396,6 +404,7 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                     children: [
                       const AppText(
                           text: "Mobilization",
+                          isBody: true,
                           textAlign: TextAlign.center,
                           fontSize: 18,
                           color: AppColors.black,
@@ -427,6 +436,7 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                     children: [
                       const AppText(
                           text: "Washing And Dressing",
+                          isBody: true,
                           textAlign: TextAlign.center,
                           fontSize: 18,
                           color: AppColors.black,
@@ -458,6 +468,7 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                     children: [
                       const AppText(
                           text: "Medication",
+                          isBody: true,
                           textAlign: TextAlign.center,
                           fontSize: 18,
                           color: AppColors.black,
@@ -489,6 +500,7 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                     children: [
                       const AppText(
                           text: "Eyesight",
+                          isBody: true,
                           textAlign: TextAlign.center,
                           fontSize: 18,
                           color: AppColors.black,
@@ -520,6 +532,7 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                     children: [
                       const AppText(
                           text: "Fall Risk",
+                          isBody: true,
                           textAlign: TextAlign.center,
                           fontSize: 18,
                           color: AppColors.black,
@@ -551,6 +564,7 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                     children: [
                       const AppText(
                           text: "Food And Fluid",
+                          isBody: true,
                           textAlign: TextAlign.center,
                           fontSize: 18,
                           color: AppColors.black,

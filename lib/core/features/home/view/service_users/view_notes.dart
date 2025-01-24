@@ -19,11 +19,11 @@ class ViewNotesPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<ViewNotesPage> {
-  late HomeProvider dataProvider;
+  late HomeNotifier dataProvider;
 
   @override
   void initState() {
-    dataProvider = ref.read(homeProvider);
+    dataProvider = ref.read(homeProvider.notifier);
     super.initState();
   }
 
@@ -109,6 +109,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
             title: const AppText(
                 text: "Add Notes",
                 textAlign: TextAlign.center,
+                isBody: false,
                 fontSize: 15,
                 color: AppColors.black,
                 fontStyle: FontStyle.normal,
@@ -134,6 +135,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                               text:
                                   "${widget.userChat.firstName} ${widget.userChat.lastName}",
                               textAlign: TextAlign.start,
+                              isBody: true,
                               fontSize: 13,
                               color: AppColors.black,
                               fontStyle: FontStyle.normal,
@@ -168,6 +170,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                     const AppText(
                                         text: "Sunday",
                                         textAlign: TextAlign.start,
+                                        isBody: true,
                                         fontSize: 13,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
@@ -198,6 +201,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                   const AppText(
                                       text: "Morning Notes:",
                                       textAlign: TextAlign.start,
+                                      isBody: true,
                                       fontSize: 16,
                                       color: AppColors.black,
                                       fontStyle: FontStyle.normal,
@@ -206,6 +210,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                       text:
                                           "${widget.userChat.sunday!.morningNotes}",
                                       textAlign: TextAlign.start,
+                                      isBody: true,
                                       fontSize: 16,
                                       color: AppColors.black,
                                       fontStyle: FontStyle.normal,
@@ -214,6 +219,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                   const AppText(
                                       text: "Night Notes:",
                                       textAlign: TextAlign.start,
+                                      isBody: true,
                                       fontSize: 16,
                                       color: AppColors.black,
                                       fontStyle: FontStyle.normal,
@@ -222,6 +228,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                       text:
                                           "${widget.userChat.sunday!.nightNotes}",
                                       textAlign: TextAlign.start,
+                                      isBody: true,
                                       fontSize: 16,
                                       color: AppColors.black,
                                       fontStyle: FontStyle.normal,
@@ -253,6 +260,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                   children: [
                                     const AppText(
                                         text: "Monday",
+                                        isBody: true,
                                         textAlign: TextAlign.start,
                                         fontSize: 13,
                                         color: AppColors.black,
@@ -283,6 +291,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                   children: [
                                     const AppText(
                                         text: "Morning Notes:",
+                                        isBody: true,
                                         textAlign: TextAlign.start,
                                         fontSize: 16,
                                         color: AppColors.black,
@@ -292,6 +301,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         text:
                                             "${widget.userChat.monday!.morningNotes}",
                                         textAlign: TextAlign.start,
+                                        isBody: true,
                                         fontSize: 16,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
@@ -300,6 +310,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                     const AppText(
                                         text: "Night Notes:",
                                         textAlign: TextAlign.start,
+                                        isBody: true,
                                         fontSize: 16,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
@@ -308,6 +319,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         text:
                                             "${widget.userChat.monday!.nightNotes}",
                                         textAlign: TextAlign.start,
+                                        isBody: true,
                                         fontSize: 16,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
@@ -339,6 +351,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                     const AppText(
                                         text: "Tuesday",
                                         textAlign: TextAlign.start,
+                                        isBody: true,
                                         fontSize: 13,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
@@ -369,6 +382,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                     const AppText(
                                         text: "Morning Notes:",
                                         textAlign: TextAlign.start,
+                                        isBody: true,
                                         fontSize: 16,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
@@ -378,6 +392,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                             "${widget.userChat.tuesday!.morningNotes}",
                                         textAlign: TextAlign.start,
                                         fontSize: 16,
+                                        isBody: true,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold),
@@ -385,6 +400,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                     const AppText(
                                         text: "Night Notes:",
                                         textAlign: TextAlign.start,
+                                        isBody: true,
                                         fontSize: 16,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
@@ -393,6 +409,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         text:
                                             "${widget.userChat.tuesday!.nightNotes}",
                                         textAlign: TextAlign.start,
+                                        isBody: true,
                                         fontSize: 16,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
@@ -423,6 +440,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                   children: [
                                     const AppText(
                                         text: "Wednesday",
+                                        isBody: true,
                                         textAlign: TextAlign.start,
                                         fontSize: 13,
                                         color: AppColors.black,
@@ -453,6 +471,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                   children: [
                                     const AppText(
                                         text: "Morning Notes:",
+                                        isBody: true,
                                         textAlign: TextAlign.start,
                                         fontSize: 16,
                                         color: AppColors.black,
@@ -462,6 +481,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         text:
                                             "${widget.userChat.wednesday!.morningNotes}",
                                         textAlign: TextAlign.start,
+                                        isBody: true,
                                         fontSize: 16,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
@@ -470,6 +490,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                     const AppText(
                                         text: "Night Notes:",
                                         textAlign: TextAlign.start,
+                                        isBody: true,
                                         fontSize: 16,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
@@ -479,6 +500,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                             "${widget.userChat.wednesday!.nightNotes}",
                                         textAlign: TextAlign.start,
                                         fontSize: 16,
+                                        isBody: true,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold),
@@ -509,6 +531,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                     const AppText(
                                         text: "Thursday",
                                         textAlign: TextAlign.start,
+                                        isBody: true,
                                         fontSize: 13,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
@@ -539,6 +562,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                     const AppText(
                                         text: "Morning Notes:",
                                         textAlign: TextAlign.start,
+                                        isBody: true,
                                         fontSize: 16,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
@@ -547,6 +571,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         text:
                                             "${widget.userChat.thursday!.morningNotes}",
                                         textAlign: TextAlign.start,
+                                        isBody: true,
                                         fontSize: 16,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
@@ -556,6 +581,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         text: "Night Notes:",
                                         textAlign: TextAlign.start,
                                         fontSize: 16,
+                                        isBody: true,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.normal),
@@ -564,6 +590,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                             "${widget.userChat.thursday!.nightNotes}",
                                         textAlign: TextAlign.start,
                                         fontSize: 16,
+                                        isBody: true,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold),
@@ -595,6 +622,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         text: "Friday",
                                         textAlign: TextAlign.start,
                                         fontSize: 13,
+                                        isBody: true,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold),
@@ -625,6 +653,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         text: "Morning Notes:",
                                         textAlign: TextAlign.start,
                                         fontSize: 16,
+                                        isBody: true,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.normal),
@@ -633,6 +662,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                             "${widget.userChat.friday!.morningNotes}",
                                         textAlign: TextAlign.start,
                                         fontSize: 16,
+                                        isBody: true,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold),
@@ -641,6 +671,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         text: "Night Notes:",
                                         textAlign: TextAlign.start,
                                         fontSize: 16,
+                                        isBody: true,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.normal),
@@ -649,6 +680,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                             "${widget.userChat.friday!.nightNotes}",
                                         textAlign: TextAlign.start,
                                         fontSize: 16,
+                                        isBody: true,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold),
@@ -680,6 +712,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         text: "Saturday",
                                         textAlign: TextAlign.start,
                                         fontSize: 13,
+                                        isBody: true,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold),
@@ -710,6 +743,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         text: "Morning Notes:",
                                         textAlign: TextAlign.start,
                                         fontSize: 16,
+                                        isBody: true,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.normal),
@@ -717,6 +751,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         text:
                                             "${widget.userChat.saturday!.morningNotes}",
                                         textAlign: TextAlign.start,
+                                        isBody: true,
                                         fontSize: 16,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
@@ -724,6 +759,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                     addVerticalSpacing(context, 180),
                                     const AppText(
                                         text: "Night Notes:",
+                                        isBody: true,
                                         textAlign: TextAlign.start,
                                         fontSize: 16,
                                         color: AppColors.black,
@@ -734,6 +770,7 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                             "${widget.userChat.saturday!.nightNotes}",
                                         textAlign: TextAlign.start,
                                         fontSize: 16,
+                                        isBody: true,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold),

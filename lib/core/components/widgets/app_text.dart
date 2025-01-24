@@ -16,6 +16,7 @@ class AppText extends StatelessWidget {
   final TextHeightBehavior? textHeightBehavior;
   final int? maxLines;
   final bool? softWrap;
+  final bool isBody;
 
   const AppText({
     required this.text,
@@ -33,6 +34,7 @@ class AppText extends StatelessWidget {
     this.textHeightBehavior,
     this.maxLines,
     this.softWrap,
+    required this.isBody,
   });
 
   @override
@@ -56,14 +58,14 @@ class AppText extends StatelessWidget {
     }
 
     final style = TextStyle(
-      fontSize: fontSizeEd,
+      fontSize: fontSizeEd + 0.5,
       letterSpacing: letterSpacing ?? 1,
       color: color ?? Colors.black,
       fontStyle: fontStyle ?? FontStyle.normal,
       fontWeight: fontWeight ?? FontWeight.w400,
       decoration: decoration ?? TextDecoration.none,
       height: linHeight ?? 1.5,
-      fontFamily: 'Inter',
+      fontFamily: isBody == true ? "Montserrat" : "Inter",
     );
     return Text(text,
         style: style,

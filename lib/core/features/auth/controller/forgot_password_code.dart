@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:pe_je_healthcare_admin/core/components/widgets/custom_snackbar.dart';
 import 'package:pe_je_healthcare_admin/core/features/auth/controller/login_controller.dart';
 
 import '../../../components/helpers/globals.dart';
@@ -53,8 +54,11 @@ class ForgotPasswordCodeController extends State<ForgotPasswordCodeScreen> {
         setState(() {
           isLoading = false;
         });
-        showInfoAlertWithAction(
-            context, "Code Error", "Code Does Not Exist", () {});
+        showCustomSnackbar(context,
+            title: "Code",
+            content: "Invalid Code Imputed",
+            type: SnackbarType.error,
+            isTopPosition: false);
       }
     }
 

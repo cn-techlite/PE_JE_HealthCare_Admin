@@ -20,12 +20,12 @@ class AssignUserTaskPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
-  late HomeProvider dataProvider;
+  late HomeNotifier dataProvider;
 
   @override
   void initState() {
-    dataProvider = ref.read(homeProvider);
-    dataProvider.getAllUsersData(context);
+    dataProvider = ref.read(homeProvider.notifier);
+    dataProvider.getAllUsersData();
     dataProvider.allUserData;
     super.initState();
   }
@@ -88,8 +88,8 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
   @override
   Widget build(BuildContext context) {
     final key = GlobalKey<ScaffoldMessengerState>();
-    dataProvider = ref.read(homeProvider);
-    dataProvider.getAllUsersData(context);
+    dataProvider = ref.read(homeProvider.notifier);
+    dataProvider.getAllUsersData();
     dataProvider.allUserData;
     return Container(
         height: MediaQuery.of(context).size.height,
@@ -113,6 +113,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
             title: const AppText(
                 text: "Assign User Task",
                 textAlign: TextAlign.center,
+                isBody: false,
                 fontSize: 15,
                 color: AppColors.black,
                 fontStyle: FontStyle.normal,
@@ -138,6 +139,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                               text:
                                   "${widget.userChat.firstName} ${widget.userChat.lastName}",
                               textAlign: TextAlign.start,
+                              isBody: true,
                               fontSize: 13,
                               color: AppColors.black,
                               fontStyle: FontStyle.normal,
@@ -173,6 +175,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                         text: "Sunday",
                                         textAlign: TextAlign.start,
                                         fontSize: 13,
+                                        isBody: true,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold),
@@ -202,6 +205,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                   const AppText(
                                       text: "Morning Task:",
                                       textAlign: TextAlign.start,
+                                      isBody: true,
                                       fontSize: 16,
                                       color: AppColors.black,
                                       fontStyle: FontStyle.normal,
@@ -220,7 +224,8 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                               users: dataProvider.allUserData,
                                               userId:
                                                   widget.userChat.id.toString(),
-                                              endpoint: "sun-morning",
+                                              dayString: "sunday",
+                                              isNight: false,
                                             ));
                                       },
                                       child: Container(
@@ -240,6 +245,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                               text:
                                                   "Assign User:\n${widget.userChat.sunday!.morningVisitName}",
                                               textAlign: TextAlign.start,
+                                              isBody: true,
                                               fontSize: 15,
                                               color: AppColors.white,
                                               fontStyle: FontStyle.normal,
@@ -253,6 +259,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                       text: "Night Task:",
                                       textAlign: TextAlign.start,
                                       fontSize: 16,
+                                      isBody: true,
                                       color: AppColors.black,
                                       fontStyle: FontStyle.normal,
                                       fontWeight: FontWeight.normal),
@@ -270,7 +277,8 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                               users: dataProvider.allUserData,
                                               userId:
                                                   widget.userChat.id.toString(),
-                                              endpoint: "sun-night",
+                                              dayString: "sunday",
+                                              isNight: true,
                                             ));
                                       },
                                       child: Container(
@@ -290,6 +298,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                               text:
                                                   "Assign User:\n${widget.userChat.sunday!.nightVisitName}",
                                               textAlign: TextAlign.start,
+                                              isBody: true,
                                               fontSize: 15,
                                               color: AppColors.white,
                                               fontStyle: FontStyle.normal,
@@ -327,6 +336,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                         text: "Monday",
                                         textAlign: TextAlign.start,
                                         fontSize: 13,
+                                        isBody: true,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold),
@@ -356,6 +366,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                   const AppText(
                                       text: "Morning Task:",
                                       textAlign: TextAlign.start,
+                                      isBody: true,
                                       fontSize: 16,
                                       color: AppColors.black,
                                       fontStyle: FontStyle.normal,
@@ -374,7 +385,8 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                               users: dataProvider.allUserData,
                                               userId:
                                                   widget.userChat.id.toString(),
-                                              endpoint: "mon-morning",
+                                              dayString: "monday",
+                                              isNight: false,
                                             ));
                                       },
                                       child: Container(
@@ -394,6 +406,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                               text:
                                                   "Assign User:\n${widget.userChat.monday!.morningVisitName}",
                                               textAlign: TextAlign.start,
+                                              isBody: true,
                                               fontSize: 15,
                                               color: AppColors.white,
                                               fontStyle: FontStyle.normal,
@@ -406,6 +419,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                   const AppText(
                                       text: "Night Task:",
                                       textAlign: TextAlign.start,
+                                      isBody: true,
                                       fontSize: 16,
                                       color: AppColors.black,
                                       fontStyle: FontStyle.normal,
@@ -424,7 +438,8 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                               users: dataProvider.allUserData,
                                               userId:
                                                   widget.userChat.id.toString(),
-                                              endpoint: "mon-night",
+                                              dayString: "monday",
+                                              isNight: true,
                                             ));
                                       },
                                       child: Container(
@@ -444,6 +459,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                               text:
                                                   "Assign User:\n${widget.userChat.monday!.nightVisitName}",
                                               textAlign: TextAlign.start,
+                                              isBody: true,
                                               fontSize: 15,
                                               color: AppColors.white,
                                               fontStyle: FontStyle.normal,
@@ -479,6 +495,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                   children: [
                                     const AppText(
                                         text: "Tuesday",
+                                        isBody: true,
                                         textAlign: TextAlign.start,
                                         fontSize: 13,
                                         color: AppColors.black,
@@ -509,6 +526,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                 children: [
                                   const AppText(
                                       text: "Morning Task:",
+                                      isBody: true,
                                       textAlign: TextAlign.start,
                                       fontSize: 16,
                                       color: AppColors.black,
@@ -528,7 +546,8 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                               users: dataProvider.allUserData,
                                               userId:
                                                   widget.userChat.id.toString(),
-                                              endpoint: "tues-morning",
+                                              dayString: "tuesday",
+                                              isNight: false,
                                             ));
                                       },
                                       child: Container(
@@ -548,6 +567,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                               text:
                                                   "Assign User:\n${widget.userChat.tuesday!.morningVisitName}",
                                               textAlign: TextAlign.start,
+                                              isBody: true,
                                               fontSize: 15,
                                               color: AppColors.white,
                                               fontStyle: FontStyle.normal,
@@ -560,6 +580,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                   const AppText(
                                       text: "Night Task:",
                                       textAlign: TextAlign.start,
+                                      isBody: true,
                                       fontSize: 16,
                                       color: AppColors.black,
                                       fontStyle: FontStyle.normal,
@@ -578,7 +599,8 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                               users: dataProvider.allUserData,
                                               userId:
                                                   widget.userChat.id.toString(),
-                                              endpoint: "tues-night",
+                                              dayString: "tuesday",
+                                              isNight: true,
                                             ));
                                       },
                                       child: Container(
@@ -598,6 +620,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                               text:
                                                   "Assign User:\n${widget.userChat.tuesday!.nightVisitName}",
                                               textAlign: TextAlign.start,
+                                              isBody: true,
                                               fontSize: 15,
                                               color: AppColors.white,
                                               fontStyle: FontStyle.normal,
@@ -634,6 +657,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                     const AppText(
                                         text: "Wednesday",
                                         textAlign: TextAlign.start,
+                                        isBody: true,
                                         fontSize: 13,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
@@ -664,6 +688,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                   const AppText(
                                       text: "Morning Task:",
                                       textAlign: TextAlign.start,
+                                      isBody: true,
                                       fontSize: 16,
                                       color: AppColors.black,
                                       fontStyle: FontStyle.normal,
@@ -682,7 +707,8 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                               users: dataProvider.allUserData,
                                               userId:
                                                   widget.userChat.id.toString(),
-                                              endpoint: "wed-morning",
+                                              dayString: "wednesday",
+                                              isNight: false,
                                             ));
                                       },
                                       child: Container(
@@ -703,6 +729,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                                   "Assign User:\n${widget.userChat.wednesday!.morningVisitName}",
                                               textAlign: TextAlign.start,
                                               fontSize: 15,
+                                              isBody: true,
                                               color: AppColors.white,
                                               fontStyle: FontStyle.normal,
                                               fontWeight: FontWeight.bold),
@@ -715,6 +742,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                       text: "Night Task:",
                                       textAlign: TextAlign.start,
                                       fontSize: 16,
+                                      isBody: true,
                                       color: AppColors.black,
                                       fontStyle: FontStyle.normal,
                                       fontWeight: FontWeight.normal),
@@ -732,7 +760,8 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                               users: dataProvider.allUserData,
                                               userId:
                                                   widget.userChat.id.toString(),
-                                              endpoint: "wed-night",
+                                              dayString: "wednesday",
+                                              isNight: true,
                                             ));
                                       },
                                       child: Container(
@@ -753,6 +782,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                                   "Assign User:\n${widget.userChat.wednesday!.nightVisitName}",
                                               textAlign: TextAlign.start,
                                               fontSize: 15,
+                                              isBody: true,
                                               color: AppColors.white,
                                               fontStyle: FontStyle.normal,
                                               fontWeight: FontWeight.bold),
@@ -787,6 +817,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                   children: [
                                     const AppText(
                                         text: "Thursday",
+                                        isBody: true,
                                         textAlign: TextAlign.start,
                                         fontSize: 13,
                                         color: AppColors.black,
@@ -822,6 +853,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                     children: [
                                       const AppText(
                                           text: "Morning Task:",
+                                          isBody: true,
                                           textAlign: TextAlign.start,
                                           fontSize: 16,
                                           color: AppColors.black,
@@ -842,7 +874,8 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                                       dataProvider.allUserData,
                                                   userId: widget.userChat.id
                                                       .toString(),
-                                                  endpoint: "thur-morning",
+                                                  dayString: "thursday",
+                                                  isNight: false,
                                                 ));
                                           },
                                           child: Container(
@@ -863,6 +896,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                                       "Assign User:\n${widget.userChat.thursday!.morningVisitName}",
                                                   textAlign: TextAlign.start,
                                                   fontSize: 15,
+                                                  isBody: true,
                                                   color: AppColors.white,
                                                   fontStyle: FontStyle.normal,
                                                   fontWeight: FontWeight.bold),
@@ -875,6 +909,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                           text: "Night Task:",
                                           textAlign: TextAlign.start,
                                           fontSize: 16,
+                                          isBody: true,
                                           color: AppColors.black,
                                           fontStyle: FontStyle.normal,
                                           fontWeight: FontWeight.normal),
@@ -893,7 +928,8 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                                       dataProvider.allUserData,
                                                   userId: widget.userChat.id
                                                       .toString(),
-                                                  endpoint: "thur-night",
+                                                  dayString: "thursday",
+                                                  isNight: true,
                                                 ));
                                           },
                                           child: Container(
@@ -913,6 +949,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                                   text:
                                                       "Assign User:\n${widget.userChat.thursday!.nightVisitName}",
                                                   textAlign: TextAlign.start,
+                                                  isBody: true,
                                                   fontSize: 15,
                                                   color: AppColors.white,
                                                   fontStyle: FontStyle.normal,
@@ -949,6 +986,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                     const AppText(
                                         text: "Friday",
                                         textAlign: TextAlign.start,
+                                        isBody: true,
                                         fontSize: 13,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
@@ -978,6 +1016,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                 children: [
                                   const AppText(
                                       text: "Morning Task:",
+                                      isBody: true,
                                       textAlign: TextAlign.start,
                                       fontSize: 16,
                                       color: AppColors.black,
@@ -997,7 +1036,8 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                               users: dataProvider.allUserData,
                                               userId:
                                                   widget.userChat.id.toString(),
-                                              endpoint: "fri-morning",
+                                              dayString: "friday",
+                                              isNight: false,
                                             ));
                                       },
                                       child: Container(
@@ -1018,6 +1058,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                                   "Assign User:\n${widget.userChat.friday!.morningVisitName}",
                                               textAlign: TextAlign.start,
                                               fontSize: 15,
+                                              isBody: true,
                                               color: AppColors.white,
                                               fontStyle: FontStyle.normal,
                                               fontWeight: FontWeight.bold),
@@ -1030,6 +1071,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                       text: "Night Task:",
                                       textAlign: TextAlign.start,
                                       fontSize: 16,
+                                      isBody: true,
                                       color: AppColors.black,
                                       fontStyle: FontStyle.normal,
                                       fontWeight: FontWeight.normal),
@@ -1047,7 +1089,8 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                               users: dataProvider.allUserData,
                                               userId:
                                                   widget.userChat.id.toString(),
-                                              endpoint: "fri-night",
+                                              dayString: "friday",
+                                              isNight: true,
                                             ));
                                       },
                                       child: Container(
@@ -1068,6 +1111,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                                   "Assign User:\n${widget.userChat.friday!.nightVisitName}",
                                               textAlign: TextAlign.start,
                                               fontSize: 15,
+                                              isBody: true,
                                               color: AppColors.white,
                                               fontStyle: FontStyle.normal,
                                               fontWeight: FontWeight.bold),
@@ -1104,6 +1148,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                         text: "Saturday",
                                         textAlign: TextAlign.start,
                                         fontSize: 13,
+                                        isBody: true,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold),
@@ -1134,6 +1179,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                       text: "Morning Task:",
                                       textAlign: TextAlign.start,
                                       fontSize: 16,
+                                      isBody: true,
                                       color: AppColors.black,
                                       fontStyle: FontStyle.normal,
                                       fontWeight: FontWeight.normal),
@@ -1151,7 +1197,8 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                               users: dataProvider.allUserData,
                                               userId:
                                                   widget.userChat.id.toString(),
-                                              endpoint: "sat-morning",
+                                              dayString: "saturday",
+                                              isNight: false,
                                             ));
                                       },
                                       child: Container(
@@ -1172,6 +1219,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                                   "Assign User:\n${widget.userChat.saturday!.morningVisitName}",
                                               textAlign: TextAlign.start,
                                               fontSize: 15,
+                                              isBody: true,
                                               color: AppColors.white,
                                               fontStyle: FontStyle.normal,
                                               fontWeight: FontWeight.bold),
@@ -1183,6 +1231,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                   const AppText(
                                       text: "Night Task:",
                                       textAlign: TextAlign.start,
+                                      isBody: true,
                                       fontSize: 16,
                                       color: AppColors.black,
                                       fontStyle: FontStyle.normal,
@@ -1201,7 +1250,8 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                               users: dataProvider.allUserData,
                                               userId:
                                                   widget.userChat.id.toString(),
-                                              endpoint: "sat-night",
+                                              dayString: "saturday",
+                                              isNight: true,
                                             ));
                                       },
                                       child: Container(
@@ -1222,6 +1272,7 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                                   "Assign User:\n${widget.userChat.saturday!.nightVisitName}",
                                               textAlign: TextAlign.start,
                                               fontSize: 15,
+                                              isBody: true,
                                               color: AppColors.white,
                                               fontStyle: FontStyle.normal,
                                               fontWeight: FontWeight.bold),

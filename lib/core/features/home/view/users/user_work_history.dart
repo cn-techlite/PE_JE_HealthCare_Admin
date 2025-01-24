@@ -53,6 +53,7 @@ class _LoginPageState extends ConsumerState<ViewUserWorkHistory> {
           title: const AppText(
               text: "Work History",
               textAlign: TextAlign.center,
+              isBody: false,
               fontSize: 15,
               color: AppColors.black,
               fontStyle: FontStyle.normal,
@@ -80,6 +81,7 @@ class _LoginPageState extends ConsumerState<ViewUserWorkHistory> {
                         text: "Nothing to show here",
                         textAlign: TextAlign.start,
                         fontSize: 21,
+                        isBody: true,
                         color: AppColors.black,
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.bold),
@@ -87,6 +89,7 @@ class _LoginPageState extends ConsumerState<ViewUserWorkHistory> {
                         text: "This user has not added any work history yet",
                         textAlign: TextAlign.center,
                         fontSize: 26,
+                        isBody: true,
                         color: AppColors.black,
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.normal),

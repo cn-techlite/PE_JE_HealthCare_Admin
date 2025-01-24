@@ -7,9 +7,7 @@ import 'package:http/http.dart' as http;
 import '../../../components/helpers/endpoints.dart';
 import '../../../components/helpers/globals.dart';
 import '../../../components/utils/constants.dart';
-import '../../../components/utils/helper_functions.dart';
 import '../../../components/utils/package_export.dart';
-import '../controller/confirm_email.dart';
 import '../model/login_response_model.dart';
 import '../model/register_model.dart';
 
@@ -78,15 +76,9 @@ class AuthService {
         globals.init();
         return true;
       } else if (response.body == "User Email Not Yet Verify") {
-        ScaffoldMessenger.of(cxt!).showSnackBar(
-            const SnackBar(content: Text("New code sent to your email")));
-        navigateAndRemoveUntilRoute(
-            cxt,
-            ConfirmEmailAddressScreen(
-              email: email,
-              fromLogin: false,
-              password: password,
-            ));
+        printData("Error", response.body);
+
+        return false;
       } else {
         printData("Error", response.body);
 

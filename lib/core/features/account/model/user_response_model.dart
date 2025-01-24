@@ -12,37 +12,55 @@ String registerResponseModelToJson(RegisterResponseModel data) =>
 
 class RegisterResponseModel {
   final String? id;
-  final String? firstName;
-  final String? surName;
   final String? email;
+  final String? surName;
+  final String? firstName;
+  final String? staffCode;
   final String? phoneNo;
   final String? imagePath;
-  final String? staffCode;
   final String? sex;
+  final String? state;
+  final String? locality;
+  final String? address;
+  final String? branch;
+  final String? datePublished;
+  final String? adminType;
   final DateTime? createdAt;
 
   RegisterResponseModel({
     this.id,
-    this.firstName,
-    this.surName,
     this.email,
+    this.surName,
+    this.firstName,
+    this.staffCode,
     this.phoneNo,
     this.imagePath,
-    this.staffCode,
     this.sex,
+    this.state,
+    this.locality,
+    this.address,
+    this.branch,
+    this.datePublished,
+    this.adminType,
     this.createdAt,
   });
 
   factory RegisterResponseModel.fromJson(Map<String, dynamic> json) =>
       RegisterResponseModel(
         id: json["id"],
-        firstName: json["firstName"],
-        surName: json["surName"],
         email: json["email"],
+        surName: json["surName"],
+        firstName: json["firstName"],
+        staffCode: json["staffCode"],
         phoneNo: json["phoneNo"],
         imagePath: json["imagePath"],
-        staffCode: json["staffCode"],
         sex: json["sex"],
+        state: json["state"],
+        locality: json["locality"],
+        address: json["address"],
+        branch: json["branch"],
+        datePublished: json["datePublished"],
+        adminType: json["adminType"],
         createdAt: json["createdAt"] == null
             ? null
             : DateTime.parse(json["createdAt"]),
@@ -50,13 +68,19 @@ class RegisterResponseModel {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "firstName": firstName,
-        "surName": surName,
         "email": email,
+        "surName": surName,
+        "firstName": firstName,
+        "staffCode": staffCode,
         "phoneNo": phoneNo,
         "imagePath": imagePath,
-        "staffCode": staffCode,
         "sex": sex,
+        "state": state,
+        "locality": locality,
+        "address": address,
+        "branch": branch,
+        "datePublished": datePublished,
+        "adminType": adminType,
         "createdAt": createdAt?.toIso8601String(),
       };
 }

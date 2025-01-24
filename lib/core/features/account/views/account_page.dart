@@ -3,13 +3,11 @@
 
 import 'dart:io';
 
-import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:pe_je_healthcare_admin/core/components/helpers/base_service_upload.dart';
 import 'package:pe_je_healthcare_admin/core/components/utils/helper_functions.dart';
 import 'package:pe_je_healthcare_admin/core/features/auth/controller/login_controller.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../components/helpers/globals.dart';
 import '../../../components/utils/colors.dart';
 import '../../../components/utils/package_export.dart';
 import '../../../components/widgets/app_text.dart';
@@ -33,12 +31,12 @@ class AccountPage extends ConsumerStatefulWidget {
 class _LoginPageState extends ConsumerState<AccountPage> {
   String selectedCarType = "";
 
-  late AccountProvider provider;
+  late AccountNotifier provider;
   @override
   void initState() {
     super.initState();
-    provider = ref.read(accountProvider);
-    provider.getPostData(context);
+    provider = ref.read(accountProvider.notifier);
+    provider.getAccount();
     provider.userData;
   }
 
@@ -49,6 +47,7 @@ class _LoginPageState extends ConsumerState<AccountPage> {
 
   File? pickedCv2;
   String imageFile = "";
+
   void handleCVUpload2() async {
     try {
       final ImagePicker picker = ImagePicker();
@@ -64,11 +63,12 @@ class _LoginPageState extends ConsumerState<AccountPage> {
         );
         setState(() {
           pickedCv2 = File(compressedImage!.path.toString());
-          imageFile = pickedCv2!.path;
         });
       }
-      AccountService().updateProfilePics(
-          userId: globals.userId.toString(), imageFile: imageFile);
+      String imageHandling = await ApiService.upload(
+        pickedCv2!.absolute.path.toString(),
+      );
+      AccountService().updateUsers(imagePath: imageHandling);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -77,10 +77,9 @@ class _LoginPageState extends ConsumerState<AccountPage> {
   @override
   Widget build(BuildContext context) {
     final key = GlobalKey<ScaffoldMessengerState>();
-    final accountProviderd = ref.read(accountProvider);
-    accountProviderd.getPostData(context);
+    final accountProviderd = ref.read(accountProvider.notifier);
+    accountProviderd.getAccount();
     var user = accountProviderd.userData;
-
     return Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -104,6 +103,7 @@ class _LoginPageState extends ConsumerState<AccountPage> {
                 fontSize: 19,
                 color: AppColors.white,
                 fontStyle: FontStyle.normal,
+                isBody: true,
                 fontWeight: FontWeight.w600),
             elevation: 0,
             centerTitle: false,
@@ -133,7 +133,7 @@ class _LoginPageState extends ConsumerState<AccountPage> {
                                         child: CircleAvatar(
                                             backgroundColor: Colors.white,
                                             radius: 37,
-                                            backgroundImage: user.imagePath
+                                            backgroundImage: user!.imagePath
                                                     .toString()
                                                     .isEmpty
                                                 ? const NetworkImage(
@@ -185,15 +185,17 @@ class _LoginPageState extends ConsumerState<AccountPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           AppText(
-                              text: "${user.firstName} ${user.surName}",
+                              text: "${user!.firstName} ${user.surName}",
                               textAlign: TextAlign.start,
                               fontSize: 22,
+                              isBody: true,
                               color: AppColors.black,
                               fontStyle: FontStyle.normal,
                               fontWeight: FontWeight.bold),
                           AppText(
                               text: user.email.toString(),
                               textAlign: TextAlign.start,
+                              isBody: true,
                               fontSize: 23,
                               color: AppColors.black,
                               fontStyle: FontStyle.normal,
@@ -201,6 +203,7 @@ class _LoginPageState extends ConsumerState<AccountPage> {
                           AppText(
                               text: user.staffCode.toString(),
                               textAlign: TextAlign.start,
+                              isBody: true,
                               fontSize: 23,
                               color: AppColors.black,
                               fontStyle: FontStyle.normal,
@@ -225,6 +228,7 @@ class _LoginPageState extends ConsumerState<AccountPage> {
                       text: "Personal Details",
                       textAlign: TextAlign.start,
                       fontSize: 22,
+                      isBody: false,
                       color: AppColors.black,
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w600),
@@ -232,6 +236,7 @@ class _LoginPageState extends ConsumerState<AccountPage> {
                       text: "Information about you",
                       textAlign: TextAlign.start,
                       fontSize: 23,
+                      isBody: true,
                       color: AppColors.black,
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w600),
@@ -253,12 +258,14 @@ class _LoginPageState extends ConsumerState<AccountPage> {
                       fontSize: 22,
                       color: AppColors.black,
                       fontStyle: FontStyle.normal,
+                      isBody: false,
                       fontWeight: FontWeight.w600),
                   subtitle: const AppText(
                       text: "Change your notification settings",
                       textAlign: TextAlign.start,
                       fontSize: 23,
                       color: AppColors.black,
+                      isBody: true,
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w600),
                   trailing: const Icon(
@@ -276,6 +283,7 @@ class _LoginPageState extends ConsumerState<AccountPage> {
                   title: const AppText(
                       text: "Help and Support",
                       textAlign: TextAlign.start,
+                      isBody: false,
                       fontSize: 22,
                       color: AppColors.black,
                       fontStyle: FontStyle.normal,
@@ -285,6 +293,7 @@ class _LoginPageState extends ConsumerState<AccountPage> {
                       textAlign: TextAlign.start,
                       fontSize: 23,
                       color: AppColors.black,
+                      isBody: true,
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w600),
                   trailing: const Icon(
@@ -302,6 +311,7 @@ class _LoginPageState extends ConsumerState<AccountPage> {
                   title: const AppText(
                       text: "Terms of Service",
                       textAlign: TextAlign.start,
+                      isBody: false,
                       fontSize: 22,
                       color: AppColors.black,
                       fontStyle: FontStyle.normal,
@@ -310,6 +320,7 @@ class _LoginPageState extends ConsumerState<AccountPage> {
                       text: "What you must know",
                       textAlign: TextAlign.start,
                       fontSize: 23,
+                      isBody: true,
                       color: AppColors.black,
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w600),
@@ -329,6 +340,7 @@ class _LoginPageState extends ConsumerState<AccountPage> {
                       text: "Privacy Policy",
                       textAlign: TextAlign.start,
                       fontSize: 22,
+                      isBody: false,
                       color: AppColors.black,
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w600),
@@ -336,6 +348,7 @@ class _LoginPageState extends ConsumerState<AccountPage> {
                       text: "How we protect your information",
                       textAlign: TextAlign.start,
                       fontSize: 23,
+                      isBody: true,
                       color: AppColors.black,
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w600),
@@ -359,6 +372,7 @@ class _LoginPageState extends ConsumerState<AccountPage> {
                                 text: "Sign Out of PE & JE HealthCare",
                                 textAlign: TextAlign.center,
                                 fontSize: 22,
+                                isBody: false,
                                 color: AppColors.black,
                                 fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.bold),
@@ -367,6 +381,7 @@ class _LoginPageState extends ConsumerState<AccountPage> {
                                     "Do you want to sign out of PE & JE HealthCare App?",
                                 textAlign: TextAlign.center,
                                 fontSize: 22,
+                                isBody: true,
                                 color: AppColors.black,
                                 fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.normal),
@@ -395,6 +410,7 @@ class _LoginPageState extends ConsumerState<AccountPage> {
                   title: const AppText(
                       text: "Logout",
                       textAlign: TextAlign.start,
+                      isBody: true,
                       fontSize: 22,
                       color: AppColors.black,
                       fontStyle: FontStyle.normal,

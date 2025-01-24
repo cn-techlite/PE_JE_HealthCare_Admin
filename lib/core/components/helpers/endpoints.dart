@@ -9,8 +9,7 @@ class Endpoints {
   static String twoFactorEnabledUrl = "Admin/two-factor-enabled";
   static String forgetPasswordUrl = "Admin/forgot-password-request-token";
   static String resetPasswordUrl = "Admin/reset-password";
-  static String profileImageUrl = "Admin/update-profile-image";
-  static String uploadUrl = "UploadFile/upload-image";
+  static String uploadUrl = "UploadFile/upload-web-server";
   static String resendEmailVerificationTokenUrl =
       "Admin/email-verification-request-token";
   static String contactUsUrl = "Info/ContactUs";

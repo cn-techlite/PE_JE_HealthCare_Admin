@@ -47,44 +47,4 @@ class FirestoreConstants {
   static const imageUrl = "ImageUrl";
   static const notificationType = "NotificationType";
   static const updatedAt = "UpdatedAt";
-
-  // All Users
-  static const addressPostCodes = "AddressPostCodes";
-  static const agreed = "Agreed";
-  static const allDocumentsCheck = "AllDocumentsCheck";
-  static const availabilityDays = "AvailabilityDays";
-  static const morning = "Morning";
-  static const night = "Night";
-  static const usersDataModelTableId = "UsersDataModelTableId";
-  static const deviceTokenId = "DeviceTokenId";
-  static const bankAccName = "BankAccName";
-  static const bankAccNo = "BankAccNo";
-  static const bankSortCode = "BankSortCode";
-  static const cvUpload = "CvUpload";
-  static const dbsCode = "DBSCode";
-  static const dBSFile = "DBSFile";
-  static const dBSFileCheck = "DBSFileCheck";
-  static const hasGoneHoliday = "HasGoneHoliday";
-  static const holidayEndDate = "HolidayEndDate";
-  static const holidayStartDate = "HolidayStartDate";
-  static const infoCompleted = "InfoCompleted";
-  static const insuranceNo = "InsuranceNo";
-  static const nationality = "Nationality";
-  static const profilePicture = "ProfilePicture";
-  static const proofOfAddress = "ProofOfAddress";
-  static const proofOfAddressCheck = "ProofOfAddressCheck";
-  static const referenceEmail1 = "ReferenceEmail";
-  static const referenceEmail2 = "ReferenceEmail2";
-  static const sex = "Sex";
-  static const trainingCertificates = "TrainingCertificates";
-  static const trainingCertificatesChecked = "TrainingCertificatesChecked";
-  static const uniqueNo = "UniqueNo";
-  static const workExperience = "WorkExperience";
-  static const workHistory = "WorkHistory";
-  static const employerName = "EmployerName";
-  static const positionHeld = "PositionHeld";
-  static const workEndDate = "";
-  static const workStartDate = "WorkStartDate";
-  static const nextOfKin = "NextOfKin";
-  static const nextOfKinPhoneNo = "NextOfKinPhoneNo";
 }

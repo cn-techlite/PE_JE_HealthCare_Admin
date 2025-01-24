@@ -1,11 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:pe_je_healthcare_admin/core/components/helpers/globals.dart';
-import 'package:pe_je_healthcare_admin/core/features/auth/states/auth_provider.dart'
-    as d;
+import 'package:pe_je_healthcare_admin/core/components/state/connectivity_state.dart';
+import 'package:pe_je_healthcare_admin/core/components/widgets/custom_snackbar.dart';
 
 import '../services/auth_service.dart';
-import '../states/auth_provider.dart';
 import '../../../components/utils/helper_functions.dart';
 import '../../../components/utils/package_export.dart';
 
@@ -24,7 +23,7 @@ class LoginScreensController extends ConsumerState<LoginScreens> {
   bool obscureText = true;
   late TextEditingController emailController;
   late TextEditingController passwordController;
-  d.AuthProvider? authProviders;
+
   String? email = "";
   String? password = "";
   bool saveButtonPressed = false;
@@ -38,7 +37,6 @@ class LoginScreensController extends ConsumerState<LoginScreens> {
     super.initState();
     emailController = TextEditingController();
     passwordController = TextEditingController();
-    authProviders = ref.read(authProvider);
   }
 
   @override
@@ -71,6 +69,7 @@ class LoginScreensController extends ConsumerState<LoginScreens> {
   }
 
   loginUser() async {
+    var connectivityStatusProvider = ref.read(connectivityStatusProviders);
     setState(() {
       saveButtonPressed = true;
     });
@@ -80,13 +79,7 @@ class LoginScreensController extends ConsumerState<LoginScreens> {
       setState(() {
         isLoading = true;
       });
-      var connectivityResult = await (Connectivity().checkConnectivity());
-      if (connectivityResult.contains(ConnectivityResult.mobile) ||
-          connectivityResult.contains(ConnectivityResult.wifi) ||
-          connectivityResult.contains(ConnectivityResult.ethernet) ||
-          connectivityResult.contains(ConnectivityResult.vpn) ||
-          connectivityResult.contains(ConnectivityResult.bluetooth) ||
-          connectivityResult.contains(ConnectivityResult.other)) {
+      if (connectivityStatusProvider == ConnectivityStatus.isConnected) {
         if (isChecked == true) {
           final res = await AuthService.userLogin(
               email: emailController.text.trim(),
@@ -103,22 +96,31 @@ class LoginScreensController extends ConsumerState<LoginScreens> {
             setState(() {
               isLoading = false;
             });
-            showInfoAlertWithAction(
-                context, "Invalid User", "Incorrect Email or Password", () {});
+            showCustomSnackbar(context,
+                title: "Invalid User",
+                content: "Incorrect Email or Password",
+                type: SnackbarType.error,
+                isTopPosition: false);
           }
         } else {
           setState(() {
             isLoading = false;
           });
-          showInfoAlertWithAction(context, "Terms & Conditions",
-              "Please accept terms & conditions", () {});
+          showCustomSnackbar(context,
+              title: "Terms of Service",
+              content: "Please accept terms & condition",
+              type: SnackbarType.error,
+              isTopPosition: false);
         }
       } else {
         setState(() {
           isLoading = false;
         });
-        showInfoAlertWithAction(
-            context, "Network Connection", "No Internet Connection", () {});
+        showCustomSnackbar(context,
+            title: "Network Connection",
+            content: "No Internet Connection",
+            type: SnackbarType.error,
+            isTopPosition: false);
       }
       setState(() {
         isLoading = false;
