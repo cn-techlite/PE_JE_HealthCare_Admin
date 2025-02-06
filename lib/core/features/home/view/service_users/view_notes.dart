@@ -215,6 +215,15 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                       color: AppColors.black,
                                       fontStyle: FontStyle.normal,
                                       fontWeight: FontWeight.bold),
+                                  AppText(
+                                      text:
+                                          "Current Location: ${widget.userChat.sunday!.morningUserLocation}",
+                                      textAlign: TextAlign.start,
+                                      isBody: true,
+                                      fontSize: 16,
+                                      color: AppColors.black,
+                                      fontStyle: FontStyle.normal,
+                                      fontWeight: FontWeight.bold),
                                   addVerticalSpacing(context, 180),
                                   const AppText(
                                       text: "Night Notes:",
@@ -227,6 +236,15 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                   AppText(
                                       text:
                                           "${widget.userChat.sunday!.nightNotes}",
+                                      textAlign: TextAlign.start,
+                                      isBody: true,
+                                      fontSize: 16,
+                                      color: AppColors.black,
+                                      fontStyle: FontStyle.normal,
+                                      fontWeight: FontWeight.bold),
+                                  AppText(
+                                      text:
+                                          "Current Location: ${widget.userChat.sunday!.nightUserLocation}",
                                       textAlign: TextAlign.start,
                                       isBody: true,
                                       fontSize: 16,
@@ -306,6 +324,15 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold),
+                                    AppText(
+                                        text:
+                                            "Current Location: ${widget.userChat.monday!.morningUserLocation}",
+                                        textAlign: TextAlign.start,
+                                        isBody: true,
+                                        fontSize: 16,
+                                        color: AppColors.black,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.bold),
                                     addVerticalSpacing(context, 180),
                                     const AppText(
                                         text: "Night Notes:",
@@ -318,6 +345,15 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                     AppText(
                                         text:
                                             "${widget.userChat.monday!.nightNotes}",
+                                        textAlign: TextAlign.start,
+                                        isBody: true,
+                                        fontSize: 16,
+                                        color: AppColors.black,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.bold),
+                                    AppText(
+                                        text:
+                                            "Current Location: ${widget.userChat.monday!.nightUserLocation}",
                                         textAlign: TextAlign.start,
                                         isBody: true,
                                         fontSize: 16,
@@ -396,6 +432,15 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold),
+                                    AppText(
+                                        text:
+                                            "Current Location: ${widget.userChat.tuesday!.morningUserLocation}",
+                                        textAlign: TextAlign.start,
+                                        isBody: true,
+                                        fontSize: 16,
+                                        color: AppColors.black,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.bold),
                                     addVerticalSpacing(context, 180),
                                     const AppText(
                                         text: "Night Notes:",
@@ -408,6 +453,15 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                     AppText(
                                         text:
                                             "${widget.userChat.tuesday!.nightNotes}",
+                                        textAlign: TextAlign.start,
+                                        isBody: true,
+                                        fontSize: 16,
+                                        color: AppColors.black,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.bold),
+                                    AppText(
+                                        text:
+                                            "Current Location: ${widget.userChat.tuesday!.nightUserLocation}",
                                         textAlign: TextAlign.start,
                                         isBody: true,
                                         fontSize: 16,
@@ -486,6 +540,15 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold),
+                                    AppText(
+                                        text:
+                                            "Current Location: ${widget.userChat.wednesday!.morningUserLocation}",
+                                        textAlign: TextAlign.start,
+                                        isBody: true,
+                                        fontSize: 16,
+                                        color: AppColors.black,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.bold),
                                     addVerticalSpacing(context, 180),
                                     const AppText(
                                         text: "Night Notes:",
@@ -501,6 +564,15 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         textAlign: TextAlign.start,
                                         fontSize: 16,
                                         isBody: true,
+                                        color: AppColors.black,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.bold),
+                                    AppText(
+                                        text:
+                                            "Current Location: ${widget.userChat.wednesday!.nightUserLocation}",
+                                        textAlign: TextAlign.start,
+                                        isBody: true,
+                                        fontSize: 16,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold),
@@ -576,6 +648,15 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold),
+                                    AppText(
+                                        text:
+                                            "Current Location: ${widget.userChat.thursday!.morningUserLocation}",
+                                        textAlign: TextAlign.start,
+                                        isBody: true,
+                                        fontSize: 16,
+                                        color: AppColors.black,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.bold),
                                     addVerticalSpacing(context, 180),
                                     const AppText(
                                         text: "Night Notes:",
@@ -591,6 +672,15 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         textAlign: TextAlign.start,
                                         fontSize: 16,
                                         isBody: true,
+                                        color: AppColors.black,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.bold),
+                                    AppText(
+                                        text:
+                                            "Current Location: ${widget.userChat.thursday!.nightUserLocation}",
+                                        textAlign: TextAlign.start,
+                                        isBody: true,
+                                        fontSize: 16,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold),
@@ -666,6 +756,15 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold),
+                                    AppText(
+                                        text:
+                                            "Current Location: ${widget.userChat.friday!.morningUserLocation}",
+                                        textAlign: TextAlign.start,
+                                        isBody: true,
+                                        fontSize: 16,
+                                        color: AppColors.black,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.bold),
                                     addVerticalSpacing(context, 180),
                                     const AppText(
                                         text: "Night Notes:",
@@ -681,6 +780,15 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         textAlign: TextAlign.start,
                                         fontSize: 16,
                                         isBody: true,
+                                        color: AppColors.black,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.bold),
+                                    AppText(
+                                        text:
+                                            "Current Location: ${widget.userChat.friday!.nightUserLocation}",
+                                        textAlign: TextAlign.start,
+                                        isBody: true,
+                                        fontSize: 16,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold),
@@ -756,6 +864,15 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold),
+                                    AppText(
+                                        text:
+                                            "Current Location: ${widget.userChat.saturday!.morningUserLocation}",
+                                        textAlign: TextAlign.start,
+                                        isBody: true,
+                                        fontSize: 16,
+                                        color: AppColors.black,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.bold),
                                     addVerticalSpacing(context, 180),
                                     const AppText(
                                         text: "Night Notes:",
@@ -771,6 +888,15 @@ class _LoginPageState extends ConsumerState<ViewNotesPage> {
                                         textAlign: TextAlign.start,
                                         fontSize: 16,
                                         isBody: true,
+                                        color: AppColors.black,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.bold),
+                                    AppText(
+                                        text:
+                                            "Current Location: ${widget.userChat.saturday!.nightUserLocation}",
+                                        textAlign: TextAlign.start,
+                                        isBody: true,
+                                        fontSize: 16,
                                         color: AppColors.black,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold),

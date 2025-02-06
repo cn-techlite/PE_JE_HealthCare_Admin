@@ -108,41 +108,42 @@ class UserResponseModel {
 
   factory UserResponseModel.fromJson(Map<String, dynamic> json) =>
       UserResponseModel(
-        id: json["id"],
-        uniqueNo: json["uniqueNo"],
-        firstName: json["firstName"],
-        lastName: json["lastName"],
-        email: json["email"],
-        phoneNo: json["phoneNo"],
-        profilePicture: json["profilePicture"],
-        address: json["address"],
-        sex: json["sex"],
-        dateOfBirth: json["dateOfBirth"],
-        addressPostCodes: json["addressPostCodes"],
-        bankAccName: json["bankAccName"],
-        bankAccNo: json["bankAccNo"],
-        bankSortCode: json["bankSortCode"],
-        dbsCode: json["dbsCode"],
-        workExperience: json["workExperience"],
-        insuranceNo: json["insuranceNo"],
-        nationality: json["nationality"],
-        nextOfKin: json["nextOfKin"],
-        nextOfKinPhoneNo: json["nextOfKinPhoneNo"],
-        proofOfAddress: json["proofOfAddress"],
-        proofOfAddressCheck: json["proofOfAddressCheck"],
-        referenceEmail: json["referenceEmail"],
-        referenceEmail2: json["referenceEmail2"],
-        dbsFile: json["dbsFile"],
-        dbsFileCheck: json["dbsFileCheck"],
-        trainingCertificates: json["trainingCertificates"],
-        trainingCertificatesChecked: json["trainingCertificatesChecked"],
-        allDocumentsCheck: json["allDocumentsCheck"],
-        cvUpload: json["cvUpload"],
-        agreed: json["agreed"],
-        infoCompleted: json["infoCompleted"],
-        hasGoneHoliday: json["hasGoneHoliday"],
-        holidayStartDate: json["holidayStartDate"],
-        holidayEndDate: json["holidayEndDate"],
+        id: json["id"] ?? "",
+        uniqueNo: json["uniqueNo"] ?? "",
+        firstName: json["firstName"] ?? "",
+        lastName: json["lastName"] ?? "",
+        email: json["email"] ?? "",
+        phoneNo: json["phoneNo"] ?? "",
+        profilePicture: json["profilePicture"] ?? "",
+        address: json["address"] ?? "",
+        sex: json["sex"] ?? "",
+        dateOfBirth: json["dateOfBirth"] ?? "",
+        addressPostCodes: json["addressPostCodes"] ?? "",
+        bankAccName: json["bankAccName"] ?? "",
+        bankAccNo: json["bankAccNo"] ?? "",
+        bankSortCode: json["bankSortCode"] ?? "",
+        dbsCode: json["dbsCode"] ?? "",
+        workExperience: json["workExperience"] ?? "",
+        insuranceNo: json["insuranceNo"] ?? "",
+        nationality: json["nationality"] ?? "",
+        nextOfKin: json["nextOfKin"] ?? "",
+        nextOfKinPhoneNo: json["nextOfKinPhoneNo"] ?? "",
+        proofOfAddress: json["proofOfAddress"] ?? "",
+        proofOfAddressCheck: json["proofOfAddressCheck"] ?? "",
+        referenceEmail: json["referenceEmail"] ?? "",
+        referenceEmail2: json["referenceEmail2"] ?? "",
+        dbsFile: json["dbsFile"] ?? "",
+        dbsFileCheck: json["dbsFileCheck"] ?? false,
+        trainingCertificates: json["trainingCertificates"] ?? "",
+        trainingCertificatesChecked:
+            json["trainingCertificatesChecked"] ?? false,
+        allDocumentsCheck: json["allDocumentsCheck"] ?? false,
+        cvUpload: json["cvUpload"] ?? "",
+        agreed: json["agreed"] ?? false,
+        infoCompleted: json["infoCompleted"] ?? false,
+        hasGoneHoliday: json["hasGoneHoliday"] ?? false,
+        holidayStartDate: json["holidayStartDate"] ?? "",
+        holidayEndDate: json["holidayEndDate"] ?? "",
         mondayAvailability: json["mondayAvailability"] == null
             ? null
             : DayAvailability.fromJson(json["mondayAvailability"]),
@@ -243,9 +244,9 @@ class DeviceTokenModel {
 
   factory DeviceTokenModel.fromJson(Map<String, dynamic> json) =>
       DeviceTokenModel(
-        id: json["id"],
-        deviceTokenId: json["deviceTokenId"],
-        usersDataModelTableId: json["usersDataModelTableId"],
+        id: json["id"] ?? "",
+        deviceTokenId: json["deviceTokenId"] ?? "",
+        usersDataModelTableId: json["usersDataModelTableId"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -270,10 +271,10 @@ class DayAvailability {
 
   factory DayAvailability.fromJson(Map<String, dynamic> json) =>
       DayAvailability(
-        id: json["id"],
-        morningAvailability: json["morningAvailability"],
-        nightAvailability: json["nightAvailability"],
-        usersDataModelTableId: json["usersDataModelTableId"],
+        id: json["id"] ?? "",
+        morningAvailability: json["morningAvailability"] ?? false,
+        nightAvailability: json["nightAvailability"] ?? false,
+        usersDataModelTableId: json["usersDataModelTableId"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -303,12 +304,12 @@ class WorkExperienceHistory {
 
   factory WorkExperienceHistory.fromJson(Map<String, dynamic> json) =>
       WorkExperienceHistory(
-        id: json["id"],
-        employerName: json["employerName"],
-        positionHeld: json["positionHeld"],
-        workStartDate: json["workStartDate"],
-        workEndDate: json["workEndDate"],
-        usersDataModelTableId: json["usersDataModelTableId"],
+        id: json["id"] ?? "",
+        employerName: json["employerName"] ?? "",
+        positionHeld: json["positionHeld"] ?? "",
+        workStartDate: json["workStartDate"] ?? "",
+        workEndDate: json["workEndDate"] ?? "",
+        usersDataModelTableId: json["usersDataModelTableId"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {

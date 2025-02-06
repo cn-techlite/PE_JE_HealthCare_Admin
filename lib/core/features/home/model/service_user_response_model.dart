@@ -66,21 +66,21 @@ class ServiceUserResponseModel {
 
   factory ServiceUserResponseModel.fromJson(Map<String, dynamic> json) =>
       ServiceUserResponseModel(
-        id: json["id"],
-        firstName: json["firstName"],
-        lastName: json["lastName"],
-        email: json["email"],
-        address: json["address"],
-        dateOfBirth: json["dateOfBirth"],
-        imageProfile: json["imageProfile"],
-        communication: json["communication"],
-        mobilization: json["mobilization"],
-        washingAndDressing: json["washingAndDressing"],
-        medication: json["medication"],
-        eyesight: json["eyesight"],
-        socialactivities: json["socialactivities"],
-        fallRisk: json["fallRisk"],
-        foodAndFluid: json["foodAndFluid"],
+        id: json["id"] ?? "",
+        firstName: json["firstName"] ?? "",
+        lastName: json["lastName"] ?? "",
+        email: json["email"] ?? "",
+        address: json["address"] ?? "",
+        dateOfBirth: json["dateOfBirth"] ?? "",
+        imageProfile: json["imageProfile"] ?? "",
+        communication: json["communication"] ?? "",
+        mobilization: json["mobilization"] ?? "",
+        washingAndDressing: json["washingAndDressing"] ?? "",
+        medication: json["medication"] ?? "",
+        eyesight: json["eyesight"] ?? "",
+        socialactivities: json["socialactivities"] ?? "",
+        fallRisk: json["fallRisk"] ?? "",
+        foodAndFluid: json["foodAndFluid"] ?? "",
         createdAt: json["createdAt"] == null
             ? null
             : DateTime.parse(json["createdAt"]),
@@ -138,6 +138,10 @@ class Day {
   final DateTime? morningDate;
   final DateTime? nightDate;
   final String? servicesUserDataModelId;
+  final String? nightUserLocation;
+  final String? nightUserPostcode;
+  final String? morningUserLocation;
+  final String? morningUserPostCode;
 
   Day({
     this.id,
@@ -150,16 +154,20 @@ class Day {
     this.morningDate,
     this.nightDate,
     this.servicesUserDataModelId,
+    this.nightUserLocation,
+    this.nightUserPostcode,
+    this.morningUserLocation,
+    this.morningUserPostCode,
   });
 
   factory Day.fromJson(Map<String, dynamic> json) => Day(
-        id: json["id"],
-        morningVisitId: json["morningVisitId"],
-        nightVisitId: json["nightVisitId"],
-        morningVisitName: json["morningVisitName"],
-        nightVisitName: json["nightVisitName"],
-        morningNotes: json["morningNotes"],
-        nightNotes: json["nightNotes"],
+        id: json["id"] ?? "",
+        morningVisitId: json["morningVisitId"] ?? "",
+        nightVisitId: json["nightVisitId"] ?? "",
+        morningVisitName: json["morningVisitName"] ?? "",
+        nightVisitName: json["nightVisitName"] ?? "",
+        morningNotes: json["morningNotes"] ?? "",
+        nightNotes: json["nightNotes"] ?? "",
         morningDate: json["morningDate"] == null
             ? null
             : DateTime.parse(json["morningDate"]),
@@ -167,6 +175,10 @@ class Day {
             ? null
             : DateTime.parse(json["nightDate"]),
         servicesUserDataModelId: json["servicesUserDataModelId"],
+        nightUserLocation: json["nightUserLocation"] ?? "",
+        nightUserPostcode: json["nightUserPostcode"] ?? "",
+        morningUserLocation: json["morningUserLocation"] ?? "",
+        morningUserPostCode: json["morningUserPostCode"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -180,5 +192,9 @@ class Day {
         "morningDate": morningDate?.toIso8601String(),
         "nightDate": nightDate?.toIso8601String(),
         "servicesUserDataModelId": servicesUserDataModelId,
+        "nightUserLocation": nightUserLocation,
+        "nightUserPostcode": nightUserPostcode,
+        "morningUserLocation": morningUserLocation,
+        "morningUserPostCode": morningUserPostCode,
       };
 }
