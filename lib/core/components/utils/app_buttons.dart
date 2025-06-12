@@ -6,28 +6,35 @@ import 'constants.dart';
 import 'colors.dart';
 import 'helper_functions.dart';
 
-Widget appButton(String text, double width, VoidCallback onPressed,
-    Color btnColor, bool isLoading,
-    [Color textColor = Colors.white, double fontSize = 12]) {
+Widget appButton(
+  String text,
+  double width,
+  VoidCallback onPressed,
+  Color btnColor,
+  bool isLoading, [
+  Color textColor = Colors.white,
+  double fontSize = 12,
+]) {
   return SizedBox(
     width: width,
     height: Constants.buttonHeight,
     child: CupertinoButton(
-        disabledColor: !isLoading ? AppColors.grey : AppColors.primary,
-        borderRadius: BorderRadius.circular(1),
-        onPressed: isLoading ? null : onPressed,
-        color: AppColors.primary,
-        child: !isLoading
-            ? Text(text,
-                style: TextStyle(
-                    color: textColor,
-                    fontSize: fontSize,
-                    fontFamily: "Poppins",
-                    fontWeight: FontWeight.bold))
-            : const SpinKitThreeBounce(
-                color: AppColors.white,
-                size: 16,
-              )),
+      disabledColor: !isLoading ? AppColors.grey : AppColors.primary,
+      borderRadius: BorderRadius.circular(1),
+      onPressed: isLoading ? null : onPressed,
+      color: btnColor,
+      child: !isLoading
+          ? Text(
+              text,
+              style: TextStyle(
+                color: textColor,
+                fontSize: fontSize,
+                fontFamily: "Poppins",
+                fontWeight: FontWeight.bold,
+              ),
+            )
+          : const SpinKitThreeBounce(color: AppColors.white, size: 16),
+    ),
   );
 }
 

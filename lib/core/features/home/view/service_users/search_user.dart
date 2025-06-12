@@ -5,6 +5,7 @@ import 'package:pe_je_healthcare_admin/core/components/utils/colors.dart';
 import 'package:pe_je_healthcare_admin/core/components/utils/helper_functions.dart';
 import 'package:pe_je_healthcare_admin/core/components/utils/package_export.dart';
 import 'package:pe_je_healthcare_admin/core/components/widgets/app_text.dart';
+import 'package:pe_je_healthcare_admin/core/components/widgets/custom_snackbar.dart';
 import 'package:pe_je_healthcare_admin/core/components/widgets/input.dart';
 import 'package:pe_je_healthcare_admin/core/features/home/model/users_response_model.dart';
 import 'package:pe_je_healthcare_admin/core/features/home/services/home_service.dart';
@@ -180,14 +181,7 @@ class _UserPageState extends ConsumerState<SelectUserPage> {
                                   CupertinoDialogAction(
                                       child: const Text("Proceed"),
                                       onPressed: () async {
-                                        String deviceToken = "";
-                                        for (var token
-                                            in userChat.deviceTokenModels!) {
-                                          deviceToken =
-                                              token.deviceTokenId.toString();
-                                        }
-
-                                        final isValid = await HomeServices()
+                                        final response = await HomeServices()
                                             .updateServiceUser(
                                                 serviceUserId: widget.userId,
                                                 nightUserId:
@@ -195,24 +189,26 @@ class _UserPageState extends ConsumerState<SelectUserPage> {
                                                 nightUserName:
                                                     "${userChat.firstName} ${userChat.lastName}",
                                                 dayString: widget.dayString);
-                                        if (isValid) {
-                                          await HomeServices().sendNotificationUser(
-                                              userDeviceToken: deviceToken,
-                                              title: "New Task",
-                                              body:
-                                                  "You have been assigned to a new task",
-                                              notificationType: "task",
-                                              userId: userChat.id.toString());
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
-                                                  content: Text(
-                                                      "User Added Successfully")));
-                                          Navigator.pop(context);
+                                        if (response.statusCode == 201 ||
+                                            response.statusCode == 200) {
+                                          navigateBack(context);
+                                          showCustomSnackbar(
+                                            context,
+                                            title: "User Update",
+                                            content:
+                                                "User Updated Successfully",
+                                            type: SnackbarType.success,
+                                            isTopPosition: false,
+                                          );
                                         } else {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
-                                                  content: Text(
-                                                      "Failed to add user")));
+                                          navigateBack(context);
+                                          showCustomSnackbar(
+                                            context,
+                                            title: "Update User Error",
+                                            content: response.body,
+                                            type: SnackbarType.error,
+                                            isTopPosition: false,
+                                          );
                                         }
                                       }),
                                   CupertinoDialogAction(
@@ -248,14 +244,7 @@ class _UserPageState extends ConsumerState<SelectUserPage> {
                                   CupertinoDialogAction(
                                       child: const Text("Proceed"),
                                       onPressed: () async {
-                                        String deviceToken = "";
-                                        for (var token
-                                            in userChat.deviceTokenModels!) {
-                                          deviceToken =
-                                              token.deviceTokenId.toString();
-                                        }
-
-                                        final isValid = await HomeServices()
+                                        final response = await HomeServices()
                                             .updateServiceUser(
                                                 serviceUserId: widget.userId,
                                                 morningUserId:
@@ -263,24 +252,26 @@ class _UserPageState extends ConsumerState<SelectUserPage> {
                                                 morningUserName:
                                                     "${userChat.firstName} ${userChat.lastName}",
                                                 dayString: widget.dayString);
-                                        if (isValid) {
-                                          await HomeServices().sendNotificationUser(
-                                              userDeviceToken: deviceToken,
-                                              title: "New Task",
-                                              body:
-                                                  "You have been assigned to a new task",
-                                              notificationType: "task",
-                                              userId: userChat.id.toString());
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
-                                                  content: Text(
-                                                      "User Added Successfully")));
-                                          Navigator.pop(context);
+                                        if (response.statusCode == 201 ||
+                                            response.statusCode == 200) {
+                                          navigateBack(context);
+                                          showCustomSnackbar(
+                                            context,
+                                            title: "User Update",
+                                            content:
+                                                "User Updated Successfully",
+                                            type: SnackbarType.success,
+                                            isTopPosition: false,
+                                          );
                                         } else {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
-                                                  content: Text(
-                                                      "Failed to add user")));
+                                          navigateBack(context);
+                                          showCustomSnackbar(
+                                            context,
+                                            title: "Update User Error",
+                                            content: response.body,
+                                            type: SnackbarType.error,
+                                            isTopPosition: false,
+                                          );
                                         }
                                       }),
                                   CupertinoDialogAction(

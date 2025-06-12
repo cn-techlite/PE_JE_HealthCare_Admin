@@ -63,105 +63,99 @@ class ForgotPasswordCodeScreenView extends StatelessView<
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const AppText(
-                          text: "New Password",
-                          textAlign: TextAlign.start,
-                          fontSize: 15,
-                          isBody: true,
+                      Text(
+                        "OTP Code",
+                        style: TextStyle(
+                          fontSize: fontSized(context, 80),
                           color: AppColors.black,
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w400),
-                      const SizedBox(height: 8),
-                      PasswordInput(
-                        obscureText: controller.obscureText,
-                        fillColor: const Color.fromARGB(255, 243, 247, 245),
-                        focusNode: controller.newPasswordFocusNode,
-                        passwordIcon: GestureDetector(
-                          onTap: () {
-                            controller.obscureTextPassword();
-                          },
-                          child: Icon(
-                            controller.obscureText
-                                ? Icons.visibility_outlined
-                                : Icons.visibility_off_outlined,
-                            color: AppColors.primary,
-                          ),
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "Mulish",
                         ),
-                        controller: controller.newPasswordController,
-                        hintText: "New Password",
-                        prefixIcon: Icons.lock,
-                        labelText: "New Password",
-                        keyboard: TextInputType.text,
-                        onChanged: (String? value) {},
-                        validator: (String? value) {
-                          if (value!.isEmpty || value.length < 3) {
-                            return "enter a valid password";
-                          } else if (value.length < 8) {
-                            return "password must be 8 characters";
-                          } else if (!controller.passValid.hasMatch(value)) {
-                            return "password must contain at least one uppercase letter, one lowercase letter, one number";
-                          }
-                          return null;
+                      ),
+                      GlobalTextField(
+                        fieldName: 'OTP Code',
+                        keyBoardType: TextInputType.number,
+                        obscureText: false,
+                        maxLength: 5,
+                        textController: controller.codeController,
+                        onChanged: (String? value) {
+                          controller.otpOnChanged(value!);
                         },
-                        toggleEye: () {},
-                        onSaved: (value) {},
-                        onTap: () {},
                       ),
                     ],
                   ),
-                  addVerticalSpacing(context, 15),
+                  addVerticalSpacing(context, 5),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const AppText(
-                          text: "Confirm Password",
-                          textAlign: TextAlign.start,
-                          fontSize: 15,
-                          isBody: true,
-                          color: AppColors.black,
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w400),
-                      const SizedBox(height: 8),
-                      PasswordInput(
-                        obscureText: controller.obscureConfirmPassword,
-                        focusNode: controller.confirmPasswordFocusNode,
-                        fillColor: const Color.fromARGB(255, 243, 247, 245),
-                        passwordIcon: GestureDetector(
-                          onTap: () {
-                            controller.obscureTextConfirmPassword();
-                          },
-                          child: Icon(
-                            controller.obscureConfirmPassword
-                                ? Icons.visibility_outlined
-                                : Icons.visibility_off_outlined,
-                            color: AppColors.primary,
-                          ),
-                        ),
-                        controller: controller.confirmPasswordController,
-                        hintText: "Confirm Password",
-                        prefixIcon: Icons.lock,
-                        labelText: "Confirm Password",
-                        keyboard: TextInputType.text,
-                        onChanged: (String? value) {},
-                        validator: (String? value) {
-                          if (value!.isEmpty || value.length < 3) {
-                            return "enter a valid password";
-                          } else if (controller.newPasswordController.text !=
-                              controller.confirmPasswordController.text) {
-                            return "password do not match";
-                          }
-                          return null;
+                        isBody: false,
+                        text: "New Password",
+                        textAlign: TextAlign.start,
+                        fontSize: 80,
+                        color: AppColors.black,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      GlobalTextField(
+                        fieldName: 'New Password',
+                        keyBoardType: TextInputType.visiblePassword,
+                        obscureText: true,
+                        isEyeVisible: true,
+                        textController: controller.newPasswordController,
+                        onChanged: (String? value) {
+                          controller.newPasswordOnChanged(value!);
                         },
-                        toggleEye: () {},
-                        onSaved: (value) {},
-                        onTap: () {},
                       ),
                     ],
                   ),
-                  addVerticalSpacing(context, 50),
-                  appButton("Update Password", getScreenWidth(context), () {
-                    controller.onSubmit();
-                  }, AppColors.primary, controller.isLoading),
+                  addVerticalSpacing(context, 5),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const AppText(
+                        isBody: false,
+                        text: "Confirm Password",
+                        textAlign: TextAlign.start,
+                        fontSize: 80,
+                        color: AppColors.black,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      GlobalTextField(
+                        fieldName: 'Confirm Password',
+                        keyBoardType: TextInputType.visiblePassword,
+                        obscureText: true,
+                        isEyeVisible: true,
+                        textController: controller.confirmPasswordController,
+                        onChanged: (String? value) {
+                          controller.confirmPasswordOnChanged(value!);
+                        },
+                      ),
+                    ],
+                  ),
+                  addVerticalSpacing(context, 10),
+                  controller.isOTPChanged.isEmpty ||
+                          controller.isNewPasswordChanged.isEmpty ||
+                          controller.isConfirmPasswordChanged.isEmpty ||
+                          controller.isConfirmPasswordChanged !=
+                              controller.isNewPasswordChanged
+                      ? appButton(
+                          "Update Password",
+                          getScreenWidth(context),
+                          () {},
+                          AppColors.grey,
+                          controller.isLoading,
+                        )
+                      : appButton(
+                          "Update Password",
+                          getScreenWidth(context),
+                          () {
+                            controller.onSubmit();
+                          },
+                          AppColors.primary,
+                          controller.isLoading,
+                        ),
                   addVerticalSpacing(context, 50),
                 ],
               ),

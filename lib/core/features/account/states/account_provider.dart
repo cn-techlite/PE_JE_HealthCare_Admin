@@ -49,48 +49,6 @@ class AccountNotifier extends StateNotifier<AccountState> {
     }
   }
 
-  updateUser(
-      {String? firstName,
-      String? lastName,
-      String? phoneNo,
-      String? imagePath,
-      String? sex,
-      String? userState,
-      String? locality,
-      String? address,
-      String? branch,
-      required BuildContext context}) async {
-    try {
-      if (!mounted) {
-        state = AccountLoading();
-        return;
-      }
-      var response = await services.updateUsers(
-        firstName: firstName,
-        lastName: lastName,
-        phoneNo: phoneNo,
-        imagePath: imagePath,
-        address: address,
-        sex: sex,
-        state: userState,
-        locality: locality,
-        branch: branch,
-      );
-      if (response) {
-        if (!mounted) return;
-        state = AccountSuccess(userData: userData!);
-        ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("User Updated Successfully")));
-      } else {
-        state = AccountFailure("User Not Found");
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("User Not Found")));
-      }
-    } on Exception catch (e) {
-      state = AccountFailure(e.toString());
-    }
-  }
-
   Future<void> handleSignOut() async {
     removeFromLocalStorage(name: "token");
     removeFromLocalStorage(name: "userEmail");

@@ -1,174 +1,62 @@
-import 'package:pe_je_healthcare_admin/core/components/widgets/app_text.dart';
-
-import '../utils/colors.dart';
 import '../utils/package_export.dart';
-import '../utils/typography.dart';
 
-class DropdownForApi extends StatelessWidget {
-  const DropdownForApi({
+class BottomSheetSelector extends StatefulWidget {
+  final List<String> options;
+  final String title;
+
+  const BottomSheetSelector({
     super.key,
-    required this.hint,
-    required this.selected,
-    required this.itemList,
-    this.selectDrop,
-    required this.selectedItem,
+    required this.options,
+    this.title = 'Select an Option',
   });
 
-  final String hint;
-  final String selected;
-  final String? selectedItem;
-  final List<dynamic> itemList;
-  final Function(String?)? selectDrop;
-
-  @override
-  Widget build(BuildContext context) {
-    return DropdownButtonFormField<String>(
-      style: AppTypography.dynamicStyle(
-        fontSize: fontSized(context, 22),
-        fontWeight: FontWeight.w400,
-        color: AppColors.black,
+  /// Call this to show the selector
+  static Future<String?> show({
+    required BuildContext context,
+    required List<String> options,
+    String title = 'Select an Option',
+  }) {
+    return showModalBottomSheet<String>(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
-      validator: (value) => value == null ? 'field required' : null,
-      decoration: InputDecoration(
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(2),
-          borderSide: const BorderSide(
-            color: AppColors.primary,
-            width: 1.0,
-          ),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(2),
-          borderSide: const BorderSide(
-            color: Colors.red,
-            width: 1.0,
-          ),
-        ),
-        border: const OutlineInputBorder(
-          gapPadding: 1.0,
-          borderRadius: BorderRadius.all(
-            Radius.circular(0.0),
-          ),
-        ),
-      ),
-      hint: Text(
-        hint,
-        style: AppTypography.dynamicStyle(
-          fontSize: fontSized(context, 22),
-          fontWeight: FontWeight.w400,
-          color: Colors.grey,
-        ),
-      ),
-      value: selectedItem, //controller.selectedCategory,
-      onChanged: (value) {
-        selectDrop!(value);
-      },
-      items: itemList.map((category) {
-        return DropdownMenuItem<String>(
-          value: category.title,
-          child: Text(
-            category.title,
-            style: AppTypography.dynamicStyle(
-              fontSize: fontSized(context, 22),
-              fontWeight: FontWeight.w400,
-              color: AppColors.black,
-            ),
-          ),
-        );
-      }).toList(),
+      builder: (context) => BottomSheetSelector(options: options, title: title),
     );
   }
-}
-
-class DropdownFor extends StatelessWidget {
-  const DropdownFor({
-    super.key,
-    required this.hint,
-    // required this.selected,
-    required this.itemList,
-    this.selectDrop,
-    required this.selectedItem,
-    this.validator,
-  });
-
-  final String hint;
-  //final String selected;
-  final String? selectedItem;
-  final List<String> itemList;
-  final Function(String?)? selectDrop;
-  final String? Function(String?)? validator;
 
   @override
-  Widget build(BuildContext context) {
-    return DropdownButtonHideUnderline(
-      child: DropdownButtonFormField2<String>(
-        style: AppTypography.dynamicStyle(
-          fontSize: fontSized(context, 22),
-          fontWeight: FontWeight.w400,
-          color: AppColors.black,
-        ),
-        validator: (value) => value == null ? 'field required' : null,
-        decoration: InputDecoration(
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(2),
-            borderSide: const BorderSide(
-              color: AppColors.primary,
-              width: 1.0,
-            ),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(2),
-            borderSide: const BorderSide(
-              color: Colors.red,
-              width: 1.0,
-            ),
-          ),
-          border: const OutlineInputBorder(
-            gapPadding: 1.0,
-            borderRadius: BorderRadius.all(
-              Radius.circular(0.0),
-            ),
-          ),
-        ),
-        hint: Text(
-          hint,
-          style: AppTypography.dynamicStyle(
-            fontSize: fontSized(context, 22),
-            fontWeight: FontWeight.w400,
-            color: Colors.grey,
-          ),
-        ),
-        // buttonStyleData: ButtonStyleData(
-        //   height: 60,
-        //   padding: const EdgeInsets.only(left: 10, right: 10),
-        //   decoration: BoxDecoration(
-        //     borderRadius: BorderRadius.circular(10),
-        //     border: Border.all(
-        //       color: AppColors.grey,
-        //     ),
-        //     color: AppColors.white,
-        //   ),
-        // ),
-        // menuItemStyleData: const MenuItemStyleData(
-        //   height: 40,
-        //   padding: EdgeInsets.only(left: 10, right: 10),
-        // ),
+  State<BottomSheetSelector> createState() => _BottomSheetSelectorState();
+}
 
-        value: selectedItem, //controller.selectedCategory,
-        onChanged: selectDrop!,
-        items: itemList.map((value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(
-              value,
-              style: AppTypography.dynamicStyle(
-                fontSize: fontSized(context, 22),
-                fontWeight: FontWeight.w400,
-                color: AppColors.black,
-              ),
-            ),
-          );
-        }).toList(),
+class _BottomSheetSelectorState extends State<BottomSheetSelector> {
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(height: 12),
+          Text(
+            widget.title,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          const Divider(),
+          ListView.separated(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            shrinkWrap: true,
+            itemCount: widget.options.length,
+            itemBuilder: (context, index) {
+              final option = widget.options[index];
+              return ListTile(
+                title: Text(option),
+                onTap: () => Navigator.of(context).pop(option),
+              );
+            },
+            separatorBuilder: (_, __) => const Divider(),
+          ),
+        ],
       ),
     );
   }

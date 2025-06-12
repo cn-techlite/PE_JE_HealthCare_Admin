@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:pe_je_healthcare_admin/core/features/home/model/admin_response_model.dart';
 import 'package:pe_je_healthcare_admin/core/features/home/model/notification_response_model.dart';
 import 'package:pe_je_healthcare_admin/core/features/home/model/service_user_response_model.dart';
 import 'package:pe_je_healthcare_admin/core/features/home/model/users_response_model.dart';
@@ -68,120 +69,6 @@ class HomeNotifier extends StateNotifier<HomeState> {
     return serviceUser;
   }
 
-  addServiceUser(
-      {required String firstName,
-      required String lastName,
-      required String email,
-      required String address,
-      required String dateOfBirth,
-      required String imageProfile,
-      required String communication,
-      required String mobilization,
-      required String washingAndDressing,
-      required String medication,
-      required String eyesight,
-      required String socialActivities,
-      required String fallRisk,
-      required String foodAndFluid,
-      required BuildContext context}) async {
-    try {
-      if (!mounted) {
-        state = HomeLoading();
-        return;
-      }
-      var response = await home.addServiceUser(
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          address: address,
-          dateOfBirth: dateOfBirth,
-          imageProfile: imageProfile,
-          communication: communication,
-          mobilization: mobilization,
-          washingAndDressing: washingAndDressing,
-          medication: medication,
-          eyesight: eyesight,
-          socialActivities: socialActivities,
-          fallRisk: fallRisk,
-          foodAndFluid: foodAndFluid);
-      if (response) {
-        if (!mounted) return;
-        state = HomeSuccess(message: "");
-        ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("User Updated Successfully")));
-      } else {
-        state = HomeFailure(error: "User Not Found");
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("User Not Found")));
-      }
-    } on Exception catch (e) {
-      state = HomeFailure(error: e.toString());
-    }
-  }
-
-  updateServiceUser(
-      {required String serviceUserId,
-      String? firstName,
-      String? lastName,
-      String? email,
-      String? address,
-      String? dateOfBirth,
-      String? imageProfile,
-      String? communication,
-      String? mobilization,
-      String? washingAndDressing,
-      String? medication,
-      String? eyesight,
-      String? socialActivities,
-      String? fallRisk,
-      String? foodAndFluid,
-      String? dayString,
-      String? morningUserId,
-      String? morningUserName,
-      String? nightUserId,
-      String? nightUserName,
-      required BuildContext context}) async {
-    try {
-      if (!mounted) {
-        state = HomeLoading();
-        return;
-      }
-      var response = await home.updateServiceUser(
-          serviceUserId: serviceUserId,
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          address: address,
-          dateOfBirth: dateOfBirth,
-          imageProfile: imageProfile,
-          communication: communication,
-          mobilization: mobilization,
-          washingAndDressing: washingAndDressing,
-          medication: medication,
-          eyesight: eyesight,
-          socialActivities: socialActivities,
-          fallRisk: fallRisk,
-          foodAndFluid: foodAndFluid,
-          dayString: dayString,
-          morningUserId: morningUserId,
-          morningUserName: morningUserName,
-          nightUserId: nightUserId,
-          nightUserName: nightUserName);
-      if (response) {
-        if (!mounted) return;
-        state = HomeSuccess(message: "");
-        ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("User Updated Successfully")));
-      } else {
-        state = HomeFailure(error: "User Not Found");
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("User Not Found")));
-      }
-    } on Exception catch (e) {
-      state = HomeFailure(error: e.toString());
-    }
-  }
-
   deleteServiceUser(
       {required String serviceUserId, required BuildContext context}) async {
     try {
@@ -228,6 +115,28 @@ class HomeNotifier extends StateNotifier<HomeState> {
         return;
       }
       var response = await home.deleteUser(id: userId);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        if (!mounted) return;
+        state = HomeSuccess(message: "");
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("User Deleted Successfully")));
+      } else {
+        state = HomeFailure(error: "User Not Found");
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("User Not Found")));
+      }
+    } on Exception catch (e) {
+      state = HomeFailure(error: e.toString());
+    }
+  }
+
+  deleteAdmin({required String userId, required BuildContext context}) async {
+    try {
+      if (!mounted) {
+        state = HomeLoading();
+        return;
+      }
+      var response = await home.deleteAdmin(id: userId);
       if (response.statusCode == 200 || response.statusCode == 201) {
         if (!mounted) return;
         state = HomeSuccess(message: "");
@@ -308,6 +217,19 @@ class NewHomeStateService {
   Stream<List<ServiceUserResponseModel>> get streamServiceUser {
     return _streamServiceUser;
   }
+
+  // Admin
+  late Stream<List<AdminResponseModel>> _streamAdmin;
+  initAdmin() async {
+    var homeService = HomeServices();
+    _streamAdmin = homeService.getAllStreamAdminData();
+    final result = _streamAdmin;
+    return result;
+  }
+
+  Stream<List<AdminResponseModel>> get streamAdmin {
+    return _streamAdmin;
+  }
 }
 
 final streamRepo =
@@ -325,4 +247,11 @@ final getListUsers = StreamProvider.autoDispose<List<UserResponseModel>>((ref) {
   final streamServices = ref.watch(streamRepo);
   streamServices.init();
   return streamServices.stream;
+});
+// Admin List
+final getListAdmin =
+    StreamProvider.autoDispose<List<AdminResponseModel>>((ref) {
+  final streamServices = ref.watch(streamRepo);
+  streamServices.initAdmin();
+  return streamServices.streamAdmin;
 });

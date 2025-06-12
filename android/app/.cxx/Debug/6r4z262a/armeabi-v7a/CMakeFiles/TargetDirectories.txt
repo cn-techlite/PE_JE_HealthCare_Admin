@@ -1,0 +1,2 @@
+C:/Users/HP USER/Documents/VSCODE PROJECT/PE_JE_HealthCare_Admin/android/app/.cxx/Debug/6r4z262a/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/HP USER/Documents/VSCODE PROJECT/PE_JE_HealthCare_Admin/android/app/.cxx/Debug/6r4z262a/armeabi-v7a/CMakeFiles/rebuild_cache.dir

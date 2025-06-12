@@ -1,74 +1,224 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../utils/colors.dart';
 
-Future selectTime({BuildContext? context, TimeOfDay? selectedTime}) async {
-  final pickedS = await showTimePicker(
-    context: context!,
-    initialTime: selectedTime!,
-  );
+import 'dart:io';
+import 'package:intl/intl.dart';
 
-  if (pickedS != null && pickedS != selectedTime) {
-    return pickedS;
-  }
+class CustomDateTimePickerField extends StatefulWidget {
+  final bool showDate;
+  final bool showTime;
+
+  const CustomDateTimePickerField({
+    super.key,
+    this.showDate = true,
+    this.showTime = true,
+  });
+
+  @override
+  State<CustomDateTimePickerField> createState() =>
+      _CustomDateTimePickerFieldState();
 }
 
-Future buildMaterialDatePicker(
-    {BuildContext? context,
-    DateTime? initialDate,
-    DateTime? firstDate,
-    DateTime? lastDate}) async {
-  final picked = await showDatePicker(
-      context: context!,
-      initialDate: initialDate!,
-      firstDate: firstDate!,
-      lastDate: lastDate!,
-      builder: (BuildContext context, Widget? child) {
-        return Theme(
-          data: ThemeData(
-            primarySwatch: Colors.grey,
-            splashColor: Colors.black,
-            textTheme: const TextTheme(
-              titleMedium: TextStyle(color: Colors.black),
-              bodyMedium: TextStyle(color: Colors.black),
+class _CustomDateTimePickerFieldState extends State<CustomDateTimePickerField> {
+  final TextEditingController _controller = TextEditingController();
+
+  Future<void> _pickDateTime(BuildContext context) async {
+    DateTime now = DateTime.now();
+    DateTime? selectedDateTime;
+
+    if (Platform.isIOS) {
+      // Show Cupertino Modal Popup
+      await showCupertinoModalPopup(
+        context: context,
+        builder: (BuildContext context) {
+          DateTime tempDateTime = now;
+
+          return Container(
+            height: 300,
+            color: Colors.white,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 250,
+                  child: CupertinoDatePicker(
+                    mode: widget.showDate && widget.showTime
+                        ? CupertinoDatePickerMode.dateAndTime
+                        : widget.showDate
+                            ? CupertinoDatePickerMode.date
+                            : CupertinoDatePickerMode.time,
+                    initialDateTime: now,
+                    onDateTimeChanged: (DateTime value) {
+                      tempDateTime = value;
+                    },
+                  ),
+                ),
+                CupertinoButton(
+                  child: const Text("Done"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    selectedDateTime = tempDateTime;
+                    _formatAndSet(selectedDateTime!);
+                  },
+                ),
+              ],
             ),
-            colorScheme: const ColorScheme.light(
-                primary: AppColors.primary,
-                onSecondary: Colors.black,
-                onPrimary: Colors.white,
-                surface: Colors.black,
-                onSurface: Colors.black,
-                secondary: Colors.black),
-            dialogBackgroundColor: Colors.white,
-          ),
-          child: child ?? const Text(""),
+          );
+        },
+      );
+    } else {
+      // Android: Material Pickers
+      DateTime? pickedDate;
+      TimeOfDay? pickedTime;
+
+      if (widget.showDate) {
+        pickedDate = await showDatePicker(
+          context: context,
+          initialDate: now,
+          firstDate: DateTime(2000),
+          lastDate: DateTime(2100),
         );
-      });
-  if (picked != null && picked != initialDate) {
-    return picked;
+        if (pickedDate == null) return;
+      }
+
+      if (widget.showTime) {
+        pickedTime = await showTimePicker(
+          context: context,
+          initialTime: TimeOfDay.now(),
+        );
+        if (pickedTime == null) return;
+      }
+
+      selectedDateTime = DateTime(
+        pickedDate?.year ?? now.year,
+        pickedDate?.month ?? now.month,
+        pickedDate?.day ?? now.day,
+        pickedTime?.hour ?? 0,
+        pickedTime?.minute ?? 0,
+      );
+
+      _formatAndSet(selectedDateTime);
+    }
+  }
+
+  void _formatAndSet(DateTime dateTime) {
+    String formatted = '';
+
+    if (widget.showDate && widget.showTime) {
+      formatted = DateFormat('yyyy-MM-dd HH:mm').format(dateTime);
+    } else if (widget.showDate) {
+      formatted = DateFormat('yyyy-MM-dd').format(dateTime);
+    } else if (widget.showTime) {
+      formatted = DateFormat('HH:mm').format(dateTime);
+    }
+
+    setState(() {
+      _controller.text = formatted;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: _controller,
+      readOnly: true,
+      decoration: const InputDecoration(
+        labelText: 'Select Date &/or Time',
+        suffixIcon: Icon(Icons.calendar_today),
+        border: OutlineInputBorder(),
+      ),
+      onTap: () => _pickDateTime(context),
+    );
   }
 }
 
-/// This builds cupertino date picker in iOS
-Future buildCupertinoDatePicker(
-  BuildContext context,
-  DateTime initialDate,
-) {
-  return showModalBottomSheet<void>(
+Future<String?> pickDateTime({
+  required BuildContext context,
+  bool showDate = true,
+  bool showTime = true,
+}) async {
+  FocusScope.of(context).requestFocus(FocusNode()); // Dismiss keyboard
+  DateTime now = DateTime.now();
+  DateTime? selectedDateTime;
+
+  if (Platform.isIOS) {
+    DateTime tempDateTime = now;
+
+    await showCupertinoModalPopup(
       context: context,
-      builder: (BuildContext builder) {
-        return SizedBox(
-            height: MediaQuery.of(context).copyWith().size.height / 3,
-            child: CupertinoDatePicker(
-              initialDateTime: DateTime.now(),
-              onDateTimeChanged: (DateTime newdate) {},
-              use24hFormat: true,
-              maximumDate: DateTime(2018, 12, 30),
-              minimumYear: 2010,
-              maximumYear: 2018,
-              minuteInterval: 1,
-              mode: CupertinoDatePickerMode.dateAndTime,
-            ));
-      });
+      builder: (BuildContext ctx) {
+        return Container(
+          height: 300,
+          color: Colors.white,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 250,
+                child: CupertinoDatePicker(
+                  mode: showDate && showTime
+                      ? CupertinoDatePickerMode.dateAndTime
+                      : showDate
+                          ? CupertinoDatePickerMode.date
+                          : CupertinoDatePickerMode.time,
+                  initialDateTime: now,
+                  onDateTimeChanged: (DateTime value) {
+                    tempDateTime = value;
+                  },
+                ),
+              ),
+              CupertinoButton(
+                child: const Text("Done"),
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                  selectedDateTime = tempDateTime;
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  } else {
+    DateTime? pickedDate;
+    TimeOfDay? pickedTime;
+
+    if (showDate) {
+      pickedDate = await showDatePicker(
+        context: context,
+        initialDate: now,
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2100),
+      );
+      if (pickedDate == null) return null;
+    }
+
+    if (showTime) {
+      pickedTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
+      );
+      if (pickedTime == null) return null;
+    }
+
+    selectedDateTime = DateTime(
+      pickedDate?.year ?? now.year,
+      pickedDate?.month ?? now.month,
+      pickedDate?.day ?? now.day,
+      pickedTime?.hour ?? 0,
+      pickedTime?.minute ?? 0,
+    );
+  }
+
+  if (selectedDateTime == null) return null;
+
+  // Format the result
+  if (showDate && showTime) {
+    return DateFormat('dd MMM, yyyy HH:mm').format(selectedDateTime!);
+  } else if (showDate) {
+    return DateFormat('dd MMM, yyyy').format(selectedDateTime!);
+  } else if (showTime) {
+    return DateFormat('HH:mm').format(selectedDateTime!);
+  } else {
+    return null;
+  }
 }

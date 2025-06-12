@@ -39,13 +39,13 @@ Widget addSeperatorDarkMode(bool darkMode, double height) {
 Widget addVerticalSpacing(BuildContext context, double height) {
   var heightEd = 14.0;
   if (Responsive.isDesktop(context)) {
-    final width2 = (MediaQuery.of(context).size.height) / 6 / (height);
+    final width2 = (MediaQuery.of(context).size.height / 6) * (height / 100);
     heightEd = width2;
   } else if (Responsive.isTablet(context)) {
-    final width2 = (MediaQuery.of(context).size.height) / 4 / (height);
+    final width2 = (MediaQuery.of(context).size.height / 4) * (height / 100);
     heightEd = width2;
   } else {
-    final width2 = (MediaQuery.of(context).size.height) / 2 / (height);
+    final width2 = (MediaQuery.of(context).size.height / 2) * (height / 100);
     heightEd = width2;
   }
   return SizedBox(height: heightEd);
@@ -126,6 +126,92 @@ String convertToTitleCase(String? text) {
   return capitalizedWords.join(' ');
 }
 
+Widget produceButton(
+  String text,
+  Color color,
+  double width,
+  VoidCallback onPressed, [
+  double height = 50,
+  Color textColor = Colors.white,
+  double fontSize = 14,
+]) {
+  return SizedBox(
+    width: width,
+    height: height,
+    child: ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(backgroundColor: color),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: textColor,
+          fontSize: fontSize,
+          fontWeight: FontWeight.normal,
+        ),
+      ),
+    ),
+  );
+}
+
+Widget produceSmallButton(
+  String text,
+  Color color,
+  double width,
+  VoidCallback onPressed, [
+  double height = 50,
+  Color textColor = Colors.white,
+  double fontSize = 12,
+]) {
+  return InkWell(
+    onTap: onPressed,
+    child: Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(24.0),
+      ),
+      child: Center(
+        child: Text(
+          text,
+          style: TextStyle(
+            color: textColor,
+            fontSize: fontSize,
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+Widget produceImage(
+  String imgPath,
+  double imgWidth,
+  double imgHeight, [
+  BoxFit fit = BoxFit.contain,
+]) {
+  return Image.asset(imgPath, fit: fit, width: imgWidth, height: imgHeight);
+}
+
+Widget showCircularLoadingIndicator = Align(
+  alignment: Alignment.center,
+  child: Container(
+    color: Colors.black.withOpacity(0.5),
+    width: 100,
+    height: 100,
+    child: showAppLoader,
+  ),
+);
+
+//non - functions
+Widget showAppLoader = const Center(
+  child: CircularProgressIndicator(
+    color: Colors.yellowAccent,
+    backgroundColor: Colors.white,
+  ),
+);
+
 String getNairaSymbol() {
   return "\u{20A6}";
 }
@@ -148,35 +234,138 @@ void navigateToRoute(BuildContext context, dynamic routeClass) {
 
 void navigateAndReplaceRoute(BuildContext context, dynamic routeClass) {
   Navigator.pushReplacement(
-      context, CupertinoPageRoute(builder: (context) => routeClass));
+    context,
+    CupertinoPageRoute(builder: (context) => routeClass),
+  );
 }
 
 void navigateAndRemoveUntilRoute(BuildContext context, dynamic routeClass) {
-  Navigator.pushAndRemoveUntil(context,
-      CupertinoPageRoute(builder: (context) => routeClass), (route) => false);
+  Navigator.pushAndRemoveUntil(
+    context,
+    CupertinoPageRoute(builder: (context) => routeClass),
+    (route) => false,
+  );
 }
 
 navPush(BuildContext context, String route) {
   Navigator.push(context, generateRoute(RouteSettings(name: route)));
 }
 
+//Alerts
+
+showInfoAlertWithAction(
+  BuildContext context,
+  String title,
+  String description,
+  Function onPressed,
+) {
+  showCupertinoDialog(
+    context: context,
+    barrierDismissible: true,
+    builder: (context) => CupertinoAlertDialog(
+      title: Text(title),
+      content: Text(description),
+      actions: <Widget>[
+        CupertinoDialogAction(
+          child: const Text("Ok"),
+          onPressed: () {
+            Navigator.of(context).pop(true);
+            onPressed();
+          },
+        ),
+      ],
+    ),
+  );
+}
+
+showCancelOrProceedAlert({
+  required BuildContext context,
+  required String title,
+  required String description,
+  String cancel = "Cancel",
+  String proceed = "Proceed",
+  required VoidCallback onPressed,
+}) {
+  showCupertinoDialog(
+    context: context,
+    builder: (context) => CupertinoAlertDialog(
+      title: Text(title),
+      content: Text(description),
+      actions: <Widget>[
+        CupertinoDialogAction(
+          child: Text(
+            cancel,
+            style: const TextStyle(color: AppColors.primary),
+          ),
+          onPressed: () => Navigator.of(context, rootNavigator: true).pop(true),
+        ),
+        CupertinoDialogAction(onPressed: onPressed, child: Text(proceed)),
+      ],
+    ),
+  );
+}
+
+showThreeOptionsAlert({
+  required BuildContext context,
+  required String title,
+  required String description,
+  String cancel = "Cancel",
+  required String titleOne,
+  required String titleTwo,
+  required VoidCallback onPressedOne,
+  required VoidCallback onPressedTwo,
+}) {
+  showCupertinoDialog(
+    context: context,
+    builder: (context) => CupertinoAlertDialog(
+      title: Text(title),
+      content: Text(description),
+      actions: <Widget>[
+        CupertinoDialogAction(
+          onPressed: onPressedOne,
+          child: Text(titleOne),
+        ),
+        CupertinoDialogAction(
+          onPressed: onPressedTwo,
+          child: Text(titleTwo),
+        ),
+        CupertinoDialogAction(
+          child: Text(
+            cancel,
+            style: const TextStyle(color: AppColors.primary),
+          ),
+          onPressed: () => Navigator.of(context).pop(true),
+        ),
+      ],
+    ),
+  );
+}
+
 displayBottomSheet(context, Widget bottomSheet) {
   showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30.0), topRight: Radius.circular(30.0))),
-      builder: (context) => Padding(
-          padding: MediaQuery.of(context).viewInsets,
-          child: GestureDetector(onTap: dismissKeyboard, child: bottomSheet)));
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: Colors.white,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(30.0),
+        topRight: Radius.circular(30.0),
+      ),
+    ),
+    builder: (context) => Padding(
+      padding: MediaQuery.of(context).viewInsets,
+      child: GestureDetector(onTap: dismissKeyboard, child: bottomSheet),
+    ),
+  );
 }
 
 class MyBehavior extends ScrollBehavior {
   @override
   Widget buildOverscrollIndicator(
-      BuildContext context, Widget child, ScrollableDetails details) {
+    BuildContext context,
+    Widget child,
+    ScrollableDetails details,
+  ) {
     return child;
   }
 }
@@ -214,4 +403,11 @@ class DashedLineVerticalPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => false;
+}
+
+const num screenSize = 600;
+const String image =
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png?20220519031949';
+String removeSpecialCharactersAndSpaces(String input) {
+  return input.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '');
 }

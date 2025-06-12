@@ -216,7 +216,6 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                           fontWeight: FontWeight.bold),
                                     ],
                                   ),
-                                  addVerticalSpacing(context, 180),
                                   Row(
                                     children: [
                                       widget.userChat.sundayAvailability!
@@ -249,7 +248,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                         ],
                       ),
                     ),
-                    addVerticalSpacing(context, 30),
+                    addVerticalSpacing(context, 3),
                     Padding(
                       padding: const EdgeInsets.only(left: 15.0, right: 15),
                       child: Column(
@@ -323,7 +322,6 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                           fontWeight: FontWeight.bold),
                                     ],
                                   ),
-                                  addVerticalSpacing(context, 180),
                                   Row(
                                     children: [
                                       widget.userChat.mondayAvailability!
@@ -356,7 +354,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                         ],
                       ),
                     ),
-                    addVerticalSpacing(context, 30),
+                    addVerticalSpacing(context, 3),
                     Padding(
                       padding: const EdgeInsets.only(left: 15.0, right: 15),
                       child: Column(
@@ -430,7 +428,6 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                           fontWeight: FontWeight.bold),
                                     ],
                                   ),
-                                  addVerticalSpacing(context, 180),
                                   Row(
                                     children: [
                                       widget.userChat.tuesdayAvailability!
@@ -463,7 +460,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                         ],
                       ),
                     ),
-                    addVerticalSpacing(context, 30),
+                    addVerticalSpacing(context, 3),
                     Padding(
                       padding: const EdgeInsets.only(left: 15.0, right: 15),
                       child: Column(
@@ -537,7 +534,6 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                           fontWeight: FontWeight.bold),
                                     ],
                                   ),
-                                  addVerticalSpacing(context, 180),
                                   Row(
                                     children: [
                                       widget.userChat.wednesdayAvailability!
@@ -570,7 +566,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                         ],
                       ),
                     ),
-                    addVerticalSpacing(context, 30),
+                    addVerticalSpacing(context, 3),
                     Padding(
                       padding: const EdgeInsets.only(left: 15.0, right: 15),
                       child: Column(
@@ -644,7 +640,6 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                           fontWeight: FontWeight.bold),
                                     ],
                                   ),
-                                  addVerticalSpacing(context, 180),
                                   Row(
                                     children: [
                                       widget.userChat.thursdayAvailability!
@@ -677,7 +672,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                         ],
                       ),
                     ),
-                    addVerticalSpacing(context, 30),
+                    addVerticalSpacing(context, 3),
                     Padding(
                       padding: const EdgeInsets.only(left: 15.0, right: 15),
                       child: Column(
@@ -751,7 +746,6 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                           fontWeight: FontWeight.bold),
                                     ],
                                   ),
-                                  addVerticalSpacing(context, 180),
                                   Row(
                                     children: [
                                       widget.userChat.fridayAvailability!
@@ -784,7 +778,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                         ],
                       ),
                     ),
-                    addVerticalSpacing(context, 30),
+                    addVerticalSpacing(context, 3),
                     Padding(
                       padding: const EdgeInsets.only(left: 15.0, right: 15),
                       child: Column(
@@ -858,7 +852,6 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                                           fontWeight: FontWeight.bold),
                                     ],
                                   ),
-                                  addVerticalSpacing(context, 180),
                                   Row(
                                     children: [
                                       widget.userChat.saturdayAvailability!
@@ -891,7 +884,7 @@ class _LoginPageState extends ConsumerState<UserAvailabilityPage> {
                         ],
                       ),
                     ),
-                    addVerticalSpacing(context, 30),
+                    addVerticalSpacing(context, 3),
                   ])),
         ));
   }

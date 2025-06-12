@@ -1,4 +1,3 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 import '../../../components/architecture/mvc.dart';
@@ -44,49 +43,62 @@ class ForgotPasswordView
                     children: [
                       const SizedBox(height: 12),
                       const AppText(
-                          text: "Forgot \nPassword",
-                          textAlign: TextAlign.start,
-                          isBody: true,
-                          fontSize: 8,
-                          color: AppColors.primaryDark,
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w800),
+                        text: "Forgot Password",
+                        textAlign: TextAlign.start,
+                        isBody: true,
+                        fontSize: 38,
+                        color: AppColors.primaryDark,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w800,
+                      ),
+                      const AppText(
+                        isBody: true,
+                        text: "Enter your email address",
+                        textAlign: TextAlign.start,
+                        fontSize: 38,
+                        color: AppColors.black,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w400,
+                      ),
                       const SizedBox(height: 40),
                       const AppText(
-                          text: "Email Address",
-                          textAlign: TextAlign.start,
-                          isBody: true,
-                          fontSize: 15,
-                          color: AppColors.black,
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w400),
-                      const SizedBox(height: 8),
-                      // const SizedBox(height: 48),
-                      Input(
-                        controller: controller.emailController,
-                        fillColor: const Color.fromARGB(255, 243, 247, 245),
-                        hintText: "Your Email",
-                        prefixIcon: Icons.person,
-                        labelText: "Email",
-                        keyboard: TextInputType.text,
-                        onChanged: (String? value) {},
-                        validator: (value) {
-                          String trimValue =
-                              controller.emailController.text.trim();
-                          if (EmailValidator.validate(trimValue) == false) {
-                            return 'enter a valid email';
-                          }
-
-                          return null;
+                        text: "Email Address",
+                        textAlign: TextAlign.start,
+                        isBody: true,
+                        fontSize: 35,
+                        color: AppColors.black,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      GlobalTextField(
+                        fieldName: 'Email',
+                        keyBoardType: TextInputType.emailAddress,
+                        obscureText: false,
+                        textController: controller.emailController,
+                        onChanged: (String? value) {
+                          controller.emailOnChanged(value!);
                         },
-                        toggleEye: () {},
-                        onSaved: (value) {},
-                        onTap: () {},
                       ),
                       addVerticalSpacing(context, 5),
-                      appButton("Continue", getScreenWidth(context), () {
-                        controller.onSubmit();
-                      }, AppColors.primary, controller.isLoading)
+                      controller.isEmailChanged.isNotEmpty
+                          ? appButton(
+                              "Send OTP",
+                              getScreenWidth(context),
+                              () {
+                                controller.onSubmit();
+                              },
+                              AppColors.primary,
+                              controller.isLoading,
+                            )
+                          : appButton(
+                              "Continue",
+                              getScreenWidth(context),
+                              () {
+                                controller.onSubmit();
+                              },
+                              AppColors.primary,
+                              controller.isLoading,
+                            ),
                     ],
                   ),
                 ),

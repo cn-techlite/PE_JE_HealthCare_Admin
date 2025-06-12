@@ -8,6 +8,7 @@ import 'package:pe_je_healthcare_admin/core/components/utils/helper_functions.da
 import 'package:pe_je_healthcare_admin/core/components/widgets/app_text.dart';
 import 'package:pe_je_healthcare_admin/core/features/account/views/account_page.dart';
 import 'package:pe_je_healthcare_admin/core/features/home/states/home_provider.dart';
+import 'package:pe_je_healthcare_admin/core/features/home/view/admin/admin_users_list.dart';
 import 'package:pe_je_healthcare_admin/core/features/home/view/service_users/service_user_page.dart';
 import 'package:pe_je_healthcare_admin/core/features/home/view/users/users_list.dart';
 
@@ -101,7 +102,7 @@ class _NavBarfeaturestate extends ConsumerState<HomeScreenPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  addVerticalSpacing(context, 10),
+                  addVerticalSpacing(context, 5),
                   const Padding(
                     padding: EdgeInsets.only(left: 15.0, right: 15.0),
                     child: AppText(
@@ -113,7 +114,7 @@ class _NavBarfeaturestate extends ConsumerState<HomeScreenPage> {
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w700),
                   ),
-                  addVerticalSpacing(context, 10),
+                  addVerticalSpacing(context, 5),
                   Container(
                     height: 210,
                     width: getScreenWidth(context),
@@ -128,7 +129,7 @@ class _NavBarfeaturestate extends ConsumerState<HomeScreenPage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        addVerticalSpacing(context, 30),
+                        addVerticalSpacing(context, 3),
                         Padding(
                           padding:
                               const EdgeInsets.only(left: 20.0, right: 100.0),
@@ -185,7 +186,7 @@ class _NavBarfeaturestate extends ConsumerState<HomeScreenPage> {
                                     height: 20,
                                     width: 20,
                                   ),
-                                  addVerticalSpacing(context, 30),
+                                  addVerticalSpacing(context, 3),
                                   const AppText(
                                       text: "Visit Service Users",
                                       textAlign: TextAlign.start,
@@ -220,7 +221,7 @@ class _NavBarfeaturestate extends ConsumerState<HomeScreenPage> {
                                     height: 20,
                                     width: 20,
                                   ),
-                                  addVerticalSpacing(context, 30),
+                                  addVerticalSpacing(context, 3),
                                   const AppText(
                                       text: "All Users List",
                                       textAlign: TextAlign.start,
@@ -238,6 +239,47 @@ class _NavBarfeaturestate extends ConsumerState<HomeScreenPage> {
                     ),
                   ),
                   addVerticalSpacing(context, 5),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            navigateToRoute(context, const AdminPage());
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: const Color.fromARGB(255, 245, 221, 237),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 35.0, bottom: 35.0, right: 15, left: 15),
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    "assets/images/service_user.png",
+                                    height: 20,
+                                    width: 20,
+                                  ),
+                                  addVerticalSpacing(context, 3),
+                                  const AppText(
+                                      text: "Admin Users List",
+                                      textAlign: TextAlign.start,
+                                      isBody: true,
+                                      fontSize: 19,
+                                      color: AppColors.primary,
+                                      fontStyle: FontStyle.normal,
+                                      fontWeight: FontWeight.bold),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),

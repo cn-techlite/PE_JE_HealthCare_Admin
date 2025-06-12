@@ -102,7 +102,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
     return ListView(
       physics: const ScrollPhysics(),
       children: <Widget>[
-        addVerticalSpacing(context, 20),
+        addVerticalSpacing(context, 2),
         Center(
           child: CircleAvatar(
             radius: 60,
@@ -120,7 +120,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                         : NetworkImage(userChat.imageProfile.toString())),
           ),
         ),
-        addVerticalSpacing(context, 50),
+        addVerticalSpacing(context, 2),
         GestureDetector(
           onTap: () {
             navigateToRoute(
@@ -133,18 +133,18 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
               text: "View Notes",
               textAlign: TextAlign.center,
               isBody: true,
-              fontSize: 14,
+              fontSize: 34,
               color: AppColors.primary,
               decoration: TextDecoration.underline,
               fontStyle: FontStyle.normal,
               fontWeight: FontWeight.bold),
         ),
-        addVerticalSpacing(context, 50),
+        addVerticalSpacing(context, 2),
         Center(
           child: AppText(
               text: "${userChat.firstName} ${userChat.lastName}",
               textAlign: TextAlign.start,
-              fontSize: 19,
+              fontSize: 29,
               isBody: true,
               color: AppColors.black,
               fontStyle: FontStyle.normal,
@@ -228,7 +228,7 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
             ),
           ),
         ),
-        addVerticalSpacing(context, 20),
+        addVerticalSpacing(context, 2),
         Padding(
           padding: const EdgeInsets.only(left: 0.0, right: 0),
           child: Column(
@@ -277,7 +277,6 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      addVerticalSpacing(context, 180),
                       AppText(
                           text: "${userChat.communication}",
                           isBody: true,
@@ -293,7 +292,6 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
             ],
           ),
         ),
-        addVerticalSpacing(context, 50),
         Padding(
           padding: const EdgeInsets.only(left: 0.0, right: 0),
           child: Column(
@@ -342,7 +340,6 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      addVerticalSpacing(context, 180),
                       AppText(
                           text: "${userChat.mobilization}",
                           isBody: true,
@@ -358,7 +355,6 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
             ],
           ),
         ),
-        addVerticalSpacing(context, 50),
         Padding(
           padding: const EdgeInsets.only(left: 0.0, right: 0),
           child: Column(
@@ -407,7 +403,6 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      addVerticalSpacing(context, 180),
                       AppText(
                           text: "${userChat.washingAndDressing}",
                           isBody: true,
@@ -423,7 +418,6 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
             ],
           ),
         ),
-        addVerticalSpacing(context, 50),
         Padding(
           padding: const EdgeInsets.only(left: 0.0, right: 0),
           child: Column(
@@ -472,7 +466,6 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      addVerticalSpacing(context, 180),
                       AppText(
                           text: "${userChat.medication}",
                           isBody: true,
@@ -488,7 +481,6 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
             ],
           ),
         ),
-        addVerticalSpacing(context, 50),
         Padding(
           padding: const EdgeInsets.only(left: 0.0, right: 0),
           child: Column(
@@ -537,7 +529,6 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      addVerticalSpacing(context, 180),
                       AppText(
                           text: "${userChat.eyesight}",
                           isBody: true,
@@ -553,7 +544,6 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
             ],
           ),
         ),
-        addVerticalSpacing(context, 50),
         Padding(
           padding: const EdgeInsets.only(left: 0.0, right: 0),
           child: Column(
@@ -602,7 +592,6 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      addVerticalSpacing(context, 180),
                       AppText(
                           text: "${userChat.socialactivities}",
                           isBody: true,
@@ -618,7 +607,6 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
             ],
           ),
         ),
-        addVerticalSpacing(context, 50),
         Padding(
           padding: const EdgeInsets.only(left: 0.0, right: 0),
           child: Column(
@@ -667,7 +655,6 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      addVerticalSpacing(context, 180),
                       AppText(
                           text: "${userChat.fallRisk}",
                           textAlign: TextAlign.start,
@@ -683,7 +670,6 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
             ],
           ),
         ),
-        addVerticalSpacing(context, 50),
         Padding(
           padding: const EdgeInsets.only(left: 0.0, right: 0),
           child: Column(
@@ -732,7 +718,6 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      addVerticalSpacing(context, 180),
                       AppText(
                           text: "${userChat.foodAndFluid}",
                           textAlign: TextAlign.start,
@@ -748,7 +733,6 @@ class _LoginPageState extends ConsumerState<ServiceUsersDetailsPage> {
             ],
           ),
         ),
-        addVerticalSpacing(context, 50),
       ],
     );
   }

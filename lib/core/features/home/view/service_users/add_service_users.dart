@@ -3,6 +3,7 @@ import 'package:pe_je_healthcare_admin/core/components/utils/colors.dart';
 import 'package:pe_je_healthcare_admin/core/components/utils/helper_functions.dart';
 import 'package:pe_je_healthcare_admin/core/components/utils/package_export.dart';
 import 'package:pe_je_healthcare_admin/core/components/widgets/app_text.dart';
+import 'package:pe_je_healthcare_admin/core/components/widgets/date_picker.dart';
 import 'package:pe_je_healthcare_admin/core/components/widgets/input.dart';
 import 'package:pe_je_healthcare_admin/core/features/home/controller/add_service_user.dart';
 
@@ -159,7 +160,7 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                       ],
                     ),
                   ),
-                  addVerticalSpacing(context, 35),
+                  addVerticalSpacing(context, 5),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -171,27 +172,18 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.w700),
-                      PlainInput(
-                        controller: controller.firstName,
-                        hintText: "First Name",
-                        //  prefixIcon: Icons.person,
-                        labelText: "First Name",
-                        focusNode: controller.firstNameFocusNode,
-                        keyboard: TextInputType.text,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Empty Field';
-                          }
-                          return null;
+                      GlobalTextField(
+                        fieldName: 'First Name',
+                        keyBoardType: TextInputType.name,
+                        obscureText: false,
+                        textController: controller.firstName,
+                        onChanged: (String? value) {
+                          controller.firstNameOnChanged(value!);
                         },
-                        toggleEye: () {},
-                        onSaved: (value) {},
-                        onTap: () {},
-                        onChanged: (String? value) {},
                       ),
                     ],
                   ),
-                  addVerticalSpacing(context, 35),
+                  addVerticalSpacing(context, 5),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -203,27 +195,18 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.w700),
-                      PlainInput(
-                        controller: controller.lastName,
-                        hintText: "Last Name",
-                        //  prefixIcon: Icons.person,
-                        labelText: "Last Name",
-                        focusNode: controller.lastNameFocusNode,
-                        keyboard: TextInputType.text,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Empty Field';
-                          }
-                          return null;
+                      GlobalTextField(
+                        fieldName: 'Last Name',
+                        keyBoardType: TextInputType.name,
+                        obscureText: false,
+                        textController: controller.lastName,
+                        onChanged: (String? value) {
+                          controller.lastNameOnChanged(value!);
                         },
-                        toggleEye: () {},
-                        onSaved: (value) {},
-                        onTap: () {},
-                        onChanged: (String? value) {},
                       ),
                     ],
                   ),
-                  addVerticalSpacing(context, 35),
+                  addVerticalSpacing(context, 5),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -235,29 +218,18 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                             fontWeight: FontWeight.w700,
                             fontFamily: "Inter"),
                       ),
-                      PlainInput(
-                        controller: controller.email,
-                        hintText: "Your Email",
-                        //  prefixIcon: Icons.person,
-                        labelText: "Email",
-                        focusNode: controller.emailFocusNode,
-                        keyboard: TextInputType.emailAddress,
-                        validator: (value) {
-                          String trimValue = controller.email.text.trim();
-                          if (EmailValidator.validate(trimValue) == false) {
-                            return 'enter a valid email';
-                          }
-
-                          return null;
+                      GlobalTextField(
+                        fieldName: 'Email',
+                        keyBoardType: TextInputType.emailAddress,
+                        obscureText: false,
+                        textController: controller.email,
+                        onChanged: (String? value) {
+                          controller.emailOnChanged(value!);
                         },
-                        toggleEye: () {},
-                        onSaved: (value) {},
-                        onTap: () {},
-                        onChanged: (String? value) {},
                       ),
                     ],
                   ),
-                  addVerticalSpacing(context, 35),
+                  addVerticalSpacing(context, 5),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -269,27 +241,19 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.w700),
-                      PlainInput(
-                        controller: controller.address,
-                        hintText: "Address",
-                        //   prefixIcon: Icons.person,
-                        labelText: "Address",
-                        focusNode: controller.addressFocusNode,
-                        keyboard: TextInputType.text,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'enter an address';
-                          }
-                          return null;
+                      GlobalTextField(
+                        fieldName: 'Address',
+                        keyBoardType: TextInputType.name,
+                        obscureText: false,
+                        removeSpace: false,
+                        textController: controller.address,
+                        onChanged: (String? value) {
+                          controller.addressOnChanged(value!);
                         },
-                        toggleEye: () {},
-                        onSaved: (value) {},
-                        onTap: () {},
-                        onChanged: (String? value) {},
                       ),
                     ],
                   ),
-                  addVerticalSpacing(context, 35),
+                  addVerticalSpacing(context, 5),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -301,72 +265,29 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.w700),
-                      DateTimeField(
-                        format: controller.format,
-                        onShowPicker: (context, currentValue) async {
-                          final date = await showDatePicker(
-                              context: context,
-                              initialDate: currentValue ?? DateTime.now(),
-                              firstDate: DateTime(1900),
-                              lastDate: DateTime(2200));
-                          return date;
+                      GlobalTextField(
+                        fieldName: "Date of Birth",
+                        keyBoardType: TextInputType.name,
+                        obscureText: false,
+                        readOnly: true,
+                        textController: controller.dateOfBirth,
+                        onTap: () async {
+                          final result = await pickDateTime(
+                            context: context,
+                            showDate: true,
+                            showTime: false,
+                          );
+                          if (result != null) {
+                            controller.dateOfBirthOnChanged(result);
+                          }
                         },
-                        focusNode: controller.dateOfBirthFocusNode,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        controller: controller.dateOfBirth,
-                        validator: (value) =>
-                            value == null ? "Enter a valid Date" : null,
-                        style: TextStyle(
-                          fontSize: fontSized(context, 18),
-                          fontWeight: FontWeight.w700,
-                          fontStyle: FontStyle.normal,
-                        ),
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: AppColors.white,
-                          focusedBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(2)),
-                            borderSide:
-                                BorderSide(width: 1, color: AppColors.black),
-                          ),
-                          disabledBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(2)),
-                            borderSide:
-                                BorderSide(width: 1, color: Colors.orange),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(2),
-                            borderSide: const BorderSide(
-                              color: Colors.grey,
-                              width: 1.0,
-                            ),
-                          ),
-                          border: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(2)),
-                              borderSide:
-                                  BorderSide(width: 1, color: AppColors.grey)),
-                          errorBorder: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(2)),
-                              borderSide:
-                                  BorderSide(width: 1, color: Colors.red)),
-                          focusedErrorBorder: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(2)),
-                              borderSide:
-                                  BorderSide(width: 1, color: Colors.red)),
-                          hintText: "Date of Birth",
-                          hintStyle: TextStyle(
-                              fontSize: fontSized(context, 18),
-                              fontWeight: FontWeight.w700,
-                              fontStyle: FontStyle.normal,
-                              color: AppColors.grey),
-                        ),
+                        onChanged: (String? value) {
+                          controller.dateOfBirthOnChanged(value!);
+                        },
                       ),
                     ],
                   ),
-                  addVerticalSpacing(context, 35),
+                  addVerticalSpacing(context, 5),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -378,27 +299,20 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.w700),
-                      DescriptionInput(
-                        controller: controller.communication,
-                        hintText: "Communication",
-                        //   prefixIcon: Icons.person,
-                        labelText: "Communication",
-                        focusNode: controller.communicationFocusNode,
-                        keyboard: TextInputType.text,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Empty Field';
-                          }
-                          return null;
+                      GlobalTextField(
+                        fieldName: "Communication",
+                        keyBoardType: TextInputType.name,
+                        obscureText: false,
+                        removeSpace: false,
+                        isNotePad: true,
+                        textController: controller.communication,
+                        onChanged: (String? value) {
+                          controller.communicationOnChanged(value!);
                         },
-                        toggleEye: () {},
-                        onSaved: (value) {},
-                        onTap: () {},
-                        onChanged: (String? value) {},
                       ),
                     ],
                   ),
-                  addVerticalSpacing(context, 35),
+                  addVerticalSpacing(context, 5),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -410,27 +324,20 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.w700),
-                      DescriptionInput(
-                        controller: controller.mobilization,
-                        hintText: "Mobilization",
-                        //   prefixIcon: Icons.person,
-                        labelText: "Mobilization",
-                        focusNode: controller.mobilizationFocusNode,
-                        keyboard: TextInputType.text,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Empty State';
-                          }
-                          return null;
+                      GlobalTextField(
+                        fieldName: "Mobilization",
+                        keyBoardType: TextInputType.name,
+                        obscureText: false,
+                        removeSpace: false,
+                        isNotePad: true,
+                        textController: controller.mobilization,
+                        onChanged: (String? value) {
+                          controller.mobilizationOnChanged(value!);
                         },
-                        toggleEye: () {},
-                        onSaved: (value) {},
-                        onTap: () {},
-                        onChanged: (String? value) {},
                       ),
                     ],
                   ),
-                  addVerticalSpacing(context, 35),
+                  addVerticalSpacing(context, 5),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -442,27 +349,20 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.w700),
-                      DescriptionInput(
-                        controller: controller.washingAndDressing,
-                        hintText: "Washing And Dressing",
-                        //   prefixIcon: Icons.person,
-                        labelText: "Washing And Dressing",
-                        focusNode: controller.washingAndDressingFocusNode,
-                        keyboard: TextInputType.text,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Empty Field';
-                          }
-                          return null;
+                      GlobalTextField(
+                        fieldName: "Washing and Dressing",
+                        keyBoardType: TextInputType.name,
+                        obscureText: false,
+                        removeSpace: false,
+                        isNotePad: true,
+                        textController: controller.washingAndDressing,
+                        onChanged: (String? value) {
+                          controller.washingAndDressingOnChanged(value!);
                         },
-                        toggleEye: () {},
-                        onSaved: (value) {},
-                        onTap: () {},
-                        onChanged: (String? value) {},
                       ),
                     ],
                   ),
-                  addVerticalSpacing(context, 35),
+                  addVerticalSpacing(context, 5),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -474,27 +374,20 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.w700),
-                      DescriptionInput(
-                        controller: controller.medication,
-                        hintText: "Medication",
-                        //   prefixIcon: Icons.person,
-                        labelText: "Medication",
-                        focusNode: controller.medicationFocusNode,
-                        keyboard: TextInputType.text,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Empty Field';
-                          }
-                          return null;
+                      GlobalTextField(
+                        fieldName: "Medication",
+                        keyBoardType: TextInputType.name,
+                        obscureText: false,
+                        removeSpace: false,
+                        isNotePad: true,
+                        textController: controller.medication,
+                        onChanged: (String? value) {
+                          controller.medicationOnChanged(value!);
                         },
-                        toggleEye: () {},
-                        onSaved: (value) {},
-                        onTap: () {},
-                        onChanged: (String? value) {},
                       ),
                     ],
                   ),
-                  addVerticalSpacing(context, 35),
+                  addVerticalSpacing(context, 5),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -506,27 +399,20 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.w700),
-                      DescriptionInput(
-                        controller: controller.eyesight,
-                        hintText: "Eyesight",
-                        //   prefixIcon: Icons.person,
-                        labelText: "Eyesight",
-                        focusNode: controller.eyesightFocusNode,
-                        keyboard: TextInputType.text,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Empty Field';
-                          }
-                          return null;
+                      GlobalTextField(
+                        fieldName: "Eyesight",
+                        keyBoardType: TextInputType.name,
+                        obscureText: false,
+                        removeSpace: false,
+                        isNotePad: true,
+                        textController: controller.eyesight,
+                        onChanged: (String? value) {
+                          controller.eyesightOnChanged(value!);
                         },
-                        toggleEye: () {},
-                        onSaved: (value) {},
-                        onTap: () {},
-                        onChanged: (String? value) {},
                       ),
                     ],
                   ),
-                  addVerticalSpacing(context, 35),
+                  addVerticalSpacing(context, 5),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -538,27 +424,20 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.w700),
-                      DescriptionInput(
-                        controller: controller.fallRisk,
-                        hintText: "Fall Risk",
-                        //   prefixIcon: Icons.person,
-                        labelText: "Fall Risk",
-                        focusNode: controller.fallRiskFocusNode,
-                        keyboard: TextInputType.text,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Empty Field';
-                          }
-                          return null;
+                      GlobalTextField(
+                        fieldName: "Fall Risk",
+                        keyBoardType: TextInputType.name,
+                        obscureText: false,
+                        removeSpace: false,
+                        isNotePad: true,
+                        textController: controller.fallRisk,
+                        onChanged: (String? value) {
+                          controller.fallRiskOnChanged(value!);
                         },
-                        toggleEye: () {},
-                        onSaved: (value) {},
-                        onTap: () {},
-                        onChanged: (String? value) {},
                       ),
                     ],
                   ),
-                  addVerticalSpacing(context, 35),
+                  addVerticalSpacing(context, 5),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -570,31 +449,24 @@ class AddServiceUserScreenView extends StatelessView<AddServiceUserScreen,
                           color: AppColors.black,
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.w700),
-                      DescriptionInput(
-                        controller: controller.foodAndFluid,
-                        hintText: "Food And Fluid",
-                        //   prefixIcon: Icons.person,
-                        labelText: "Food And Fluid",
-                        focusNode: controller.foodAndFluidFocusNode,
-                        keyboard: TextInputType.text,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Empty Field';
-                          }
-                          return null;
+                      GlobalTextField(
+                        fieldName: "Food and Fluid",
+                        keyBoardType: TextInputType.name,
+                        obscureText: false,
+                        removeSpace: false,
+                        isNotePad: true,
+                        textController: controller.foodAndFluid,
+                        onChanged: (String? value) {
+                          controller.foodAndFluidOnChanged(value!);
                         },
-                        toggleEye: () {},
-                        onSaved: (value) {},
-                        onTap: () {},
-                        onChanged: (String? value) {},
                       ),
                     ],
                   ),
-                  addVerticalSpacing(context, 25),
+                  addVerticalSpacing(context, 5),
                   appButton("Continue", getScreenWidth(context), () {
                     controller.userRegister();
                   }, AppColors.primary, controller.isLoading),
-                  addVerticalSpacing(context, 80),
+                  addVerticalSpacing(context, 8),
                 ],
               ),
             ),

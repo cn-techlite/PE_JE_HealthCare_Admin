@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:pe_je_healthcare_admin/core/components/helpers/base_service_upload.dart';
 import 'package:pe_je_healthcare_admin/core/components/utils/helper_functions.dart';
 import 'package:pe_je_healthcare_admin/core/components/utils/package_export.dart';
 import 'package:pe_je_healthcare_admin/core/features/home/services/home_service.dart';
@@ -35,19 +36,7 @@ class AddServiceUserScreenController
   late TextEditingController socialActivities;
   late TextEditingController fallRisk;
   late TextEditingController foodAndFluid;
-  final FocusNode? firstNameFocusNode = FocusNode();
-  final FocusNode? lastNameFocusNode = FocusNode();
-  final FocusNode? emailFocusNode = FocusNode();
-  final FocusNode? addressFocusNode = FocusNode();
-  final FocusNode? dateOfBirthFocusNode = FocusNode();
-  final FocusNode? communicationFocusNode = FocusNode();
-  final FocusNode? mobilizationFocusNode = FocusNode();
-  final FocusNode? washingAndDressingFocusNode = FocusNode();
-  final FocusNode? medicationFocusNode = FocusNode();
-  final FocusNode? eyesightFocusNode = FocusNode();
-  final FocusNode? socialActivitiesFocusNode = FocusNode();
-  final FocusNode? fallRiskFocusNode = FocusNode();
-  final FocusNode? foodAndFluidFocusNode = FocusNode();
+
   String imageProfile = "";
 
   bool saveButtonPressed = false;
@@ -72,7 +61,7 @@ class AddServiceUserScreenController
           imageUrl = pickedCv2!.path;
         });
       }
-      String image1 = await HomeServices().upload(imageUrl.toString());
+      String image1 = await ApiService.upload(imageUrl.toString());
       debugPrint(image1);
       setState(() {
         imageProfile = image1;
@@ -120,6 +109,99 @@ class AddServiceUserScreenController
 
   final format = DateFormat("dd MMM, yyyy");
 
+  String isFirstNameChanged = "";
+  String isLastNameChanged = "";
+  String isEmailChanged = "";
+  String isAddressChanged = "";
+  String isDateOfBirthChanged = "";
+  String isCommunicationChanged = "";
+  String isMobilizationChanged = "";
+  String isWashingAndDressingChanged = "";
+  String isMedicationChanged = "";
+  String isEyesightChanged = "";
+  String isSocialActivitiesChanged = "";
+  String isFallRiskChanged = "";
+  String isFoodAndFluidChanged = "";
+
+  firstNameOnChanged(String value) {
+    setState(() {
+      isFirstNameChanged = value;
+    });
+  }
+
+  lastNameOnChanged(String value) {
+    setState(() {
+      isLastNameChanged = value;
+    });
+  }
+
+  dateOfBirthOnChanged(String value) {
+    setState(() {
+      isDateOfBirthChanged = value;
+      dateOfBirth.text = value;
+    });
+  }
+
+  emailOnChanged(String value) {
+    setState(() {
+      isEmailChanged = value;
+    });
+  }
+
+  addressOnChanged(String value) {
+    setState(() {
+      isAddressChanged = value;
+    });
+  }
+
+  communicationOnChanged(String value) {
+    setState(() {
+      isCommunicationChanged = value;
+    });
+  }
+
+  mobilizationOnChanged(String value) {
+    setState(() {
+      isMobilizationChanged = value;
+    });
+  }
+
+  washingAndDressingOnChanged(String value) {
+    setState(() {
+      isWashingAndDressingChanged = value;
+    });
+  }
+
+  medicationOnChanged(String value) {
+    setState(() {
+      isMedicationChanged = value;
+    });
+  }
+
+  eyesightOnChanged(String value) {
+    setState(() {
+      isEyesightChanged = value;
+    });
+  }
+
+  socialactivitiesOnChanged(String value) {
+    setState(() {
+      isSocialActivitiesChanged = value;
+    });
+  }
+
+  fallRiskOnChanged(String value) {
+    setState(() {
+      isFallRiskChanged = value;
+    });
+  }
+
+  foodAndFluidOnChanged(String value) {
+    setState(() {
+      isFoodAndFluidChanged = value;
+    });
+  }
+
   userRegister() async {
     setState(() {
       saveButtonPressed = true;
@@ -130,7 +212,7 @@ class AddServiceUserScreenController
       setState(() {
         isLoading = true;
       });
-      bool isValid = await HomeServices().addServiceUser(
+      var response = await HomeServices().addServiceUser(
           firstName: firstName.text.trim(),
           lastName: lastName.text.trim(),
           email: email.text.trim(),
@@ -145,7 +227,7 @@ class AddServiceUserScreenController
           socialActivities: socialActivities.text.trim(),
           fallRisk: fallRisk.text.trim(),
           foodAndFluid: foodAndFluid.text.trim());
-      if (isValid) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         setState(() {
           isLoading = false;
         });
@@ -156,14 +238,11 @@ class AddServiceUserScreenController
         });
         showCustomSnackbar(context,
             title: "Service User",
-            content: "Error in Adding Service Users",
+            content: response.body,
             type: SnackbarType.error,
             isTopPosition: false);
       }
     }
-    setState(() {
-      isLoading = false;
-    });
   }
 
   @override

@@ -8,9 +8,7 @@ import '../../../components/utils/package_export.dart';
 import '../../../components/widgets/app_text.dart';
 
 class HelpAndSupportPage extends StatefulWidget {
-  const HelpAndSupportPage({
-    super.key,
-  });
+  const HelpAndSupportPage({super.key});
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -34,22 +32,24 @@ class _LoginPageState extends State<HelpAndSupportPage> {
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         title: const AppText(
-            text: "Help and Support",
-            textAlign: TextAlign.center,
-            fontSize: 20,
-            isBody: false,
-            color: AppColors.white,
-            fontStyle: FontStyle.normal,
-            fontWeight: FontWeight.w600),
+          text: "Help and Support",
+          textAlign: TextAlign.center,
+          fontSize: 20,
+          isBody: false,
+          color: AppColors.white,
+          fontStyle: FontStyle.normal,
+          fontWeight: FontWeight.w600,
+        ),
         leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: AppColors.white,
-              size: 20,
-            )),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: AppColors.white,
+            size: 20,
+          ),
+        ),
         elevation: 0,
         centerTitle: true,
         automaticallyImplyLeading: false,
@@ -63,63 +63,65 @@ class _LoginPageState extends State<HelpAndSupportPage> {
         child: ListView(
           physics: const ScrollPhysics(),
           children: [
-            addVerticalSpacing(context, 20),
+            addVerticalSpacing(context, 2),
             const Padding(
               padding: EdgeInsets.only(left: 10.0, right: 10),
               child: AppText(
-                  text: "FAQ",
-                  textAlign: TextAlign.start,
-                  isBody: false,
-                  fontSize: 18,
-                  color: AppColors.black,
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w600),
+                text: "FAQ",
+                textAlign: TextAlign.start,
+                isBody: false,
+                fontSize: 18,
+                color: AppColors.black,
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-            addVerticalSpacing(context, 20),
+            addVerticalSpacing(context, 2),
             ExpandableNotifier(
-                child: Padding(
-              padding: const EdgeInsets.all(0),
-              child: Container(
-                color: AppColors.white,
-                child: Column(
-                  children: <Widget>[
-                    ScrollOnExpand(
-                      scrollOnExpand: true,
-                      scrollOnCollapse: false,
-                      child: ExpandablePanel(
-                        theme: const ExpandableThemeData(
-                          headerAlignment:
-                              ExpandablePanelHeaderAlignment.center,
-                          tapBodyToCollapse: true,
-                        ),
-                        header: const Padding(
-                          padding: EdgeInsets.all(10),
-                          child: AppText(
-                              text: "How does E-Clinic Work?",
+              child: Padding(
+                padding: const EdgeInsets.all(0),
+                child: Container(
+                  color: AppColors.white,
+                  child: Column(
+                    children: <Widget>[
+                      ScrollOnExpand(
+                        scrollOnExpand: true,
+                        scrollOnCollapse: false,
+                        child: ExpandablePanel(
+                          theme: const ExpandableThemeData(
+                            headerAlignment:
+                                ExpandablePanelHeaderAlignment.center,
+                            tapBodyToCollapse: true,
+                          ),
+                          header: const Padding(
+                            padding: EdgeInsets.all(10),
+                            child: AppText(
+                              text: "How does PE & JE Healthcare Work?",
                               textAlign: TextAlign.start,
                               fontSize: 22,
                               isBody: false,
                               color: AppColors.black,
                               fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        collapsed: Text(
-                          "All you need to do is create an account",
-                          softWrap: true,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: AppColors.black,
-                            fontSize: fontSized(context, 22),
-                            fontWeight: FontWeight.w400,
-                            fontFamily: "Inter",
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
-                        ),
-                        expanded: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            for (var _ in Iterable.generate(1))
-                              Padding(
+                          collapsed: Text(
+                            "All you need to do is create an account",
+                            softWrap: true,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: AppColors.black,
+                              fontSize: fontSized(context, 22),
+                              fontWeight: FontWeight.w400,
+                              fontFamily: "Inter",
+                            ),
+                          ),
+                          expanded: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              for (var _ in Iterable.generate(1))
+                                Padding(
                                   padding: const EdgeInsets.only(bottom: 10),
                                   child: Text(
                                     "All you need to do is create an account, then input your details and you are good to go.",
@@ -131,72 +133,79 @@ class _LoginPageState extends State<HelpAndSupportPage> {
                                       fontWeight: FontWeight.w700,
                                       fontFamily: "Inter",
                                     ),
-                                  )),
-                          ],
+                                  ),
+                                ),
+                            ],
+                          ),
+                          builder: (_, collapsed, expanded) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                left: 10,
+                                right: 10,
+                                bottom: 10,
+                              ),
+                              child: Expandable(
+                                collapsed: collapsed,
+                                expanded: expanded,
+                                theme: const ExpandableThemeData(
+                                  crossFadePoint: 0,
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                        builder: (_, collapsed, expanded) {
-                          return Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10, right: 10, bottom: 10),
-                            child: Expandable(
-                              collapsed: collapsed,
-                              expanded: expanded,
-                              theme:
-                                  const ExpandableThemeData(crossFadePoint: 0),
-                            ),
-                          );
-                        },
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            )),
-            addVerticalSpacing(context, 20),
+            ),
+            addVerticalSpacing(context, 2),
             ExpandableNotifier(
-                child: Padding(
-              padding: const EdgeInsets.all(0),
-              child: Container(
-                color: AppColors.white,
-                child: Column(
-                  children: <Widget>[
-                    ScrollOnExpand(
-                      scrollOnExpand: true,
-                      scrollOnCollapse: false,
-                      child: ExpandablePanel(
-                        theme: const ExpandableThemeData(
-                          headerAlignment:
-                              ExpandablePanelHeaderAlignment.center,
-                          tapBodyToCollapse: true,
-                        ),
-                        header: const Padding(
-                          padding: EdgeInsets.all(10),
-                          child: AppText(
+              child: Padding(
+                padding: const EdgeInsets.all(0),
+                child: Container(
+                  color: AppColors.white,
+                  child: Column(
+                    children: <Widget>[
+                      ScrollOnExpand(
+                        scrollOnExpand: true,
+                        scrollOnCollapse: false,
+                        child: ExpandablePanel(
+                          theme: const ExpandableThemeData(
+                            headerAlignment:
+                                ExpandablePanelHeaderAlignment.center,
+                            tapBodyToCollapse: true,
+                          ),
+                          header: const Padding(
+                            padding: EdgeInsets.all(10),
+                            child: AppText(
                               text: "How do i select the right doctor?",
                               textAlign: TextAlign.start,
                               isBody: false,
                               fontSize: 22,
                               color: AppColors.black,
                               fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        collapsed: Text(
-                          "Doctors are Listed in the App, you can select the doctor you want, we have verified, you can select any doctor you want.",
-                          softWrap: true,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: AppColors.black,
-                            fontSize: fontSized(context, 22),
-                            fontWeight: FontWeight.w400,
-                            fontFamily: "Inter",
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
-                        ),
-                        expanded: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            for (var _ in Iterable.generate(1))
-                              Padding(
+                          collapsed: Text(
+                            "Doctors are Listed in the App, you can select the doctor you want, we have verified, you can select any doctor you want.",
+                            softWrap: true,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: AppColors.black,
+                              fontSize: fontSized(context, 22),
+                              fontWeight: FontWeight.w400,
+                              fontFamily: "Inter",
+                            ),
+                          ),
+                          expanded: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              for (var _ in Iterable.generate(1))
+                                Padding(
                                   padding: const EdgeInsets.only(bottom: 10),
                                   child: Text(
                                     "Doctors are Listed in the App, you can select the doctor you want, we have verified, you can select any doctor you want.",
@@ -208,47 +217,53 @@ class _LoginPageState extends State<HelpAndSupportPage> {
                                       fontSize: fontSized(context, 22),
                                       fontFamily: "Inter",
                                     ),
-                                  )),
-                          ],
+                                  ),
+                                ),
+                            ],
+                          ),
+                          builder: (_, collapsed, expanded) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                left: 10,
+                                right: 10,
+                                bottom: 10,
+                              ),
+                              child: Expandable(
+                                collapsed: collapsed,
+                                expanded: expanded,
+                                theme: const ExpandableThemeData(
+                                  crossFadePoint: 0,
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                        builder: (_, collapsed, expanded) {
-                          return Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10, right: 10, bottom: 10),
-                            child: Expandable(
-                              collapsed: collapsed,
-                              expanded: expanded,
-                              theme:
-                                  const ExpandableThemeData(crossFadePoint: 0),
-                            ),
-                          );
-                        },
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            )),
-            addVerticalSpacing(context, 20),
+            ),
+            addVerticalSpacing(context, 2),
             ExpandableNotifier(
-                child: Padding(
-              padding: const EdgeInsets.all(0),
-              child: Container(
-                color: AppColors.white,
-                child: Column(
-                  children: <Widget>[
-                    ScrollOnExpand(
-                      scrollOnExpand: true,
-                      scrollOnCollapse: false,
-                      child: ExpandablePanel(
-                        theme: const ExpandableThemeData(
-                          headerAlignment:
-                              ExpandablePanelHeaderAlignment.center,
-                          tapBodyToCollapse: true,
-                        ),
-                        header: const Padding(
-                          padding: EdgeInsets.all(10),
-                          child: AppText(
+              child: Padding(
+                padding: const EdgeInsets.all(0),
+                child: Container(
+                  color: AppColors.white,
+                  child: Column(
+                    children: <Widget>[
+                      ScrollOnExpand(
+                        scrollOnExpand: true,
+                        scrollOnCollapse: false,
+                        child: ExpandablePanel(
+                          theme: const ExpandableThemeData(
+                            headerAlignment:
+                                ExpandablePanelHeaderAlignment.center,
+                            tapBodyToCollapse: true,
+                          ),
+                          header: const Padding(
+                            padding: EdgeInsets.all(10),
+                            child: AppText(
                               text:
                                   "Why am i getting billed for the entire session even after i ended it early?",
                               textAlign: TextAlign.start,
@@ -256,25 +271,26 @@ class _LoginPageState extends State<HelpAndSupportPage> {
                               fontSize: 22,
                               color: AppColors.black,
                               fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w400),
-                        ),
-                        collapsed: Text(
-                          "you need to pay for the entire session because",
-                          softWrap: true,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: AppColors.black,
-                            fontSize: fontSized(context, 22),
-                            fontWeight: FontWeight.w400,
-                            fontFamily: "Inter",
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
-                        ),
-                        expanded: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            for (var _ in Iterable.generate(1))
-                              Padding(
+                          collapsed: Text(
+                            "you need to pay for the entire session because",
+                            softWrap: true,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: AppColors.black,
+                              fontSize: fontSized(context, 22),
+                              fontWeight: FontWeight.w400,
+                              fontFamily: "Inter",
+                            ),
+                          ),
+                          expanded: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              for (var _ in Iterable.generate(1))
+                                Padding(
                                   padding: const EdgeInsets.only(bottom: 10),
                                   child: Text(
                                     "you need to pay for the entire session because it is better and has a discount attached to it",
@@ -286,47 +302,53 @@ class _LoginPageState extends State<HelpAndSupportPage> {
                                       fontWeight: FontWeight.w700,
                                       fontFamily: "Inter",
                                     ),
-                                  )),
-                          ],
+                                  ),
+                                ),
+                            ],
+                          ),
+                          builder: (_, collapsed, expanded) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                left: 10,
+                                right: 10,
+                                bottom: 10,
+                              ),
+                              child: Expandable(
+                                collapsed: collapsed,
+                                expanded: expanded,
+                                theme: const ExpandableThemeData(
+                                  crossFadePoint: 0,
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                        builder: (_, collapsed, expanded) {
-                          return Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10, right: 10, bottom: 10),
-                            child: Expandable(
-                              collapsed: collapsed,
-                              expanded: expanded,
-                              theme:
-                                  const ExpandableThemeData(crossFadePoint: 0),
-                            ),
-                          );
-                        },
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            )),
-            addVerticalSpacing(context, 20),
+            ),
+            addVerticalSpacing(context, 2),
             ExpandableNotifier(
-                child: Padding(
-              padding: const EdgeInsets.all(0),
-              child: Container(
-                color: AppColors.white,
-                child: Column(
-                  children: <Widget>[
-                    ScrollOnExpand(
-                      scrollOnExpand: true,
-                      scrollOnCollapse: false,
-                      child: ExpandablePanel(
-                        theme: const ExpandableThemeData(
-                          headerAlignment:
-                              ExpandablePanelHeaderAlignment.center,
-                          tapBodyToCollapse: true,
-                        ),
-                        header: const Padding(
-                          padding: EdgeInsets.all(10),
-                          child: AppText(
+              child: Padding(
+                padding: const EdgeInsets.all(0),
+                child: Container(
+                  color: AppColors.white,
+                  child: Column(
+                    children: <Widget>[
+                      ScrollOnExpand(
+                        scrollOnExpand: true,
+                        scrollOnCollapse: false,
+                        child: ExpandablePanel(
+                          theme: const ExpandableThemeData(
+                            headerAlignment:
+                                ExpandablePanelHeaderAlignment.center,
+                            tapBodyToCollapse: true,
+                          ),
+                          header: const Padding(
+                            padding: EdgeInsets.all(10),
+                            child: AppText(
                               text:
                                   "Is it safe to store my card details on the app?",
                               textAlign: TextAlign.start,
@@ -334,25 +356,26 @@ class _LoginPageState extends State<HelpAndSupportPage> {
                               fontSize: 22,
                               color: AppColors.black,
                               fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w400),
-                        ),
-                        collapsed: Text(
-                          "Yes please. your details are encrypted",
-                          softWrap: true,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: AppColors.black,
-                            fontSize: fontSized(context, 22),
-                            fontWeight: FontWeight.w400,
-                            fontFamily: "Inter",
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
-                        ),
-                        expanded: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            for (var _ in Iterable.generate(1))
-                              Padding(
+                          collapsed: Text(
+                            "Yes please. your details are encrypted",
+                            softWrap: true,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: AppColors.black,
+                              fontSize: fontSized(context, 22),
+                              fontWeight: FontWeight.w400,
+                              fontFamily: "Inter",
+                            ),
+                          ),
+                          expanded: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              for (var _ in Iterable.generate(1))
+                                Padding(
                                   padding: const EdgeInsets.only(bottom: 10),
                                   child: Text(
                                     "Yes please. your details are encrypted and can't be accessed by third party",
@@ -364,47 +387,53 @@ class _LoginPageState extends State<HelpAndSupportPage> {
                                       fontWeight: FontWeight.w700,
                                       fontFamily: "Inter",
                                     ),
-                                  )),
-                          ],
+                                  ),
+                                ),
+                            ],
+                          ),
+                          builder: (_, collapsed, expanded) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                left: 10,
+                                right: 10,
+                                bottom: 10,
+                              ),
+                              child: Expandable(
+                                collapsed: collapsed,
+                                expanded: expanded,
+                                theme: const ExpandableThemeData(
+                                  crossFadePoint: 0,
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                        builder: (_, collapsed, expanded) {
-                          return Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10, right: 10, bottom: 10),
-                            child: Expandable(
-                              collapsed: collapsed,
-                              expanded: expanded,
-                              theme:
-                                  const ExpandableThemeData(crossFadePoint: 0),
-                            ),
-                          );
-                        },
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            )),
-            addVerticalSpacing(context, 20),
+            ),
+            addVerticalSpacing(context, 2),
             ExpandableNotifier(
-                child: Padding(
-              padding: const EdgeInsets.all(0),
-              child: Container(
-                color: AppColors.white,
-                child: Column(
-                  children: <Widget>[
-                    ScrollOnExpand(
-                      scrollOnExpand: true,
-                      scrollOnCollapse: false,
-                      child: ExpandablePanel(
-                        theme: const ExpandableThemeData(
-                          headerAlignment:
-                              ExpandablePanelHeaderAlignment.center,
-                          tapBodyToCollapse: true,
-                        ),
-                        header: const Padding(
-                          padding: EdgeInsets.all(10),
-                          child: AppText(
+              child: Padding(
+                padding: const EdgeInsets.all(0),
+                child: Container(
+                  color: AppColors.white,
+                  child: Column(
+                    children: <Widget>[
+                      ScrollOnExpand(
+                        scrollOnExpand: true,
+                        scrollOnCollapse: false,
+                        child: ExpandablePanel(
+                          theme: const ExpandableThemeData(
+                            headerAlignment:
+                                ExpandablePanelHeaderAlignment.center,
+                            tapBodyToCollapse: true,
+                          ),
+                          header: const Padding(
+                            padding: EdgeInsets.all(10),
+                            child: AppText(
                               text:
                                   "How do i trust the Doctors on the platform?",
                               textAlign: TextAlign.start,
@@ -412,25 +441,26 @@ class _LoginPageState extends State<HelpAndSupportPage> {
                               fontSize: 22,
                               color: AppColors.black,
                               fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w400),
-                        ),
-                        collapsed: Text(
-                          "",
-                          softWrap: true,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: AppColors.black,
-                            fontSize: fontSized(context, 22),
-                            fontWeight: FontWeight.w400,
-                            fontFamily: "Inter",
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
-                        ),
-                        expanded: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            for (var _ in Iterable.generate(1))
-                              Padding(
+                          collapsed: Text(
+                            "",
+                            softWrap: true,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: AppColors.black,
+                              fontSize: fontSized(context, 22),
+                              fontWeight: FontWeight.w400,
+                              fontFamily: "Inter",
+                            ),
+                          ),
+                          expanded: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              for (var _ in Iterable.generate(1))
+                                Padding(
                                   padding: const EdgeInsets.only(bottom: 10),
                                   child: Text(
                                     "",
@@ -442,27 +472,33 @@ class _LoginPageState extends State<HelpAndSupportPage> {
                                       fontWeight: FontWeight.w700,
                                       fontFamily: "Inter",
                                     ),
-                                  )),
-                          ],
+                                  ),
+                                ),
+                            ],
+                          ),
+                          builder: (_, collapsed, expanded) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                left: 10,
+                                right: 10,
+                                bottom: 10,
+                              ),
+                              child: Expandable(
+                                collapsed: collapsed,
+                                expanded: expanded,
+                                theme: const ExpandableThemeData(
+                                  crossFadePoint: 0,
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                        builder: (_, collapsed, expanded) {
-                          return Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10, right: 10, bottom: 10),
-                            child: Expandable(
-                              collapsed: collapsed,
-                              expanded: expanded,
-                              theme:
-                                  const ExpandableThemeData(crossFadePoint: 0),
-                            ),
-                          );
-                        },
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            )),
+            ),
           ],
         ),
       ),

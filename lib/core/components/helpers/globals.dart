@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:pe_je_healthcare_admin/core/components/extension/error_handling.dart';
 import 'package:pe_je_healthcare_admin/core/components/helpers/notification_service.dart';
 import '../../features/auth/model/login_response_model.dart';
 import '../utils/constants.dart';
@@ -92,7 +93,8 @@ class AppGlobals {
         await init();
       }
     } catch (e) {
-      rethrow;
+      printData('Error', e.toString());
+      return Future.error(handleHttpError(e));
     }
   }
 

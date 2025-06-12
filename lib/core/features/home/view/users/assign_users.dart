@@ -254,7 +254,6 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                       ),
                                     ),
                                   ),
-                                  addVerticalSpacing(context, 180),
                                   const AppText(
                                       text: "Night Task:",
                                       textAlign: TextAlign.start,
@@ -314,7 +313,6 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                         ],
                       ),
                     ),
-                    addVerticalSpacing(context, 30),
                     Padding(
                       padding: const EdgeInsets.only(left: 15.0, right: 15),
                       child: Column(
@@ -415,7 +413,6 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                       ),
                                     ),
                                   ),
-                                  addVerticalSpacing(context, 180),
                                   const AppText(
                                       text: "Night Task:",
                                       textAlign: TextAlign.start,
@@ -475,7 +472,6 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                         ],
                       ),
                     ),
-                    addVerticalSpacing(context, 30),
                     Padding(
                       padding: const EdgeInsets.only(left: 15.0, right: 15),
                       child: Column(
@@ -576,7 +572,6 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                       ),
                                     ),
                                   ),
-                                  addVerticalSpacing(context, 180),
                                   const AppText(
                                       text: "Night Task:",
                                       textAlign: TextAlign.start,
@@ -636,7 +631,6 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                         ],
                       ),
                     ),
-                    addVerticalSpacing(context, 30),
                     Padding(
                       padding: const EdgeInsets.only(left: 15.0, right: 15),
                       child: Column(
@@ -737,7 +731,6 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                       ),
                                     ),
                                   ),
-                                  addVerticalSpacing(context, 180),
                                   const AppText(
                                       text: "Night Task:",
                                       textAlign: TextAlign.start,
@@ -797,7 +790,6 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                         ],
                       ),
                     ),
-                    addVerticalSpacing(context, 30),
                     Padding(
                       padding: const EdgeInsets.only(left: 15.0, right: 15),
                       child: Column(
@@ -904,7 +896,6 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                           ),
                                         ),
                                       ),
-                                      addVerticalSpacing(context, 180),
                                       const AppText(
                                           text: "Night Task:",
                                           textAlign: TextAlign.start,
@@ -965,7 +956,6 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                         ],
                       ),
                     ),
-                    addVerticalSpacing(context, 30),
                     Padding(
                       padding: const EdgeInsets.only(left: 15.0, right: 15),
                       child: Column(
@@ -1066,7 +1056,6 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                       ),
                                     ),
                                   ),
-                                  addVerticalSpacing(context, 180),
                                   const AppText(
                                       text: "Night Task:",
                                       textAlign: TextAlign.start,
@@ -1126,7 +1115,6 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                         ],
                       ),
                     ),
-                    addVerticalSpacing(context, 30),
                     Padding(
                       padding: const EdgeInsets.only(left: 15.0, right: 15),
                       child: Column(
@@ -1227,7 +1215,6 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                                       ),
                                     ),
                                   ),
-                                  addVerticalSpacing(context, 180),
                                   const AppText(
                                       text: "Night Task:",
                                       textAlign: TextAlign.start,
@@ -1287,7 +1274,6 @@ class _LoginPageState extends ConsumerState<AssignUserTaskPage> {
                         ],
                       ),
                     ),
-                    addVerticalSpacing(context, 30),
                   ])),
         ));
   }

@@ -39,63 +39,59 @@ class AppText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var fontSizeEd = 14.0;
-    if (Responsive.isDesktop(context)) {
-      final fontSize2 = fontSize == null
-          ? 14 / MediaQuery.devicePixelRatioOf(context)
-          : (MediaQuery.of(context).size.width) / 6 / (fontSize!);
-      fontSizeEd = fontSize2;
-    } else if (Responsive.isTablet(context)) {
-      final fontSize2 = fontSize == null
-          ? 14 / MediaQuery.devicePixelRatioOf(context)
-          : (MediaQuery.of(context).size.width) / 4 / (fontSize!);
-      fontSizeEd = fontSize2;
-    } else {
-      final fontSize2 = fontSize == null
-          ? 14 / MediaQuery.devicePixelRatioOf(context)
-          : (MediaQuery.of(context).size.width) / 2 / (fontSize!);
-      fontSizeEd = fontSize2;
-    }
-
+    TextScaler textScaler = MediaQuery.of(context).textScaler;
     final style = TextStyle(
-      fontSize: fontSizeEd + 0.5,
+      fontSize: fontSized(context, fontSize),
       letterSpacing: letterSpacing ?? 1,
       color: color ?? Colors.black,
       fontStyle: fontStyle ?? FontStyle.normal,
       fontWeight: fontWeight ?? FontWeight.w400,
       decoration: decoration ?? TextDecoration.none,
       height: linHeight ?? 1.5,
-      fontFamily: isBody == true ? "Montserrat" : "Inter",
+      fontFamily: isBody == true ? "Poppins" : "Inter",
     );
-    return Text(text,
-        style: style,
-        textAlign: textAlign,
-        overflow: overflow,
-        maxLines: maxLines,
-        softWrap: softWrap,
-        textScaler: const TextScaler.linear(1),
-        textWidthBasis: textWidthBasis,
-        textHeightBehavior: textHeightBehavior);
+    return Text(
+      text,
+      style: style,
+      textAlign: textAlign,
+      overflow: overflow,
+      maxLines: maxLines,
+      softWrap: softWrap,
+      textScaler: textScaler,
+      textWidthBasis: textWidthBasis,
+      textHeightBehavior: textHeightBehavior,
+    );
   }
 }
 
-double fontSized(BuildContext context, double? fontSize) {
-  var fontSizeEd = 14.0;
-  if (Responsive.isDesktop(context)) {
-    final fontSize2 = fontSize == null
-        ? 14 / MediaQuery.devicePixelRatioOf(context)
-        : (MediaQuery.of(context).size.width) / 6 / (fontSize);
-    fontSizeEd = fontSize2;
-  } else if (Responsive.isTablet(context)) {
-    final fontSize2 = fontSize == null
-        ? 14 / MediaQuery.devicePixelRatioOf(context)
-        : (MediaQuery.of(context).size.width) / 4 / (fontSize);
-    fontSizeEd = fontSize2;
-  } else {
-    final fontSize2 = fontSize == null
-        ? 14 / MediaQuery.devicePixelRatioOf(context)
-        : (MediaQuery.of(context).size.width) / 2 / (fontSize);
-    fontSizeEd = fontSize2;
-  }
-  return fontSizeEd;
+double fontSized(
+  BuildContext context,
+  double? fontSize, {
+  double desktopFactor = 6,
+  double tabletFactor = 4,
+  double mobileFactor = 2,
+  double scaleFactor = 4.0,
+  double minFontSize = 12.0,
+  double maxFontSize = 24.0,
+}) {
+  double screenWidth = MediaQuery.of(context).size.width;
+  TextScaler textScaler = MediaQuery.of(context).textScaler;
+
+  // Determine scaling factor based on device type
+  double scalingFactor = Responsive.isDesktop(context)
+      ? desktopFactor
+      : Responsive.isTablet(context)
+          ? tabletFactor
+          : mobileFactor;
+
+  // Calculate base font size
+  double baseFontSize = fontSize != null
+      ? (screenWidth / scalingFactor) * (fontSize / 100) / scaleFactor
+      : 14.0;
+
+  // Clamp to prevent extreme sizes
+  double clampedFontSize = baseFontSize.clamp(minFontSize, maxFontSize);
+
+  // Apply text scaling and return final size
+  return textScaler.scale(clampedFontSize);
 }

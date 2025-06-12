@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:pe_je_healthcare_admin/core/components/extension/error_handling.dart';
 import '../../../components/helpers/endpoints.dart';
 import '../../../components/helpers/globals.dart';
 import '../../../components/utils/constants.dart';
@@ -28,12 +29,13 @@ class AccountService {
         printData('User Details Error', response.body);
       }
     } catch (e) {
-      rethrow;
+      printData('Error', e.toString());
+      return Future.error(handleHttpError(e));
     }
     return data;
   }
 
-  Future<bool> updateUsers({
+  Future<http.Response> updateUsers({
     String? firstName,
     String? lastName,
     String? phoneNo,
@@ -71,17 +73,18 @@ class AccountService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         printData("Response", response.body);
         getUserData();
-        return true;
+        return response;
       } else {
         printData("Error", response.body);
-        return false;
+        return response;
       }
     } catch (e) {
-      rethrow;
+      printData('Error', e.toString());
+      return Future.error(handleHttpError(e));
     }
   }
 
-  Future<bool> addFeedBack({
+  Future<http.Response> addFeedBack({
     required String feedback,
     required String phoneNo,
   }) async {
@@ -106,13 +109,14 @@ class AccountService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         printData("Response", response.body);
         getUserData();
-        return true;
+        return response;
       } else {
         printData("Error", response.body);
-        return false;
+        return response;
       }
     } catch (e) {
-      rethrow;
+      printData('Error', e.toString());
+      return Future.error(handleHttpError(e));
     }
   }
 }

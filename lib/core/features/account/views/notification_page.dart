@@ -11,9 +11,7 @@ import '../../../components/utils/package_export.dart';
 import '../../../components/widgets/app_text.dart';
 
 class NotificationsPage extends ConsumerStatefulWidget {
-  const NotificationsPage({
-    super.key,
-  });
+  const NotificationsPage({super.key});
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -40,7 +38,8 @@ class _LoginPageState extends ConsumerState<NotificationsPage> {
   }
 
   List<NotificationResponseModel> getOrdered(
-      List<NotificationResponseModel> model) {
+    List<NotificationResponseModel> model,
+  ) {
     List<NotificationResponseModel> mostActive = model;
     mostActive.sort((a, b) {
       return b.createdAt!.compareTo(a.createdAt!);
@@ -54,27 +53,29 @@ class _LoginPageState extends ConsumerState<NotificationsPage> {
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         title: const AppText(
-            text: "Notifications",
-            textAlign: TextAlign.center,
-            fontSize: 20,
-            isBody: false,
-            color: AppColors.white,
-            fontStyle: FontStyle.normal,
-            fontWeight: FontWeight.w600),
+          text: "Notifications",
+          textAlign: TextAlign.center,
+          fontSize: 20,
+          isBody: false,
+          color: AppColors.white,
+          fontStyle: FontStyle.normal,
+          fontWeight: FontWeight.w600,
+        ),
         leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: AppColors.white,
-              size: 20,
-            )),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: AppColors.white,
+            size: 20,
+          ),
+        ),
         elevation: 0,
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 18.0, right: 18.0),
@@ -103,52 +104,55 @@ class _LoginPageState extends ConsumerState<NotificationsPage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               InkWell(
-                                  onTap: () {
-                                    // navigateToRoute(
-                                    //     context,
-                                    //     MagazineDetailsPage(
-                                    //       magazineModel: post[index],
-                                    //     ));
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        AppText(
-                                            isBody: false,
-                                            text: "${data3.title}",
-                                            textAlign: TextAlign.start,
-                                            fontSize: 15,
-                                            color: AppColors.black,
-                                            fontStyle: FontStyle.normal,
-                                            maxLines: 1,
-                                            fontWeight: FontWeight.bold),
-                                        AppText(
-                                            isBody: true,
-                                            text: "${data3.body}",
-                                            textAlign: TextAlign.start,
-                                            fontSize: 19,
-                                            color: AppColors.black,
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            fontStyle: FontStyle.normal,
-                                            fontWeight: FontWeight.w400),
-                                        addVerticalSpacing(context, 55),
-                                        AppText(
-                                            isBody: true,
-                                            text: "$date $time",
-                                            textAlign: TextAlign.start,
-                                            fontSize: 25,
-                                            color: AppColors.green,
-                                            fontStyle: FontStyle.normal,
-                                            fontWeight: FontWeight.w400),
-                                      ],
-                                    ),
-                                  )),
+                                onTap: () {
+                                  // navigateToRoute(
+                                  //     context,
+                                  //     MagazineDetailsPage(
+                                  //       magazineModel: post[index],
+                                  //     ));
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      AppText(
+                                        isBody: false,
+                                        text: "${data3.title}",
+                                        textAlign: TextAlign.start,
+                                        fontSize: 15,
+                                        color: AppColors.black,
+                                        fontStyle: FontStyle.normal,
+                                        maxLines: 1,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      AppText(
+                                        isBody: true,
+                                        text: "${data3.body}",
+                                        textAlign: TextAlign.start,
+                                        fontSize: 19,
+                                        color: AppColors.black,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                      addVerticalSpacing(context, 5),
+                                      AppText(
+                                        isBody: true,
+                                        text: "$date $time",
+                                        textAlign: TextAlign.start,
+                                        fontSize: 25,
+                                        color: AppColors.green,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                               const Divider(
                                 thickness: 1.5,
                                 color: AppColors.grey,
@@ -156,7 +160,7 @@ class _LoginPageState extends ConsumerState<NotificationsPage> {
                             ],
                           ),
                         ),
-                        addVerticalSpacing(context, 35)
+                        addVerticalSpacing(context, 5),
                       ],
                     );
                   },
@@ -166,27 +170,29 @@ class _LoginPageState extends ConsumerState<NotificationsPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        "assets/images/empty.png",
+                        "assets/images/notification_icon.png",
                         width: 100,
                         height: 100,
                       ),
-                      addVerticalSpacing(context, 50),
+                      addVerticalSpacing(context, 5),
                       const AppText(
-                          isBody: false,
-                          text: "Nothing to show here",
-                          textAlign: TextAlign.start,
-                          fontSize: 25,
-                          color: AppColors.black,
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.bold),
+                        isBody: false,
+                        text: "Nothing to show here",
+                        textAlign: TextAlign.start,
+                        fontSize: 25,
+                        color: AppColors.black,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.bold,
+                      ),
                       const AppText(
-                          isBody: true,
-                          text: "There is no notification yet",
-                          textAlign: TextAlign.center,
-                          fontSize: 25,
-                          color: AppColors.black,
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.normal),
+                        isBody: true,
+                        text: "There is no notification yet",
+                        textAlign: TextAlign.center,
+                        fontSize: 25,
+                        color: AppColors.black,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.normal,
+                      ),
                     ],
                   ),
                 ),

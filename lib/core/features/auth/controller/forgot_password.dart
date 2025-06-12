@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:pe_je_healthcare_admin/core/components/utils/constants.dart';
 import 'package:pe_je_healthcare_admin/core/components/widgets/custom_snackbar.dart';
 import '../../../components/utils/helper_functions.dart';
 import '../services/auth_service.dart';
@@ -21,6 +22,15 @@ class ForgotPasswordController extends State<ForgotPasswordScreen> {
   bool isLoading = false;
   bool saveButtonPressed = false;
 
+  String isEmailChanged = "";
+
+  emailOnChanged(String value) {
+    setState(() {
+      isEmailChanged = value;
+    });
+    printData("identifier", isEmailChanged);
+  }
+
   onSubmit() async {
     setState(() {
       saveButtonPressed = true;
@@ -32,8 +42,8 @@ class ForgotPasswordController extends State<ForgotPasswordScreen> {
         isLoading = true;
       });
 
-      final res = await AuthService.reSendPasswordCode(
-          email: emailController.text.trim(), cxt: context);
+      final res = await AuthService()
+          .reSendPasswordCode(email: emailController.text.trim(), cxt: context);
       if (res.statusCode == 200 || res.statusCode == 201) {
         setState(() {
           isLoading = false;
@@ -49,7 +59,7 @@ class ForgotPasswordController extends State<ForgotPasswordScreen> {
         });
         showCustomSnackbar(context,
             title: "User Exist",
-            content: "Email Does Not Exist",
+            content: res.body,
             type: SnackbarType.error,
             isTopPosition: false);
       }

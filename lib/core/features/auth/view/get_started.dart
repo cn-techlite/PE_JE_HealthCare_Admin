@@ -58,7 +58,7 @@ class GetStartedScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  addVerticalSpacing(context, 48),
+                  addVerticalSpacing(context, 8),
                   Image.asset(
                     "assets/images/logo_path.png",
                     height: 50,
@@ -92,7 +92,6 @@ class GetStartedScreen extends StatelessWidget {
                       textcolor: AppColors.white,
                       btncolor: AppColors.primaryDark,
                     ),
-                    addVerticalSpacing(context, 20),
                   ],
                 ),
               ),

@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, library_private_types_in_public_api
 
+import 'package:pe_je_healthcare_admin/core/components/widgets/custom_snackbar.dart';
 import 'package:pe_je_healthcare_admin/core/components/widgets/input.dart';
 import 'package:pe_je_healthcare_admin/core/features/account/services/account_services.dart';
 
@@ -93,102 +94,121 @@ class _FeedbackPageState extends ConsumerState<FeedbackPage> {
                   margin: const EdgeInsets.symmetric(vertical: 0),
                   child: Form(
                     key: _formkey,
-                    child: Column(children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: width / 20, right: width / 20, top: 10),
-                        child: const AppText(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: width / 20,
+                            right: width / 20,
+                            top: 10,
+                          ),
+                          child: const AppText(
                             text: "Share your feedback with us",
                             textAlign: TextAlign.start,
                             isBody: true,
                             fontSize: 23,
                             color: AppColors.black,
                             fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(top: 20, left: 10, right: 10),
-                        child: DescriptionInput(
-                          controller: _feedback,
-                          hintText: "What Complaints do you have?",
-                          labelText: "Complaints",
-                          focusNode: _focusFeedback,
-                          keyboard: TextInputType.text,
-                          maxLength: 200,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Empty Field';
-                            }
-                            return null;
-                          },
-                          toggleEye: () {},
-                          onSaved: (value) {},
-                          onTap: () {},
-                          onChanged: (String? value) {},
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      addVerticalSpacing(context, 20),
-                      _isProcessing
-                          ? const CircularProgressIndicator()
-                          : Padding(
-                              padding: EdgeInsets.only(
-                                  left: width / 4, right: width / 4, top: 80),
-                              child: InkWell(
-                                onTap: () async {
-                                  _focusFeedback.unfocus();
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 20,
+                            left: 10,
+                            right: 10,
+                          ),
+                          child: GlobalTextField(
+                            fieldName: 'What Complaints do you have?',
+                            keyBoardType: TextInputType.text,
+                            obscureText: false,
+                            removeSpace: false,
+                            isNotePad: true,
+                            textController: _feedback,
+                            onChanged: (String? value) {},
+                          ),
+                        ),
+                        addVerticalSpacing(context, 20),
+                        _isProcessing
+                            ? const CircularProgressIndicator()
+                            : Padding(
+                                padding: EdgeInsets.only(
+                                  left: width / 4,
+                                  right: width / 4,
+                                  top: 80,
+                                ),
+                                child: InkWell(
+                                  onTap: () async {
+                                    _focusFeedback.unfocus();
 
-                                  if (_formkey.currentState!.validate()) {
-                                    setState(() {});
-                                    debugPrint("Email: ${_feedback.text}");
-                                    bool isValid = await AccountService()
-                                        .addFeedBack(
-                                            feedback: _feedback.text.trim(),
-                                            phoneNo: user!.phoneNo.toString());
-                                    setState(() {
-                                      _isProcessing = false;
-                                    });
-                                    if (isValid) {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(const SnackBar(
-                                              duration: Duration(seconds: 10),
-                                              content: Text(
-                                                  "FeedBack Sent Successfully")));
+                                    if (_formkey.currentState!.validate()) {
+                                      setState(() {
+                                        _isProcessing = true;
+                                      });
+                                      var response =
+                                          await AccountService().addFeedBack(
+                                        feedback: _feedback.text.trim(),
+                                        phoneNo: user!.phoneNo.toString(),
+                                      );
 
-                                      Navigator.pop(context);
-                                    } else {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(const SnackBar(
-                                              duration: Duration(seconds: 10),
-                                              content:
-                                                  Text("Error Try again")));
+                                      if (response.statusCode == 201 ||
+                                          response.statusCode == 200) {
+                                        setState(() {
+                                          _isProcessing = false;
+                                        });
+                                        navigateBack(context);
+                                        showCustomSnackbar(
+                                          context,
+                                          title: "Add Feedback",
+                                          content: "Feedback sent Successfully",
+                                          type: SnackbarType.success,
+                                          isTopPosition: false,
+                                        );
+                                      } else {
+                                        setState(() {
+                                          _isProcessing = false;
+                                        });
+                                        navigateBack(context);
+                                        showCustomSnackbar(
+                                          context,
+                                          title: "Add Feedback Error",
+                                          content: response.body,
+                                          type: SnackbarType.error,
+                                          isTopPosition: false,
+                                        );
+                                      }
                                     }
-                                  }
-                                },
-                                child: Container(
+                                  },
+                                  child: Container(
                                     alignment: Alignment.center,
                                     decoration: BoxDecoration(
                                       color: AppColors.primary,
                                       borderRadius: BorderRadius.circular(40),
                                     ),
-                                    child: const Padding(
+                                    child: Padding(
                                       padding: EdgeInsets.only(
-                                          left: 10,
-                                          right: 10,
-                                          top: 15,
-                                          bottom: 15),
-                                      child: AppText(
-                                          text: "Feedback",
-                                          textAlign: TextAlign.start,
-                                          fontSize: 23,
-                                          isBody: true,
-                                          color: AppColors.white,
-                                          fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.w600),
-                                    )),
+                                        left: 10,
+                                        right: 10,
+                                        top: 15,
+                                        bottom: 15,
+                                      ),
+                                      child: _isProcessing
+                                          ? const CircularProgressIndicator()
+                                          : AppText(
+                                              text: "Feedback",
+                                              textAlign: TextAlign.start,
+                                              fontSize: 23,
+                                              isBody: true,
+                                              color: AppColors.white,
+                                              fontStyle: FontStyle.normal,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                    ]),
+                      ],
+                    ),
                   ),
                 ),
               ],

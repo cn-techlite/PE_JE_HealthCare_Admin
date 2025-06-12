@@ -2,6 +2,7 @@
 
 import 'package:pe_je_healthcare_admin/core/components/helpers/globals.dart';
 import 'package:pe_je_healthcare_admin/core/components/state/connectivity_state.dart';
+import 'package:pe_je_healthcare_admin/core/components/utils/constants.dart';
 import 'package:pe_je_healthcare_admin/core/components/widgets/custom_snackbar.dart';
 
 import '../services/auth_service.dart';
@@ -68,6 +69,23 @@ class LoginScreensController extends ConsumerState<LoginScreens> {
     });
   }
 
+  String isEmailChanged = "";
+  String isPasswordChanged = "";
+
+  emailOnChanged(String value) {
+    setState(() {
+      isEmailChanged = value;
+    });
+    printData("identifier", isEmailChanged);
+  }
+
+  passwordOnChanged(String value) {
+    setState(() {
+      isPasswordChanged = value;
+    });
+    printData("identifier", isPasswordChanged);
+  }
+
   loginUser() async {
     var connectivityStatusProvider = ref.read(connectivityStatusProviders);
     setState(() {
@@ -81,7 +99,7 @@ class LoginScreensController extends ConsumerState<LoginScreens> {
       });
       if (connectivityStatusProvider == ConnectivityStatus.isConnected) {
         if (isChecked == true) {
-          final res = await AuthService.userLogin(
+          final res = await AuthService().userLogin(
               email: emailController.text.trim(),
               password: passwordController.text.trim(),
               cxt: context);
@@ -98,7 +116,7 @@ class LoginScreensController extends ConsumerState<LoginScreens> {
             });
             showCustomSnackbar(context,
                 title: "Invalid User",
-                content: "Incorrect Email or Password",
+                content: res.body,
                 type: SnackbarType.error,
                 isTopPosition: false);
           }
@@ -122,9 +140,6 @@ class LoginScreensController extends ConsumerState<LoginScreens> {
             type: SnackbarType.error,
             isTopPosition: false);
       }
-      setState(() {
-        isLoading = false;
-      });
     }
   }
 

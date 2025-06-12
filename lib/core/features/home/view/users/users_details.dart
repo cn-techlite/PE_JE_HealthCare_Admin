@@ -47,7 +47,7 @@ class _LoginPageState extends ConsumerState<UserDetailsPage> {
     return ListView(
       physics: const ScrollPhysics(),
       children: <Widget>[
-        addVerticalSpacing(context, 20),
+        addVerticalSpacing(context, 2),
         Center(
           child: CircleAvatar(
             radius: 60,
@@ -65,7 +65,7 @@ class _LoginPageState extends ConsumerState<UserDetailsPage> {
                         : NetworkImage(userChat.profilePicture.toString())),
           ),
         ),
-        addVerticalSpacing(context, 50),
+        addVerticalSpacing(context, 2),
         GestureDetector(
           onTap: () {
             navigateToRoute(
@@ -84,7 +84,7 @@ class _LoginPageState extends ConsumerState<UserDetailsPage> {
               fontStyle: FontStyle.normal,
               fontWeight: FontWeight.bold),
         ),
-        addVerticalSpacing(context, 50),
+        addVerticalSpacing(context, 2),
         Center(
           child: AppText(
               text: "${userChat.firstName} ${userChat.lastName}",
@@ -160,7 +160,7 @@ class _LoginPageState extends ConsumerState<UserDetailsPage> {
         const SizedBox(
           height: 10,
         ),
-        addVerticalSpacing(context, 20),
+        addVerticalSpacing(context, 2),
         Padding(
           padding: const EdgeInsets.only(left: 0.0, right: 0),
           child: Card(
@@ -431,7 +431,7 @@ class _LoginPageState extends ConsumerState<UserDetailsPage> {
             ),
           ),
         ),
-        addVerticalSpacing(context, 50),
+        addVerticalSpacing(context, 5),
         Row(
           children: [
             const SizedBox(
@@ -565,7 +565,6 @@ class _LoginPageState extends ConsumerState<UserDetailsPage> {
             ),
           ],
         ),
-        addVerticalSpacing(context, 50),
       ],
     );
   }

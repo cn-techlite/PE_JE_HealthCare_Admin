@@ -1,9 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
 
-import 'dart:io';
-
-import 'package:pe_je_healthcare_admin/core/components/helpers/base_service_upload.dart';
 import 'package:pe_je_healthcare_admin/core/components/utils/helper_functions.dart';
 import 'package:pe_je_healthcare_admin/core/features/auth/controller/login_controller.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,7 +8,6 @@ import 'package:flutter/cupertino.dart';
 import '../../../components/utils/colors.dart';
 import '../../../components/utils/package_export.dart';
 import '../../../components/widgets/app_text.dart';
-import '../services/account_services.dart';
 import '../states/account_provider.dart';
 import 'help_support_page.dart';
 import 'notification_page.dart';
@@ -43,35 +39,6 @@ class _LoginPageState extends ConsumerState<AccountPage> {
   @override
   void dispose() {
     super.dispose();
-  }
-
-  File? pickedCv2;
-  String imageFile = "";
-
-  void handleCVUpload2() async {
-    try {
-      final ImagePicker picker = ImagePicker();
-      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-
-      if (image != null) {
-        String extension = image.path.split(".").last;
-        String targetPath = "${Directory.systemTemp.path}/temp.$extension";
-        final compressedImage = await FlutterImageCompress.compressAndGetFile(
-          image.path,
-          targetPath,
-          quality: 50,
-        );
-        setState(() {
-          pickedCv2 = File(compressedImage!.path.toString());
-        });
-      }
-      String imageHandling = await ApiService.upload(
-        pickedCv2!.absolute.path.toString(),
-      );
-      AccountService().updateUsers(imagePath: imageHandling);
-    } catch (e) {
-      debugPrint(e.toString());
-    }
   }
 
   @override
@@ -112,107 +79,59 @@ class _LoginPageState extends ConsumerState<AccountPage> {
           body: ListView(
             children: [
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                addVerticalSpacing(context, 50),
+                addVerticalSpacing(context, 5),
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: Row(
                     children: [
-                      Stack(
-                        children: [
-                          Container(
-                              margin: const EdgeInsets.only(
-                                  left: 0, right: 0, top: 20),
-                              child: pickedCv2 == null
-                                  ? GestureDetector(
-                                      onTap: () async {
-                                        handleCVUpload2();
-                                      },
-                                      child: CircleAvatar(
-                                        radius: 40,
-                                        backgroundColor: Colors.grey,
-                                        child: CircleAvatar(
-                                            backgroundColor: Colors.white,
-                                            radius: 37,
-                                            backgroundImage: user!.imagePath
-                                                    .toString()
-                                                    .isEmpty
-                                                ? const NetworkImage(
-                                                    "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Microsoft_Account.svg/512px-Microsoft_Account.svg.png?20170218203212")
-                                                // ignore: unnecessary_null_comparison
-                                                : user.imagePath == null
-                                                    ? const NetworkImage(
-                                                        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Microsoft_Account.svg/512px-Microsoft_Account.svg.png?20170218203212")
-                                                    : NetworkImage(user
-                                                        .imagePath
-                                                        .toString())),
-                                      ),
-                                    )
-                                  : Center(
-                                      child: Stack(
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () async {
-                                              handleCVUpload2();
-                                            },
-                                            child: Container(
-                                              margin: const EdgeInsets.only(
-                                                  left: 0, right: 0),
-                                              child: CircleAvatar(
-                                                radius: 40,
-                                                backgroundColor: Colors.grey,
-                                                child: CircleAvatar(
-                                                  backgroundColor: Colors.white,
-                                                  radius: 37,
-                                                  backgroundImage:
-                                                      FileImage(pickedCv2!),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    )),
-                          const Positioned(
-                              top: 70,
-                              left: 50,
-                              right: 50,
-                              child: Icon(Icons.camera_alt,
-                                  color: AppColors.primary, size: 30)),
-                        ],
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundColor: Colors.grey,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          radius: 37,
+                          backgroundImage: NetworkImage(
+                            user?.imagePath == null ||
+                                    user!.imagePath.toString().isEmpty
+                                ? image.toString()
+                                : user.imagePath.toString(),
+                          ),
+                        ),
                       ),
-                      addVerticalSpacing(context, 50),
+                      addHorizontalSpacing(5),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           AppText(
-                              text: "${user!.firstName} ${user.surName}",
-                              textAlign: TextAlign.start,
-                              fontSize: 22,
-                              isBody: true,
-                              color: AppColors.black,
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.bold),
-                          AppText(
-                              text: user.email.toString(),
-                              textAlign: TextAlign.start,
-                              isBody: true,
-                              fontSize: 23,
-                              color: AppColors.black,
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w400),
-                          AppText(
-                              text: user.staffCode.toString(),
-                              textAlign: TextAlign.start,
-                              isBody: true,
-                              fontSize: 23,
-                              color: AppColors.black,
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w400),
-                          const SizedBox(
-                            height: 10,
+                            text: "${user!.firstName} ${user.surName}",
+                            textAlign: TextAlign.start,
+                            fontSize: 22,
+                            color: AppColors.black,
+                            fontStyle: FontStyle.normal,
+                            isBody: true,
+                            fontWeight: FontWeight.bold,
                           ),
+                          AppText(
+                            text: user.email.toString(),
+                            textAlign: TextAlign.start,
+                            fontSize: 23,
+                            color: AppColors.black,
+                            fontStyle: FontStyle.normal,
+                            isBody: true,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          AppText(
+                            text: user.staffCode.toString(),
+                            textAlign: TextAlign.start,
+                            fontSize: 23,
+                            color: AppColors.black,
+                            fontStyle: FontStyle.normal,
+                            isBody: true,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          const SizedBox(height: 10),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -220,7 +139,7 @@ class _LoginPageState extends ConsumerState<AccountPage> {
                   color: AppColors.grey,
                   thickness: 1,
                 ),
-                addVerticalSpacing(context, 40),
+                addVerticalSpacing(context, 4),
                 ListTile(
                   leading: Image.asset("assets/images/account_icon.png",
                       height: 20, width: 20, color: AppColors.primary),
@@ -361,7 +280,7 @@ class _LoginPageState extends ConsumerState<AccountPage> {
                     navigateToRoute(context, const PrivacyPolicyPage());
                   },
                 ),
-                addVerticalSpacing(context, 30),
+                addVerticalSpacing(context, 3),
                 ListTile(
                   onTap: () async {
                     await showDialog<bool>(

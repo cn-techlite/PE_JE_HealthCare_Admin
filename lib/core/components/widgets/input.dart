@@ -1,432 +1,8 @@
-// ignore_for_file: prefer_const_constructors, constant_identifier_names, annotate_overrides, overridden_fields, use_key_in_widget_constructors
+// ignore_for_file: prefer_const_constructors, constant_identifier_names, annotate_overrides, overridden_fields, use_key_in_widget_constructors, must_be_immutable
 
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:pe_je_healthcare_admin/core/components/utils/package_export.dart';
 import '../utils/colors.dart';
-import '../utils/helper_functions.dart';
-import '../utils/typography.dart';
 import 'app_text.dart';
-
-class Input extends StatelessWidget {
-  final String? hintText;
-  final String? Function(String?)? validator;
-  final Function(String?)? onSaved;
-  final Function(String?)? onChanged;
-  final Function? toggleEye;
-  final TextInputType? keyboard;
-  final String? init;
-  final bool isPassword;
-  final bool readOnly;
-  final Color? isPasswordColor;
-  //final bool showObscureText;
-  final bool obscureText;
-  final Color? styleColor;
-
-  final String? labelText;
-  final String? errorText;
-  final dynamic maxLines;
-  final Color? borderColor;
-  final Color? fillColor;
-  final Color? hintColor;
-  final Color? hintStyleColor;
-  final Color? textColor;
-  final Color? labelColor;
-  final String? inputIcon;
-  final Widget? prefix;
-  final Widget? suffix;
-  final Key? key;
-  final IconData? prefixIcon;
-  final bool enable;
-  final TextEditingController? controller;
-  //final List<TextInputFormatter> inputFormatters;
-  final FocusNode? focusNode;
-  //final bool alignLabelWithHint;
-  final FloatingLabelBehavior? floatingLabelBehavior;
-  final Function onTap;
-  final double? borderRadius;
-  const Input(
-      {this.hintText,
-      this.labelColor,
-      this.fillColor,
-      this.textColor,
-      this.borderRadius,
-      this.validator,
-      this.readOnly = false,
-      this.hintColor,
-      required this.onSaved,
-      required this.toggleEye,
-      this.init,
-      this.isPassword = false,
-      this.isPasswordColor,
-      //this.showObscureText,
-      this.obscureText = false,
-      this.keyboard,
-      this.styleColor,
-      this.hintStyleColor,
-      this.enable = true,
-      this.labelText,
-      this.maxLines = 1,
-      this.borderColor = Colors.grey,
-      required this.onChanged,
-      this.prefix,
-      this.suffix,
-      this.key,
-      this.controller,
-      this.focusNode,
-      this.prefixIcon,
-
-      ///this.alignLabelWithHint,
-      this.floatingLabelBehavior,
-      required this.onTap,
-      this.errorText,
-      this.inputIcon});
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      keyboardType: keyboard,
-      controller: controller,
-      key: key,
-      readOnly: readOnly,
-      enabled: enable,
-      onSaved: onSaved!,
-      onChanged: onChanged!,
-      validator: validator!,
-      obscureText: obscureText,
-      initialValue: init,
-      focusNode: focusNode,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      decoration: InputDecoration(
-        prefixIcon: Icon(prefixIcon),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(2),
-          borderSide: BorderSide(
-            color: Colors.grey,
-            width: 1.0,
-          ),
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: BorderSide(color: AppColors.primary),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(2),
-          borderSide: BorderSide(
-            color: Colors.red,
-            width: 1.0,
-          ),
-        ),
-        suffixIcon: suffix,
-        fillColor: !enable
-            ? fillColor ?? Color(0xFFeeeeee)
-            : fillColor ?? Colors.transparent,
-        // fillColor: Colors.white,
-        filled: true,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(2),
-          borderSide: BorderSide(
-            color: Colors.grey,
-            width: 1.0,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(2),
-          borderSide: BorderSide(
-            color: AppColors.primary,
-            width: 1.0,
-          ),
-        ),
-        hintText: hintText,
-        hintStyle: TextStyle(
-          color: hintStyleColor ?? Colors.grey,
-          fontSize: 14,
-        ),
-      ),
-    );
-  }
-}
-
-class PlainInput extends StatelessWidget {
-  final String? hintText;
-  final String? Function(String?)? validator;
-  final Function(String?)? onSaved;
-  final Function(String?)? onChanged;
-  final Function? toggleEye;
-  final TextInputType? keyboard;
-  final String? init;
-  final bool isPassword;
-  final Color? isPasswordColor;
-  //final bool showObscureText;
-  final bool obscureText;
-  final Color? styleColor;
-  final Color? hintStyleColor;
-  final bool enable;
-  final String? labelText;
-  final String? errorText;
-  final dynamic maxLines;
-  final Color? borderColor;
-  final Color? fillColor;
-  final Color? hintColor;
-  final Color? textColor;
-  final Color? labelColor;
-  final String? inputIcon;
-  final Widget? prefix;
-  final Widget? suffix;
-  final Key? key;
-  final IconData? prefixIcon;
-  final TextEditingController? controller;
-  //final List<TextInputFormatter> inputFormatters;
-  final FocusNode? focusNode;
-  //final bool alignLabelWithHint;
-  final FloatingLabelBehavior? floatingLabelBehavior;
-  final Function onTap;
-  final double? borderRadius;
-  final bool readOnly;
-  final int? maxLength;
-  const PlainInput(
-      {this.hintText,
-      this.labelColor,
-      this.fillColor,
-      this.textColor,
-      this.borderRadius,
-      this.validator,
-      this.hintColor,
-      required this.onSaved,
-      required this.toggleEye,
-      this.init,
-      this.isPassword = false,
-      this.isPasswordColor,
-      //this.showObscureText,
-      this.obscureText = false,
-      this.keyboard,
-      this.styleColor,
-      this.hintStyleColor,
-      this.enable = true,
-      this.labelText,
-      this.maxLines = 1,
-      this.borderColor = Colors.grey,
-      required this.onChanged,
-      this.prefix,
-      this.suffix,
-      this.key,
-      this.controller,
-      this.focusNode,
-      this.prefixIcon,
-
-      ///this.alignLabelWithHint,
-      this.floatingLabelBehavior,
-      required this.onTap,
-      this.errorText,
-      this.inputIcon,
-      this.readOnly = false,
-      this.maxLength});
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      style: AppTypography.dynamicStyle(
-        fontSize: fontSized(context, 22),
-        fontWeight: FontWeight.w400,
-        color: AppColors.black,
-      ),
-      keyboardType: keyboard,
-      controller: controller,
-      focusNode: focusNode,
-      key: key,
-      enabled: enable,
-      onSaved: onSaved!,
-      onChanged: onChanged!,
-      validator: validator!,
-      obscureText: obscureText,
-      initialValue: init,
-      readOnly: readOnly,
-      maxLength: maxLength,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(0),
-          borderSide: BorderSide(color: AppColors.primary),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(0),
-          borderSide: BorderSide(
-            color: Colors.red,
-            width: 1.0,
-          ),
-        ),
-        //suffixIcon: suffix,
-        fillColor: !enable
-            ? fillColor ?? Color(0xFFeeeeee)
-            : fillColor ?? Colors.transparent,
-        // fillColor: Colors.white,
-        filled: true,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(2),
-          borderSide: BorderSide(
-            color: Colors.grey,
-            width: 1.0,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(2),
-          borderSide: BorderSide(
-            color: AppColors.primary,
-            width: 1.0,
-          ),
-        ),
-        hintText: hintText,
-        hintStyle: TextStyle(
-          color: hintStyleColor ?? Colors.grey,
-          fontSize: fontSized(context, 22),
-        ),
-      ),
-    );
-  }
-}
-
-class DescriptionInput extends StatelessWidget {
-  final String? hintText;
-  final String? Function(String?)? validator;
-  final Function(String?)? onSaved;
-  final Function(String?)? onChanged;
-  final Function? toggleEye;
-  final TextInputType? keyboard;
-  final String? init;
-  final bool isPassword;
-  final Color? isPasswordColor;
-  //final bool showObscureText;
-  final bool obscureText;
-  final Color? styleColor;
-  final Color? hintStyleColor;
-  final bool enable;
-  final String? labelText;
-  final String? errorText;
-  final dynamic maxLines;
-  final Color? borderColor;
-  final Color? fillColor;
-  final Color? hintColor;
-  final Color? textColor;
-  final Color? labelColor;
-  final String? inputIcon;
-  final Widget? prefix;
-  final Widget? suffix;
-  final Key? key;
-  final IconData? prefixIcon;
-  final TextEditingController? controller;
-  //final List<TextInputFormatter> inputFormatters;
-  final FocusNode? focusNode;
-  //final bool alignLabelWithHint;
-  final FloatingLabelBehavior? floatingLabelBehavior;
-  final Function onTap;
-  final double? borderRadius;
-  final int? maxLength;
-  const DescriptionInput(
-      {this.hintText,
-      this.labelColor,
-      this.fillColor,
-      this.textColor,
-      this.borderRadius,
-      this.validator,
-      this.hintColor,
-      required this.onSaved,
-      required this.toggleEye,
-      this.init,
-      this.isPassword = false,
-      this.isPasswordColor,
-      //this.showObscureText,
-      this.obscureText = false,
-      this.keyboard,
-      this.styleColor,
-      this.hintStyleColor,
-      this.enable = true,
-      this.labelText,
-      this.maxLines = 1,
-      this.borderColor = Colors.grey,
-      required this.onChanged,
-      this.prefix,
-      this.suffix,
-      this.key,
-      this.controller,
-      this.focusNode,
-      this.prefixIcon,
-
-      ///this.alignLabelWithHint,
-      this.floatingLabelBehavior,
-      required this.onTap,
-      this.errorText,
-      this.inputIcon,
-      this.maxLength});
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      style: AppTypography.dynamicStyle(
-        fontSize: fontSized(context, 22),
-        fontWeight: FontWeight.w400,
-        color: AppColors.black,
-      ),
-      keyboardType: keyboard,
-      controller: controller,
-      key: key,
-      enabled: enable,
-      onSaved: onSaved!,
-      onChanged: onChanged!,
-      validator: validator!,
-      obscureText: obscureText,
-      initialValue: init,
-      maxLines: 10,
-      minLines: 6,
-      maxLength: maxLength,
-      focusNode: focusNode,
-      decoration: InputDecoration(
-        // prefixIcon: Icon(prefixIcon),
-        // focusedErrorBorder: OutlineInputBorder(
-        //   borderRadius: BorderRadius.circular(2),
-        //   borderSide: BorderSide(
-        //     color: Colors.grey,
-        //     width: 1.0,
-        //   ),
-        // ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(0),
-          borderSide: BorderSide(color: AppColors.primary),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(0),
-          borderSide: BorderSide(
-            color: Colors.red,
-            width: 1.0,
-          ),
-        ),
-        //suffixIcon: suffix,
-        fillColor: !enable
-            ? fillColor ?? Color(0xFFeeeeee)
-            : fillColor ?? Colors.transparent,
-        // fillColor: Colors.white,
-        filled: true,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(0),
-          borderSide: BorderSide(
-            color: Colors.grey,
-            width: 1.0,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(0),
-          borderSide: BorderSide(
-            color: AppColors.primary,
-            width: 1.0,
-          ),
-        ),
-        hintText: hintText,
-        hintStyle: TextStyle(
-          color: hintStyleColor ?? Colors.grey,
-          fontSize: fontSized(context, 22),
-        ),
-      ),
-    );
-  }
-}
 
 class DateWidget extends StatelessWidget {
   final String? hintText;
@@ -448,31 +24,19 @@ class DateWidget extends StatelessWidget {
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(0),
-          borderSide: BorderSide(
-            color: Colors.red,
-            width: 1.0,
-          ),
+          borderSide: BorderSide(color: Colors.red, width: 1.0),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(0),
-          borderSide: BorderSide(
-            color: Colors.grey,
-            width: 1.0,
-          ),
+          borderSide: BorderSide(color: Colors.grey, width: 1.0),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(0),
-          borderSide: BorderSide(
-            color: AppColors.primary,
-            width: 1.0,
-          ),
+          borderSide: BorderSide(color: AppColors.primary, width: 1.0),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(0),
-          borderSide: BorderSide(
-            color: AppColors.primary,
-            width: 1.0,
-          ),
+          borderSide: BorderSide(color: AppColors.primary, width: 1.0),
         ),
         hintText: hintText,
         hintStyle: TextStyle(
@@ -537,41 +101,42 @@ class SerachInput extends StatelessWidget {
   final FloatingLabelBehavior? floatingLabelBehavior;
   final Function onTap;
   final double? borderRadius;
-  const SerachInput(
-      {this.hintText,
-      this.labelColor,
-      this.fillColor,
-      this.textColor,
-      this.borderRadius,
-      this.validator,
-      this.hintColor,
-      required this.onSaved,
-      required this.toggleEye,
-      this.init,
-      this.isPassword = false,
-      this.isPasswordColor,
-      //this.showObscureText,
-      this.obscureText = false,
-      this.keyboard,
-      this.styleColor,
-      this.hintStyleColor,
-      this.enable = true,
-      this.labelText,
-      this.maxLines = 1,
-      this.borderColor = Colors.white,
-      required this.onChanged,
-      this.prefix,
-      this.suffix,
-      this.key,
-      this.controller,
-      this.focusNode,
-      this.prefixIcon,
+  const SerachInput({
+    this.hintText,
+    this.labelColor,
+    this.fillColor,
+    this.textColor,
+    this.borderRadius,
+    this.validator,
+    this.hintColor,
+    required this.onSaved,
+    required this.toggleEye,
+    this.init,
+    this.isPassword = false,
+    this.isPasswordColor,
+    //this.showObscureText,
+    this.obscureText = false,
+    this.keyboard,
+    this.styleColor,
+    this.hintStyleColor,
+    this.enable = true,
+    this.labelText,
+    this.maxLines = 1,
+    this.borderColor = Colors.white,
+    required this.onChanged,
+    this.prefix,
+    this.suffix,
+    this.key,
+    this.controller,
+    this.focusNode,
+    this.prefixIcon,
 
-      ///this.alignLabelWithHint,
-      this.floatingLabelBehavior,
-      required this.onTap,
-      this.errorText,
-      this.inputIcon});
+    ///this.alignLabelWithHint,
+    this.floatingLabelBehavior,
+    required this.onTap,
+    this.errorText,
+    this.inputIcon,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -596,10 +161,7 @@ class SerachInput extends StatelessWidget {
         prefixIcon: prefix,
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(2),
-          borderSide: BorderSide(
-            color: Colors.white,
-            width: 1.0,
-          ),
+          borderSide: BorderSide(color: Colors.white, width: 1.0),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
@@ -607,10 +169,7 @@ class SerachInput extends StatelessWidget {
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(2),
-          borderSide: BorderSide(
-            color: Colors.red,
-            width: 2.0,
-          ),
+          borderSide: BorderSide(color: Colors.red, width: 2.0),
         ),
 
         fillColor: !enable
@@ -620,17 +179,11 @@ class SerachInput extends StatelessWidget {
         filled: true,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(2),
-          borderSide: BorderSide(
-            color: Colors.white,
-            width: 2.0,
-          ),
+          borderSide: BorderSide(color: Colors.white, width: 2.0),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(2),
-          borderSide: BorderSide(
-            color: AppColors.white,
-            width: 2.0,
-          ),
+          borderSide: BorderSide(color: AppColors.white, width: 2.0),
         ),
         hintText: hintText,
         hintStyle: TextStyle(
@@ -642,254 +195,171 @@ class SerachInput extends StatelessWidget {
   }
 }
 
-class PasswordInput extends StatelessWidget {
-  final String? hintText;
-  final String? Function(String?)? validator;
-  final Function(String?)? onSaved;
+enum KeyboardType { NUMBER, TEXT, EMAIL, PHONE }
+
+class GlobalTextField extends StatefulWidget {
+  final String fieldName;
+  final TextInputType keyBoardType;
+  final FocusNode? focusNode;
+  final TextEditingController textController;
+  final int maxLength;
+  final bool isCenterText;
+  final bool isEyeVisible;
+  final bool removeSpace;
+  bool obscureText;
+  final bool isOptional;
   final Function(String?)? onChanged;
-  final Function? toggleEye;
-  final TextInputType? keyboard;
-  final String? init;
-  final bool isPassword;
-  final Color? isPasswordColor;
-  //final bool showObscureText;
-  final bool obscureText;
-  final Color? styleColor;
-  final Color? hintStyleColor;
-  final bool enable;
-  final String? labelText;
-  final String? errorText;
-  final dynamic maxLines;
-  final Color? borderColor;
-  final Color? fillColor;
-  final Color? hintColor;
-  final Color? textColor;
-  final Color? labelColor;
-  final String? inputIcon;
+  final bool readOnly;
+  final double? borderRadius;
+  final Function? onTap;
   final Widget? prefix;
   final Widget? suffix;
-  final Key? key;
-  final IconData? prefixIcon;
-  final Widget? passwordIcon;
-  final TextEditingController? controller;
-  //final List<TextInputFormatter> inputFormatters;
-  final FocusNode? focusNode;
-  //final bool alignLabelWithHint;
-  final FloatingLabelBehavior? floatingLabelBehavior;
-  final Function onTap;
-  final double? borderRadius;
-  const PasswordInput(
-      {this.hintText,
-      this.labelColor,
-      this.fillColor,
-      this.textColor,
-      this.borderRadius,
-      this.validator,
-      this.hintColor,
-      required this.onSaved,
-      required this.toggleEye,
-      this.init,
-      this.isPassword = false,
-      this.isPasswordColor,
-      //this.showObscureText,
-      this.obscureText = false,
-      this.keyboard,
-      this.styleColor,
-      this.hintStyleColor,
-      this.enable = true,
-      this.labelText,
-      this.maxLines = 1,
-      this.borderColor = Colors.grey,
-      required this.onChanged,
-      this.prefix,
-      this.suffix,
-      this.key,
-      this.controller,
-      this.focusNode,
-      this.prefixIcon,
-
-      ///this.alignLabelWithHint,
-      this.floatingLabelBehavior,
-      required this.onTap,
-      this.errorText,
-      this.inputIcon,
-      this.passwordIcon});
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      keyboardType: keyboard,
-      controller: controller,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      key: key,
-      enabled: enable,
-      onSaved: onSaved!,
-      validator: validator!,
-      onChanged: onChanged!,
-      obscureText: obscureText,
-      initialValue: init,
-      focusNode: focusNode,
-      decoration: InputDecoration(
-        prefixIcon: Icon(prefixIcon),
-        suffixIcon: passwordIcon,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(0),
-          borderSide: BorderSide(color: AppColors.primary),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(0),
-          borderSide: BorderSide(
-            color: Colors.red,
-            width: 1.0,
-          ),
-        ),
-        //suffixIcon: suffix,
-        fillColor: !enable
-            ? fillColor ?? Color(0xFFeeeeee)
-            : fillColor ?? Colors.transparent,
-        // fillColor: Colors.white,
-        filled: true,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(2),
-          borderSide: BorderSide(
-            color: Colors.grey,
-            width: 1.0,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(2),
-          borderSide: BorderSide(
-            color: AppColors.primary,
-            width: 1.0,
-          ),
-        ),
-        hintText: hintText,
-        hintStyle: TextStyle(
-          color: hintStyleColor ?? Colors.grey,
-          fontSize: fontSized(context, 22),
-        ),
-      ),
-    );
-  }
-}
-
-class InputField extends StatelessWidget {
-  const InputField({
+  final bool isNotePad;
+  GlobalTextField({
     super.key,
-    required this.controller,
-    this.textInputAction = TextInputAction.next,
-    this.textInputType,
-    this.hintText,
-    this.label,
-    this.suffix,
-    required this.labelName,
-    this.autofocus = false,
-    this.isMultipleLines = false,
-    this.validator,
-    this.onChanged,
-    this.fillColor,
-    this.hintColor,
-    this.hintStyleColor,
-    this.prefixIcon,
-    this.enable,
+    required this.fieldName,
+    required this.keyBoardType,
+    required this.textController,
     this.focusNode,
+    this.removeSpace = true,
+    this.obscureText = false,
+    this.isCenterText = false,
+    this.isEyeVisible = false,
+    this.isOptional = false,
+    this.readOnly = false,
+    this.onChanged,
+    this.maxLength = 3555,
+    this.borderRadius,
+    this.onTap,
+    this.prefix,
+    this.suffix,
+    this.isNotePad = false,
   });
 
-  final TextEditingController controller;
-  final TextInputAction? textInputAction;
-  final FocusNode? focusNode;
-  final TextInputType? textInputType;
-  final String? label;
-  final String? hintText;
-  final Widget? suffix;
-  final Color? fillColor;
-  final Color? hintColor;
-  final Color? hintStyleColor;
-  final IconData? prefixIcon;
-  final bool? enable;
-  final bool isMultipleLines;
-  final bool autofocus;
-  final String? Function(String?)? validator;
-  final String labelName;
-  final Function(String?)? onChanged;
+  @override
+  State<GlobalTextField> createState() => _GlobalTextFieldState();
+}
 
+class _GlobalTextFieldState extends State<GlobalTextField> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          labelName,
-          style: AppTypography.buttonSmall().copyWith(
-              fontWeight: FontWeight.w500, fontSize: fontSized(context, 22)),
-        ),
-        addVerticalSpacing(context, 52),
-        TextFormField(
-          style: AppTypography.dynamicStyle(
-            fontSize: fontSized(context, 22),
-            fontWeight: FontWeight.w400,
-            color: AppColors.black,
-          ),
-          cursorColor: AppColors.primary,
-          maxLines: isMultipleLines ? 5 : null,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          keyboardType: textInputType,
-          autofocus: autofocus,
-          textInputAction: textInputAction ?? TextInputAction.next,
-          validator: validator,
-          onChanged: onChanged,
-          controller: controller,
-          focusNode: focusNode,
-          decoration: InputDecoration(
-            prefixIcon: Icon(prefixIcon),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(2),
-              borderSide: BorderSide(
-                color: Colors.grey,
-                width: 1.0,
-              ),
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
-              borderSide: BorderSide(color: AppColors.primary),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(2),
-              borderSide: BorderSide(
-                color: Colors.red,
-                width: 1.0,
-              ),
-            ),
-            suffixIcon: suffix,
-            fillColor: !enable!
-                ? fillColor ?? Color(0xFFeeeeee)
-                : fillColor ?? Colors.transparent,
-            // fillColor: Colors.white,
-            filled: true,
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(2),
-              borderSide: BorderSide(
-                color: Colors.grey,
-                width: 1.0,
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(2),
-              borderSide: BorderSide(
-                color: AppColors.primary,
-                width: 1.0,
-              ),
-            ),
-            hintText: hintText,
-            hintStyle: TextStyle(
-              color: hintStyleColor ?? Colors.grey,
-              fontSize: 14,
-            ),
-          ),
-        ),
+    //  TextScaler textScaler = MediaQuery.of(context).textScaler;
+    return TextFormField(
+      controller: widget.textController,
+      keyboardType: widget.keyBoardType,
+      obscureText: widget.obscureText,
+      focusNode: widget.focusNode,
+      onChanged: widget.onChanged,
+      readOnly: widget.readOnly,
+      onTap: widget.onTap as void Function()?,
+      enabled: true,
+      maxLines: widget.isNotePad == true ? 10 : 1,
+      minLines: widget.isNotePad == true ? 6 : 1,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      textAlign: widget.isCenterText ? TextAlign.center : TextAlign.start,
+      textCapitalization: widget.keyBoardType == TextInputType.name
+          ? TextCapitalization.sentences
+          : TextCapitalization.none,
+      textInputAction: widget.keyBoardType == TextInputType.visiblePassword
+          ? TextInputAction.done
+          : TextInputAction.none,
+      enableSuggestions:
+          widget.keyBoardType == TextInputType.visiblePassword ? false : true,
+      autocorrect:
+          widget.keyBoardType == TextInputType.visiblePassword ? false : true,
+      inputFormatters: [
+        widget.removeSpace
+            ? FilteringTextInputFormatter.deny(RegExp(r"\s\b|\b\s"))
+            : LengthLimitingTextInputFormatter(widget.maxLength),
+        widget.keyBoardType == TextInputType.phone
+            ? FilteringTextInputFormatter.deny(RegExp(r'^0+'))
+            : LengthLimitingTextInputFormatter(widget.maxLength),
+        LengthLimitingTextInputFormatter(widget.maxLength),
+        widget.keyBoardType == TextInputType.number
+            ? FilteringTextInputFormatter.digitsOnly
+            : LengthLimitingTextInputFormatter(widget.maxLength),
       ],
+      style: TextStyle(
+        color: AppColors.black,
+        fontFamily: "Mulish",
+        fontSize: fontSized(context, 35),
+      ),
+      decoration: InputDecoration(
+        floatingLabelBehavior: FloatingLabelBehavior.auto,
+        labelText: widget.fieldName,
+        isDense: true,
+        contentPadding: const EdgeInsets.only(top: 15, bottom: 15, left: 5),
+        suffixIcon: widget.isEyeVisible == true
+            ? Visibility(
+                visible: widget.isEyeVisible,
+                child: IconButton(
+                  onPressed: () => setState(
+                    () => widget.obscureText = !widget.obscureText,
+                  ),
+                  icon: widget.obscureText
+                      ? Icon(
+                          Icons.visibility_outlined,
+                          color: AppColors.black,
+                          size: 25,
+                        )
+                      : Icon(
+                          Icons.visibility_off_outlined,
+                          color: AppColors.black,
+                          size: 25,
+                        ),
+                ),
+              )
+            : widget.suffix,
+        prefix: widget.prefix,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(widget.borderRadius ?? 5),
+          borderSide: BorderSide(color: AppColors.primaryDark, width: 1),
+          gapPadding: 40,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(widget.borderRadius ?? 5),
+          borderSide: BorderSide(color: AppColors.grey2, width: 1.5),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(widget.borderRadius ?? 5),
+          borderSide: const BorderSide(color: Colors.red, width: 1),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(widget.borderRadius ?? 5),
+          borderSide: BorderSide(color: AppColors.primaryDark, width: 1),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(widget.borderRadius ?? 5),
+          borderSide: const BorderSide(color: Colors.red, width: 1),
+        ),
+        errorStyle: const TextStyle(color: Colors.red, fontSize: 12),
+      ),
+      validator: (value) {
+        if (widget.isOptional && value!.isEmpty) {
+          return null;
+        }
+
+        if (value!.isEmpty) {
+          return 'This input is empty';
+        } else if (widget.keyBoardType == TextInputType.emailAddress) {
+          String trimValue = widget.textController.text.trim();
+          if (EmailValidator.validate(trimValue) == false) {
+            return 'Not a valid email';
+          }
+        } else if (widget.keyBoardType == TextInputType.phone) {
+          if (value.length != 10) {
+            return 'Phone number must be 10 digits';
+          }
+        } else if (widget.keyBoardType == TextInputType.number) {
+          final numberOnlyRegex = RegExp(r'^\d+$');
+          if (!numberOnlyRegex.hasMatch(value)) {
+            return 'Only digits are allowed. No special characters.';
+          }
+        } else {
+          return null;
+        }
+        return null;
+      },
     );
   }
 }
-
-enum KeyboardType { NUMBER, TEXT, EMAIL, PHONE }

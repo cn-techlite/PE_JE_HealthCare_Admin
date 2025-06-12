@@ -1,5 +1,5 @@
 class Endpoints {
-  static String baseUrl = "https://test-api-here.cntechlite.com/api/";
+  static String baseUrl = "https://api-data.pejehealthcare.com/api/";
 
   static String usersUrl = "Admin";
   static String usersLoginUrl = "Admin/login";

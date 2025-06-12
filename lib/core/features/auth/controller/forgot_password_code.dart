@@ -30,6 +30,31 @@ class ForgotPasswordCodeController extends State<ForgotPasswordCodeScreen> {
   bool isLoading = false;
   bool saveButtonPressed = false;
 
+  String isOTPChanged = "";
+  String isNewPasswordChanged = "";
+  String isConfirmPasswordChanged = "";
+
+  otpOnChanged(String value) {
+    setState(() {
+      isOTPChanged = value;
+    });
+    printData("identifier", isOTPChanged);
+  }
+
+  newPasswordOnChanged(String value) {
+    setState(() {
+      isNewPasswordChanged = value;
+    });
+    printData("identifier", isNewPasswordChanged);
+  }
+
+  confirmPasswordOnChanged(String value) {
+    setState(() {
+      isConfirmPasswordChanged = value;
+    });
+    printData("identifier", isConfirmPasswordChanged);
+  }
+
   onSubmit() async {
     setState(() {
       saveButtonPressed = true;
@@ -41,7 +66,7 @@ class ForgotPasswordCodeController extends State<ForgotPasswordCodeScreen> {
         isLoading = true;
       });
 
-      final res = await AuthService.forgotPassword(
+      final res = await AuthService().forgotPassword(
           token: codeController.text.trim(),
           password: newPasswordController.text.trim(),
           cxt: context);
@@ -55,16 +80,12 @@ class ForgotPasswordCodeController extends State<ForgotPasswordCodeScreen> {
           isLoading = false;
         });
         showCustomSnackbar(context,
-            title: "Code",
-            content: "Invalid Code Imputed",
+            title: "Code Error",
+            content: res.body,
             type: SnackbarType.error,
             isTopPosition: false);
       }
     }
-
-    setState(() {
-      isLoading = false;
-    });
   }
 
   bool obscureText = true;
@@ -102,8 +123,8 @@ class ForgotPasswordCodeController extends State<ForgotPasswordCodeScreen> {
         globals.stopWatchTimer!.onStartTimer();
       });
 
-      final res = await AuthService.reSendPasswordCode(
-          email: widget.email, cxt: context);
+      final res = await AuthService()
+          .reSendPasswordCode(email: widget.email, cxt: context);
       printData("result", res.statusCode);
       showSnack();
       setState(() {
