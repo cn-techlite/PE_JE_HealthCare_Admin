@@ -47,6 +47,7 @@ class UserResponseModel {
   final bool? hasGoneHoliday;
   final String? holidayStartDate;
   final String? holidayEndDate;
+  final String? religion;
   final DayAvailability? mondayAvailability;
   final DayAvailability? tuesdayAvailability;
   final DayAvailability? wednesdayAvailability;
@@ -94,6 +95,7 @@ class UserResponseModel {
     this.hasGoneHoliday,
     this.holidayStartDate,
     this.holidayEndDate,
+    this.religion,
     this.mondayAvailability,
     this.tuesdayAvailability,
     this.wednesdayAvailability,
@@ -144,6 +146,7 @@ class UserResponseModel {
         hasGoneHoliday: json["hasGoneHoliday"] ?? false,
         holidayStartDate: json["holidayStartDate"] ?? "",
         holidayEndDate: json["holidayEndDate"] ?? "",
+        religion: json["religion"] ?? "",
         mondayAvailability: json["mondayAvailability"] == null
             ? null
             : DayAvailability.fromJson(json["mondayAvailability"]),
@@ -214,6 +217,7 @@ class UserResponseModel {
         "hasGoneHoliday": hasGoneHoliday,
         "holidayStartDate": holidayStartDate,
         "holidayEndDate": holidayEndDate,
+        "religion": religion,
         "mondayAvailability": mondayAvailability?.toJson(),
         "tuesdayAvailability": tuesdayAvailability?.toJson(),
         "wednesdayAvailability": wednesdayAvailability?.toJson(),

@@ -173,6 +173,72 @@ class _LoginPageState extends ConsumerState<UserDetailsPage> {
                     left: 10.0, right: 10.0, top: 20.0, bottom: 20.0),
                 child: RichText(
                   text: TextSpan(
+                    text: "Gender: ",
+                    style: TextStyle(
+                        color: AppColors.black,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Inter",
+                        fontSize: fontSized(context, 16)),
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: "${widget.userChat.sex}",
+                          style: TextStyle(
+                              color: AppColors.black,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "Inter",
+                              fontSize: fontSized(context, 20))),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 0.0, right: 0),
+          child: Card(
+            elevation: 1,
+            color: AppColors.white,
+            child: SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: 10.0, right: 10.0, top: 20.0, bottom: 20.0),
+                child: RichText(
+                  text: TextSpan(
+                    text: "Religion: ",
+                    style: TextStyle(
+                        color: AppColors.black,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Inter",
+                        fontSize: fontSized(context, 16)),
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: "${widget.userChat.religion}",
+                          style: TextStyle(
+                              color: AppColors.black,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "Inter",
+                              fontSize: fontSized(context, 20))),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 0.0, right: 0),
+          child: Card(
+            elevation: 1,
+            color: AppColors.white,
+            child: SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: 10.0, right: 10.0, top: 20.0, bottom: 20.0),
+                child: RichText(
+                  text: TextSpan(
                     text: "Address: ",
                     style: TextStyle(
                         color: AppColors.black,
